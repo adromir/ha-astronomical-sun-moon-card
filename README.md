@@ -1,12 +1,13 @@
-# Astronomical Sun & Moon Card for Home Assistant
-
-[![HACS Custom Repository](https://img.shields.io/badge/HACS-Custom%20Repo-orange.svg)](https://github.com/hacs/default)
-[![GitHub Release](https://img.shields.io/github/v/release/adromir/ha-astronomical-sun-moon-card)](https://github.com/adromir/ha-astronomical-sun-moon-card/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-
-A modern, highly tactile Lovelace Custom Card for Home Assistant that visualizes real-time celestial mechanics: the sun's trajectory across the sky dome, solar elevation & azimuth, day/golden-hour/dusk/night atmospheric transitions, and mathematically precise lunar phases with crater illumination.
+# ☀️ Astronomical Sun & Moon Card for Home Assistant
 
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=adromir&repository=ha-astronomical-sun-moon-card&category=plugin)
+[![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/adromir)
+[![HACS Custom Repository](https://img.shields.io/badge/HACS-Custom%20Repo-orange.svg?style=for-the-badge)](https://github.com/hacs/default)
+[![GitHub Release](https://img.shields.io/github/v/release/adromir/ha-astronomical-sun-moon-card?style=for-the-badge&color=blue)](https://github.com/adromir/ha-astronomical-sun-moon-card/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)](https://github.com/adromir/ha-astronomical-sun-moon-card)
+
+A modern, highly tactile Lovelace Custom Card for Home Assistant that visualizes real-time celestial mechanics: the sun's trajectory across the sky dome, solar elevation & azimuth, day/golden-hour/dusk/night atmospheric transitions, and mathematically precise lunar phases with crater illumination.
 
 ---
 

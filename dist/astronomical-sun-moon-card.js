@@ -4,7 +4,7 @@
  * Visualizes real-time celestial trajectories, elevation, azimuth, milestones, and lunar phases.
  * 
  * Author: Adromir (https://github.com/adromir)
- * Version: 1.0.0
+ * Version: 1.1.0
  * License: MIT
  */
 
@@ -108,7 +108,7 @@
   }
 
   // Generate SVG path for precise lunar phase rendering
-  function renderMoonSvg(phaseFraction, radius = 24) {
+  function renderMoonSvg(phaseFraction, radius = 24, moonTexture = null, idSuffix = '1') {
     const r = radius;
     const cx = r;
     const cy = r;
@@ -119,7 +119,7 @@
     const isWaxing = p < 0.5;
     // Cosine of angle maps the terminator curvature
     const cosAngle = Math.cos(2 * Math.PI * p);
-    const rx = Math.abs(r * cosAngle);
+    const rx = Math.max(0.1, Math.abs(r * cosAngle));
 
     // Construct path for illuminated portion
     let litPath = '';
@@ -143,15 +143,43 @@
       }
     }
 
+    const maskId = `moonMask_${idSuffix}`;
+    const clipId = `moonClip_${idSuffix}`;
+
+    if (moonTexture) {
+      return `
+        <svg width="${r * 2}" height="${r * 2}" viewBox="0 0 ${r * 2} ${r * 2}" class="moon-svg">
+          <defs>
+            <clipPath id="${clipId}">
+              <circle cx="${cx}" cy="${cy}" r="${r}" />
+            </clipPath>
+            <mask id="${maskId}">
+              <rect width="${r * 2}" height="${r * 2}" fill="black" />
+              <path d="${litPath}" fill="white" />
+            </mask>
+            <filter id="lunarGlow_${idSuffix}" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#ffffff" flood-opacity="0.35" />
+            </filter>
+          </defs>
+          <!-- Dark Side Sphere -->
+          <circle cx="${cx}" cy="${cy}" r="${r}" fill="#0d1117" stroke="rgba(255,255,255,0.14)" stroke-width="1" />
+          <!-- Dim unlit surface -->
+          <image href="${moonTexture}" x="0" y="0" width="${r * 2}" height="${r * 2}" clip-path="url(#${clipId})" opacity="0.20" preserveAspectRatio="xMidYMid slice" />
+          <!-- Sunlit Terminator Surface -->
+          <image href="${moonTexture}" x="0" y="0" width="${r * 2}" height="${r * 2}" clip-path="url(#${clipId})" mask="url(#${maskId})" filter="url(#lunarGlow_${idSuffix})" preserveAspectRatio="xMidYMid slice" />
+        </svg>
+      `;
+    }
+
     return `
       <svg width="${r * 2}" height="${r * 2}" viewBox="0 0 ${r * 2} ${r * 2}" class="moon-svg">
         <defs>
-          <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+          <radialGradient id="moonGlow_${idSuffix}" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stop-color="#fffde7" stop-opacity="0.9" />
             <stop offset="65%" stop-color="#cfd8dc" stop-opacity="0.8" />
             <stop offset="100%" stop-color="#90a4ae" stop-opacity="0.7" />
           </radialGradient>
-          <filter id="lunarShadow" x="-20%" y="-20%" width="140%" height="140%">
+          <filter id="lunarShadow_${idSuffix}" x="-20%" y="-20%" width="140%" height="140%">
             <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#b0bec5" flood-opacity="0.4" />
           </filter>
         </defs>
@@ -162,7 +190,7 @@
         <circle cx="${cx + r * 0.2}" cy="${cy + r * 0.3}" r="${r * 0.22}" fill="rgba(0,0,0,0.12)" />
         <circle cx="${cx - r * 0.1}" cy="${cy + r * 0.4}" r="${r * 0.14}" fill="rgba(0,0,0,0.1)" />
         <!-- Lit Portion -->
-        <path d="${litPath}" fill="url(#moonGlow)" filter="url(#lunarShadow)" />
+        <path d="${litPath}" fill="url(#moonGlow_${idSuffix})" filter="url(#lunarShadow_${idSuffix})" />
       </svg>
     `;
   }
@@ -181,7 +209,10 @@
       this._config = Object.assign({
         title: '',
         sun_entity: 'sun.sun',
-        moon_entity: 'sensor.moon',
+        moon_entity: '', // auto-discover sensor.moon_phase / sensor.moon if empty
+        sun_texture: '',
+        moon_texture: '',
+        earth_texture: '',
         default_view: 'combined', // combined, sun_only, moon_only
         show_view_switcher: true,
         show_milestones: true,
@@ -232,8 +263,25 @@
 
     // --- DATA EXTRACTION ---
     _getData() {
-      const sunEntity = this._hass.states[this._config.sun_entity];
-      const moonEntity = this._hass.states[this._config.moon_entity];
+      const sunEntity = this._hass.states[this._config.sun_entity || 'sun.sun'];
+
+      // Moon entity with automatic discovery
+      let moonEntity = null;
+      if (this._config.moon_entity && this._hass.states[this._config.moon_entity]) {
+        moonEntity = this._hass.states[this._config.moon_entity];
+      } else {
+        for (const candidate of ['sensor.moon_phase', 'sensor.moon']) {
+          if (this._hass.states[candidate]) {
+            moonEntity = this._hass.states[candidate];
+            break;
+          }
+        }
+        if (!moonEntity) {
+          const autoKey = Object.keys(this._hass.states).find(k => k.startsWith('sensor.') && k.includes('moon'));
+          if (autoKey) moonEntity = this._hass.states[autoKey];
+        }
+      }
+
       const now = new Date();
 
       // Sun metrics
@@ -256,16 +304,30 @@
       }
 
       // Moon metrics
+      const PHASE_MAP = {
+        'new_moon': { fraction: 0.0, de: 'Neumond', en: 'New Moon' },
+        'waxing_crescent': { fraction: 0.125, de: 'Zunehmende Sichel', en: 'Waxing Crescent' },
+        'first_quarter': { fraction: 0.25, de: 'Erstes Viertel', en: 'First Quarter' },
+        'waxing_gibbous': { fraction: 0.375, de: 'Zunehmender Mond', en: 'Waxing Gibbous' },
+        'full_moon': { fraction: 0.5, de: 'Vollmond', en: 'Full Moon' },
+        'waning_gibbous': { fraction: 0.625, de: 'Abnehmender Mond', en: 'Waning Gibbous' },
+        'last_quarter': { fraction: 0.75, de: 'Letztes Viertel', en: 'Last Quarter' },
+        'waning_crescent': { fraction: 0.875, de: 'Abnehmende Sichel', en: 'Waning Crescent' }
+      };
+
       const calculatedMoon = calculateMoonPhase(now);
       let moonState = calculatedMoon.phaseKey;
       let moonName = (this._hass.language === 'de') ? calculatedMoon.phaseNameDe : calculatedMoon.phaseNameEn;
       let illumination = calculatedMoon.illumination;
 
-      if (moonEntity) {
-        if (moonEntity.state && moonEntity.state !== 'unknown' && moonEntity.state !== 'unavailable') {
-          moonState = moonEntity.state;
-          // Format state name if entity provided
-          const clean = moonEntity.state.replace(/_/g, ' ');
+      if (moonEntity && moonEntity.state && moonEntity.state !== 'unknown' && moonEntity.state !== 'unavailable') {
+        const rawState = String(moonEntity.state).toLowerCase().trim();
+        moonState = rawState;
+        if (PHASE_MAP[rawState]) {
+          moonName = (this._hass.language === 'de') ? PHASE_MAP[rawState].de : PHASE_MAP[rawState].en;
+          calculatedMoon.phaseKey = rawState;
+        } else {
+          const clean = rawState.replace(/_/g, ' ');
           moonName = clean.charAt(0).toUpperCase() + clean.slice(1);
         }
         if (moonEntity.attributes && moonEntity.attributes.illumination !== undefined) {
@@ -724,6 +786,16 @@
                 <path class="dome-night-arc" d="${nightArcD}" />
               ` : ''}
 
+              <!-- Earth Horizon Globe (if texture configured) -->
+              ${this._config.earth_texture ? `
+                <defs>
+                  <clipPath id="earthGlobeClip">
+                    <circle cx="240" cy="${horizonY + 140}" r="145" />
+                  </clipPath>
+                </defs>
+                <image href="${this._config.earth_texture}" x="95" y="${horizonY - 5}" width="290" height="290" clip-path="url(#earthGlobeClip)" opacity="0.92" preserveAspectRatio="xMidYMid slice" />
+              ` : ''}
+
               <!-- Horizon Line -->
               <line x1="20" y1="${horizonY}" x2="460" y2="${horizonY}" class="horizon-line" />
 
@@ -742,7 +814,16 @@
               <!-- Sun Celestial Object -->
               ${showSun ? `
                 <g class="sun-element">
-                  <circle cx="${sunX}" cy="${sunY}" r="14" fill="url(#sunDiscGrad)" />
+                  ${this._config.sun_texture ? `
+                    <defs>
+                      <clipPath id="sunDiscClip">
+                        <circle cx="${sunX}" cy="${sunY}" r="15" />
+                      </clipPath>
+                    </defs>
+                    <image href="${this._config.sun_texture}" x="${sunX - 15}" y="${sunY - 15}" width="30" height="30" clip-path="url(#sunDiscClip)" preserveAspectRatio="xMidYMid slice" />
+                  ` : `
+                    <circle cx="${sunX}" cy="${sunY}" r="14" fill="url(#sunDiscGrad)" />
+                  `}
                   <circle cx="${sunX}" cy="${sunY}" r="17" fill="none" stroke="${sky.sunGlow}" stroke-width="1.5" opacity="0.6">
                     <animate attributeName="r" values="16;20;16" dur="3s" repeatCount="indefinite" />
                     <animate attributeName="opacity" values="0.6;0.1;0.6" dur="3s" repeatCount="indefinite" />
@@ -756,7 +837,7 @@
               <!-- Moon Celestial Object in Sky (if in Moon or Combined mode) -->
               ${showMoon && (!data.isSunAboveHorizon || this._viewMode === 'moon_only') ? `
                 <g transform="translate(${moonX - 16}, ${moonY - 16})">
-                  ${renderMoonSvg(data.moon.phaseFraction, 16)}
+                  ${renderMoonSvg(data.moon.phaseFraction, 16, this._config.moon_texture, 'sky')}
                   <text x="16" y="42" text-anchor="middle" fill="#e2e8f0" font-size="9.5" font-weight="600">
                     ${data.illumination}%
                   </text>
@@ -850,7 +931,7 @@
           ${showMoon ? `
             <div class="moon-section">
               <div class="moon-avatar">
-                ${renderMoonSvg(data.moon.phaseFraction, 26)}
+                ${renderMoonSvg(data.moon.phaseFraction, 26, this._config.moon_texture, 'avatar')}
               </div>
               <div class="moon-details">
                 <div class="moon-title-row">
@@ -979,7 +1060,22 @@
 
           <div class="form-row">
             <label>${isDe ? 'Mond Entität (optional)' : 'Moon Entity (optional)'}</label>
-            <input type="text" id="moon_entity" value="${this._config.moon_entity || 'sensor.moon'}" />
+            <input type="text" id="moon_entity" value="${this._config.moon_entity || ''}" placeholder="${isDe ? 'sensor.moon_phase (automatisch)' : 'sensor.moon_phase (auto)'}" />
+          </div>
+
+          <div class="form-row">
+            <label>${isDe ? 'Mond Textur URL (optional)' : 'Moon Texture URL (optional)'}</label>
+            <input type="text" id="moon_texture" value="${this._config.moon_texture || ''}" placeholder="/local/mond.jpg" />
+          </div>
+
+          <div class="form-row">
+            <label>${isDe ? 'Sonne Textur URL (optional)' : 'Sun Texture URL (optional)'}</label>
+            <input type="text" id="sun_texture" value="${this._config.sun_texture || ''}" placeholder="/local/sonne.jpg" />
+          </div>
+
+          <div class="form-row">
+            <label>${isDe ? 'Erde Horizont Textur URL (optional)' : 'Earth Horizon Texture URL (optional)'}</label>
+            <input type="text" id="earth_texture" value="${this._config.earth_texture || ''}" placeholder="/local/erde.jpg" />
           </div>
 
           <div class="form-row">
@@ -1012,6 +1108,9 @@
       const titleInput = this.shadowRoot.getElementById('title');
       const sunInput = this.shadowRoot.getElementById('sun_entity');
       const moonInput = this.shadowRoot.getElementById('moon_entity');
+      const moonTexInput = this.shadowRoot.getElementById('moon_texture');
+      const sunTexInput = this.shadowRoot.getElementById('sun_texture');
+      const earthTexInput = this.shadowRoot.getElementById('earth_texture');
       const viewSelect = this.shadowRoot.getElementById('default_view');
       const switchToggle = this.shadowRoot.getElementById('show_view_switcher');
       const milestonesToggle = this.shadowRoot.getElementById('show_milestones');
@@ -1022,6 +1121,9 @@
           title: titleInput.value,
           sun_entity: sunInput.value,
           moon_entity: moonInput.value,
+          moon_texture: moonTexInput.value.trim(),
+          sun_texture: sunTexInput.value.trim(),
+          earth_texture: earthTexInput.value.trim(),
           default_view: viewSelect.value,
           show_view_switcher: switchToggle.checked,
           show_milestones: milestonesToggle.checked,
@@ -1038,6 +1140,9 @@
       titleInput.addEventListener('input', triggerChange);
       sunInput.addEventListener('input', triggerChange);
       moonInput.addEventListener('input', triggerChange);
+      moonTexInput.addEventListener('input', triggerChange);
+      sunTexInput.addEventListener('input', triggerChange);
+      earthTexInput.addEventListener('input', triggerChange);
       viewSelect.addEventListener('change', triggerChange);
       switchToggle.addEventListener('change', triggerChange);
       milestonesToggle.addEventListener('change', triggerChange);

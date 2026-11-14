@@ -76,17 +76,29 @@ A modern, highly tactile Lovelace Custom Card for Home Assistant that visualizes
 
 When editing your dashboard, click **Add Card**, search for **Astronomical Sun & Moon Card**, and customize settings directly in the visual GUI editor.
 
+### Recommended Companion: Home Assistant Moon Integration
+
+For accurate local lunar data and synchronization with Home Assistant's official astronomical calendar, we strongly recommend adding the built-in **Moon** integration (`sensor.moon_phase`):
+
+[![Add Integration to your Home Assistant instance.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=moon)
+
+*The card automatically detects and prioritizes `sensor.moon_phase` or `sensor.moon` if present on your system.*
+
 ### YAML Example
 
 ```yaml
 type: custom:astronomical-sun-moon-card
 title: "Sonne & Mond"
 sun_entity: sun.sun
-moon_entity: sensor.moon
+moon_entity: sensor.moon_phase   # Optional (auto-discovered)
 default_view: combined
 show_view_switcher: true
 show_milestones: true
 show_stars: true
+# Optional Photorealistic Textures
+moon_texture: /local/mond.jpg    # Dynamically clipped across all lunar terminator phases!
+sun_texture: /local/sonne.jpg     # Sun disc texture with pulsing corona
+earth_texture: /local/erde.jpg   # Horizon curved earth silhouette
 ```
 
 ### Configuration Options
@@ -96,11 +108,14 @@ show_stars: true
 | `type` | string | **Required** | `custom:astronomical-sun-moon-card` |
 | `title` | string | `""` | Optional card title |
 | `sun_entity` | string | `sun.sun` | Sun entity providing solar elevation and azimuth |
-| `moon_entity` | string | `sensor.moon` | Optional moon entity (auto-calculates if omitted) |
+| `moon_entity` | string | `auto` | Moon entity (auto-detects `sensor.moon_phase` or `sensor.moon` if omitted) |
 | `default_view` | string | `combined` | Default display mode (`combined`, `sun_only`, `moon_only`) |
 | `show_view_switcher` | boolean | `true` | Show interactive view toggle pills in the header |
 | `show_milestones` | boolean | `true` | Show Sunrise, Solar Noon, and Sunset times |
 | `show_stars` | boolean | `true` | Display shimmering starfield during night/twilight |
+| `moon_texture` | string | `""` | Optional URL to moon texture (e.g. `/local/mond.jpg`). Dynamically masked to active phase! |
+| `sun_texture` | string | `""` | Optional URL to sun texture (e.g. `/local/sonne.jpg`) |
+| `earth_texture` | string | `""` | Optional URL to earth globe horizon texture (e.g. `/local/erde.jpg`) |
 
 ---
 

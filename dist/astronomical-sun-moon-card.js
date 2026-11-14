@@ -4,12 +4,17 @@
  * Visualizes real-time celestial trajectories, elevation, azimuth, milestones, and lunar phases.
  * 
  * Author: Adromir (https://github.com/adromir)
- * Version: 1.1.0
+ * Version: 1.2.0
  * License: MIT
  */
 
 (function () {
   'use strict';
+
+  // --- DEFAULT CELESTIAL ASSETS (Built-in with Alpha Transparency) ---
+  const DEFAULT_MOON_TEXTURE = '/hacsfiles/ha-astronomical-sun-moon-card/assets/moon.webp';
+  const DEFAULT_SUN_TEXTURE = '/hacsfiles/ha-astronomical-sun-moon-card/assets/sun.webp';
+  const DEFAULT_EARTH_TEXTURE = '/hacsfiles/ha-astronomical-sun-moon-card/assets/earth.webp';
 
   // --- LUNAR ASTRONOMICAL CALCULATOR ---
   const SYNODIC_MONTH = 29.53058867;
@@ -227,6 +232,24 @@
         this._viewMode = this._config.default_view;
       }
       this._requestRender();
+    }
+
+    get _effectiveMoonTexture() {
+      const val = this._config.moon_texture;
+      if (val === 'none' || val === false) return '';
+      return val || DEFAULT_MOON_TEXTURE;
+    }
+
+    get _effectiveSunTexture() {
+      const val = this._config.sun_texture;
+      if (val === 'none' || val === false) return '';
+      return val || DEFAULT_SUN_TEXTURE;
+    }
+
+    get _effectiveEarthTexture() {
+      const val = this._config.earth_texture;
+      if (val === 'none' || val === false) return '';
+      return val || DEFAULT_EARTH_TEXTURE;
     }
 
     set hass(hass) {
@@ -787,13 +810,13 @@
               ` : ''}
 
               <!-- Earth Horizon Globe (if texture configured) -->
-              ${this._config.earth_texture ? `
+              ${this._effectiveEarthTexture ? `
                 <defs>
                   <clipPath id="earthGlobeClip">
                     <circle cx="240" cy="${horizonY + 140}" r="145" />
                   </clipPath>
                 </defs>
-                <image href="${this._config.earth_texture}" x="95" y="${horizonY - 5}" width="290" height="290" clip-path="url(#earthGlobeClip)" opacity="0.92" preserveAspectRatio="xMidYMid slice" />
+                <image href="${this._effectiveEarthTexture}" x="95" y="${horizonY - 5}" width="290" height="290" clip-path="url(#earthGlobeClip)" opacity="0.95" preserveAspectRatio="xMidYMid slice" />
               ` : ''}
 
               <!-- Horizon Line -->
@@ -814,13 +837,8 @@
               <!-- Sun Celestial Object -->
               ${showSun ? `
                 <g class="sun-element">
-                  ${this._config.sun_texture ? `
-                    <defs>
-                      <clipPath id="sunDiscClip">
-                        <circle cx="${sunX}" cy="${sunY}" r="15" />
-                      </clipPath>
-                    </defs>
-                    <image href="${this._config.sun_texture}" x="${sunX - 15}" y="${sunY - 15}" width="30" height="30" clip-path="url(#sunDiscClip)" preserveAspectRatio="xMidYMid slice" />
+                  ${this._effectiveSunTexture ? `
+                    <image href="${this._effectiveSunTexture}" x="${sunX - 16}" y="${sunY - 16}" width="32" height="32" preserveAspectRatio="xMidYMid meet" />
                   ` : `
                     <circle cx="${sunX}" cy="${sunY}" r="14" fill="url(#sunDiscGrad)" />
                   `}
@@ -837,7 +855,7 @@
               <!-- Moon Celestial Object in Sky (if in Moon or Combined mode) -->
               ${showMoon && (!data.isSunAboveHorizon || this._viewMode === 'moon_only') ? `
                 <g transform="translate(${moonX - 16}, ${moonY - 16})">
-                  ${renderMoonSvg(data.moon.phaseFraction, 16, this._config.moon_texture, 'sky')}
+                  ${renderMoonSvg(data.moon.phaseFraction, 16, this._effectiveMoonTexture, 'sky')}
                   <text x="16" y="42" text-anchor="middle" fill="#e2e8f0" font-size="9.5" font-weight="600">
                     ${data.illumination}%
                   </text>
@@ -931,7 +949,7 @@
           ${showMoon ? `
             <div class="moon-section">
               <div class="moon-avatar">
-                ${renderMoonSvg(data.moon.phaseFraction, 26, this._config.moon_texture, 'avatar')}
+                ${renderMoonSvg(data.moon.phaseFraction, 26, this._effectiveMoonTexture, 'avatar')}
               </div>
               <div class="moon-details">
                 <div class="moon-title-row">
@@ -1064,18 +1082,18 @@
           </div>
 
           <div class="form-row">
-            <label>${isDe ? 'Mond Textur URL (optional)' : 'Moon Texture URL (optional)'}</label>
-            <input type="text" id="moon_texture" value="${this._config.moon_texture || ''}" placeholder="/local/mond.jpg" />
+            <label>${isDe ? 'Mond Textur URL (integriert / "none" für Vektor)' : 'Moon Texture URL (built-in / "none" for vector)'}</label>
+            <input type="text" id="moon_texture" value="${this._config.moon_texture || ''}" placeholder="${DEFAULT_MOON_TEXTURE}" />
           </div>
 
           <div class="form-row">
-            <label>${isDe ? 'Sonne Textur URL (optional)' : 'Sun Texture URL (optional)'}</label>
-            <input type="text" id="sun_texture" value="${this._config.sun_texture || ''}" placeholder="/local/sonne.jpg" />
+            <label>${isDe ? 'Sonne Textur URL (integriert / "none" für Vektor)' : 'Sun Texture URL (built-in / "none" for vector)'}</label>
+            <input type="text" id="sun_texture" value="${this._config.sun_texture || ''}" placeholder="${DEFAULT_SUN_TEXTURE}" />
           </div>
 
           <div class="form-row">
-            <label>${isDe ? 'Erde Horizont Textur URL (optional)' : 'Earth Horizon Texture URL (optional)'}</label>
-            <input type="text" id="earth_texture" value="${this._config.earth_texture || ''}" placeholder="/local/erde.jpg" />
+            <label>${isDe ? 'Erde Horizont Textur URL (integriert / "none" für Vektor)' : 'Earth Horizon Texture URL (built-in / "none" for vector)'}</label>
+            <input type="text" id="earth_texture" value="${this._config.earth_texture || ''}" placeholder="${DEFAULT_EARTH_TEXTURE}" />
           </div>
 
           <div class="form-row">
@@ -1169,7 +1187,7 @@
   });
 
   console.info(
-    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.0.0 ',
+    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.2.0 ',
     'color: white; background: #0c1222; font-weight: 700; border-radius: 3px 0 0 3px;',
     'color: white; background: #ff9800; font-weight: 700; border-radius: 0 3px 3px 0;'
   );

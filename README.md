@@ -61,11 +61,11 @@ A modern, highly tactile Lovelace Custom Card for Home Assistant that visualizes
 
 ### Option 2: Manual Installation
 
-1. Download `dist/astronomical-sun-moon-card.js` from the [latest release](https://github.com/adromir/ha-astronomical-sun-moon-card/releases).
+1. Download `dist/astronomical-sun-moon-card.js` and the `dist/assets/` folder from the [latest release](https://github.com/adromir/ha-astronomical-sun-moon-card/releases).
 2. Upload `astronomical-sun-moon-card.js` into your `<config>/www/` directory.
 3. In Home Assistant, go to **Settings** > **Dashboards** > **Three dots (top right)** > **Resources**.
 4. Add resource:
-   - URL: `/local/astronomical-sun-moon-card.js?v=1.0.0`
+   - URL: `/local/astronomical-sun-moon-card.js?v=1.2.0`
    - Type: `JavaScript Module`
 
 ---
@@ -84,6 +84,13 @@ For accurate local lunar data and synchronization with Home Assistant's official
 
 *The card automatically detects and prioritizes `sensor.moon_phase` or `sensor.moon` if present on your system.*
 
+### Built-in Celestial Textures (Alpha Transparency)
+
+Starting with **v1.2.0**, high-resolution photorealistic textures for the **Moon**, **Sun** (with solar corona flares), and **Earth horizon** are bundled natively with full alpha transparency.
+
+> [!TIP]
+> **No extra moon phase images required**: Thanks to dynamic mathematical SVG terminator masking, every single lunar phase (including continuous fractional values) is calculated and shaded live in vector space directly onto the full-disc texture — complete with earthshine (unlit side at 20% opacity) and glowing crater highlights!
+
 ### YAML Example
 
 ```yaml
@@ -95,10 +102,9 @@ default_view: combined
 show_view_switcher: true
 show_milestones: true
 show_stars: true
-# Optional Photorealistic Textures
-moon_texture: /local/mond.jpg    # Dynamically clipped across all lunar terminator phases!
-sun_texture: /local/sonne.jpg     # Sun disc texture with pulsing corona
-earth_texture: /local/erde.jpg   # Horizon curved earth silhouette
+# Textures work out of the box! You can customize them or set to 'none' for pure vector:
+# moon_texture: /local/custom_moon.png
+# sun_texture: none
 ```
 
 ### Configuration Options
@@ -113,9 +119,9 @@ earth_texture: /local/erde.jpg   # Horizon curved earth silhouette
 | `show_view_switcher` | boolean | `true` | Show interactive view toggle pills in the header |
 | `show_milestones` | boolean | `true` | Show Sunrise, Solar Noon, and Sunset times |
 | `show_stars` | boolean | `true` | Display shimmering starfield during night/twilight |
-| `moon_texture` | string | `""` | Optional URL to moon texture (e.g. `/local/mond.jpg`). Dynamically masked to active phase! |
-| `sun_texture` | string | `""` | Optional URL to sun texture (e.g. `/local/sonne.jpg`) |
-| `earth_texture` | string | `""` | Optional URL to earth globe horizon texture (e.g. `/local/erde.jpg`) |
+| `moon_texture` | string | `built-in` | Moon texture URL. Defaults to bundled transparent texture; set to `'none'` for geometric vector |
+| `sun_texture` | string | `built-in` | Sun texture URL. Defaults to bundled transparent solar flare texture; set to `'none'` for vector |
+| `earth_texture` | string | `built-in` | Earth horizon texture URL. Defaults to bundled transparent globe texture; set to `'none'` for vector |
 
 ---
 

@@ -13,11 +13,15 @@
     "above_horizon": "Über Horizont",
     "below_horizon": "Unter Horizont",
     "daylight_remaining": "Verbleibendes Tageslicht",
+    "illumination": "Beleuchtung",
+    "illuminated": "Beleuchtet",
     "moon_age": "Mondalter",
     "days": "Tage",
+    "days_short": "T.",
+    "days_old": "Tage alt",
+    "next_full_moon": "Nächster Vollmond",
     "full_moon_in": "Vollmond in",
     "new_moon_in": "Neumond in",
-    "illuminated": "Beleuchtet",
     "east": "Ost",
     "south": "Süd",
     "west": "West",
@@ -27,18 +31,24 @@
     "in_days": "in {days} Tagen",
     "peak_today": "Höhepunkt Heute!",
     "peak_in_days": "Peak in {days}T",
+    "active_peak_in": "Aktiv (Peak in {days}T)",
     "meteor_shower": "Meteorschauer",
     "aurora_borealis": "Aurora Borealis (Nordlicht)",
     "aurora_australis": "Aurora Australis (Südlicht)"
   },
   "editor": {
     "title": "Kartentitel",
+    "placeholder_title": "Sonne & Mond Trajektorie",
     "sun_entity": "Sonne Entität",
     "moon_entity": "Mond Entität (optional)",
+    "placeholder_moon_entity": "sensor.moon_phase (automatisch)",
     "moon_texture": "Mond Textur URL (integriert / 'none' für Vektor)",
     "sun_texture": "Sonne Textur URL (integriert / 'none' für Vektor)",
     "earth_texture": "Erde Horizont Textur URL (integriert / 'none' für Vektor)",
     "default_view": "Standard-Ansicht",
+    "view_both_combined": "Beides (Sonne & Mond)",
+    "view_sun_only": "Nur Sonne",
+    "view_moon_only": "Nur Mond",
     "show_view_switcher": "Ansichtswähler anzeigen",
     "show_milestones": "Meilensteine (Aufgang/Untergang) anzeigen",
     "show_stars": "Sternenhimmel bei Nacht",
@@ -48,5 +58,111 @@
     "show_aurora": "Polarlichter anzeigen (Aurora)",
     "aurora_demo_mode": "Polarlicht Demo-Modus (Test)",
     "aurora_entity": "Aurora Entität (optional / automatisch)"
+  },
+  "phases": {
+    "new_moon": "Neumond",
+    "waxing_crescent": "Zunehmende Sichel",
+    "first_quarter": "Erstes Viertel",
+    "waxing_gibbous": "Zunehmender Mond",
+    "full_moon": "Vollmond",
+    "waning_gibbous": "Abnehmender Mond",
+    "last_quarter": "Letztes Viertel",
+    "waning_crescent": "Abnehmende Sichel"
+  },
+  "constellations": {
+    "ursa_major": {
+      "title": "Großer Wagen (Ursa Major)",
+      "label": "Großer Wagen"
+    },
+    "ursa_minor": {
+      "title": "Kleiner Wagen & Polarstern",
+      "label": "Kl. Wagen (Polarstern)"
+    },
+    "cassiopeia": {
+      "title": "Kassiopeia (Himmels-W)",
+      "label": "Kassiopeia"
+    },
+    "orion": {
+      "title": "Sternbild Orion",
+      "label": "Orion"
+    },
+    "summer_triangle": {
+      "title": "Sommerdreieck & Schwan",
+      "label": "Sommerdreieck"
+    },
+    "taurus_pleiades": {
+      "title": "Stier & Plejaden (Siebengestirn)",
+      "label": "Stier & Plejaden"
+    },
+    "gemini": {
+      "title": "Zwillinge (Gemini)",
+      "label": "Zwillinge"
+    },
+    "leo": {
+      "title": "Löwe (Leo)",
+      "label": "Löwe"
+    },
+    "canis_major": {
+      "title": "Großer Hund (Sirius)",
+      "label": "Sirius (Gr. Hund)"
+    },
+    "pegasus": {
+      "title": "Pegasus (Herbstviereck)",
+      "label": "Pegasus"
+    },
+    "crux": {
+      "title": "Kreuz des Südens (Crux)",
+      "label": "Kreuz d. Südens"
+    }
+  },
+  "planets": {
+    "venus": {
+      "title": "Venus (Abendstern)",
+      "label": "Venus"
+    },
+    "jupiter": {
+      "title": "Jupiter (Riesenplanet)",
+      "label": "Jupiter"
+    },
+    "mars": {
+      "title": "Mars (Roter Planet)",
+      "label": "Mars"
+    }
+  },
+  "solstices": {
+    "march_equinox": "Frühlings-Tagundnachtgleiche",
+    "june_solstice": "Sommersonnenwende",
+    "september_equinox": "Herbst-Tagundnachtgleiche",
+    "december_solstice": "Wintersonnenwende"
+  },
+  "meteor_showers": {
+    "quadrantids": "Quadrantiden",
+    "lyrids": "Lyriden",
+    "eta_aquariids": "Eta-Aquariiden",
+    "perseids": "Perseiden",
+    "orionids": "Orioniden",
+    "leonids": "Leoniden",
+    "geminids": "Geminiden",
+    "ursids": "Ursiden"
+  },
+  "eclipses": {
+    "types": {
+      "total_solar": "Totale Sonnenfinsternis",
+      "partial_lunar": "Partielle Mondfinsternis",
+      "annular_solar": "Ringförmige Sonnenfinsternis",
+      "great_total_solar": "Große Totale Sonnenfinsternis",
+      "total_lunar_new_year": "Totale Mondfinsternis (Silvester)",
+      "total_lunar": "Totale Mondfinsternis"
+    },
+    "regions": {
+      "europe_greenland_spain": "Europa / Grönland / Spanien",
+      "pacific_americas_europe": "Pazifik / Amerika / Europa",
+      "south_america_antarctica": "Südamerika / Antarktis",
+      "mediterranean_north_africa_egypt": "Mittelmeer / Nordafrika / Ägypten",
+      "globally_visible": "Global sichtbar",
+      "australia_new_zealand": "Australien / Neuseeland",
+      "europe_africa_asia": "Europa / Afrika / Asien",
+      "americas_europe_africa": "Amerika / Europa / Afrika"
+    }
   }
 }

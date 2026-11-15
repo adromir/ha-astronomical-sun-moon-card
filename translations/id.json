@@ -1,0 +1,168 @@
+{
+  "card": {
+    "title": "Lintasan Matahari & Bulan",
+    "view_both": "Keduanya",
+    "view_sun": "Matahari",
+    "view_moon": "Bulan",
+    "sunrise": "Terbit",
+    "solar_noon": "Tengah Hari",
+    "sunset": "Terbenam",
+    "sun_elevation": "Elevasi Matahari",
+    "azimuth_direction": "Azimut / Kompass",
+    "heading": "Arah Mata Angin",
+    "above_horizon": "Di atas ufuk",
+    "below_horizon": "Di bawah ufuk",
+    "daylight_remaining": "Sisa waktu siang",
+    "illumination": "Iluminasi",
+    "illuminated": "Terang",
+    "moon_age": "Fase Bulan",
+    "days": "hari",
+    "days_short": "h",
+    "days_old": "hari",
+    "next_full_moon": "Bulan Purnama Berikutnya",
+    "full_moon_in": "Purnama dlm",
+    "new_moon_in": "Bulan baru dlm",
+    "east": "Timur",
+    "south": "Selatan",
+    "west": "Barat",
+    "active": "aktif",
+    "visibility": "Visibilitas",
+    "today": "Hari ini!",
+    "in_days": "dlm {days} hari",
+    "peak_today": "Puncak Hari Ini!",
+    "peak_in_days": "Puncak dlm {days}h",
+    "active_peak_in": "Aktif (Puncak dlm {days}h)",
+    "meteor_shower": "Hujan Meteor",
+    "aurora_borealis": "Aurora Borealis (Cahaya Utara)",
+    "aurora_australis": "Aurora Australis (Cahaya Selatan)"
+  },
+  "editor": {
+    "title": "Judul Kartu",
+    "placeholder_title": "Lintasan Matahari & Bulan",
+    "sun_entity": "Entitas Matahari",
+    "moon_entity": "Entitas Bulan (opsional)",
+    "placeholder_moon_entity": "sensor.moon_phase (otomatis)",
+    "moon_texture": "URL Tekstur Bulan (bawaan / 'none' untuk vektor)",
+    "sun_texture": "URL Tekstur Matahari (bawaan / 'none' untuk vektor)",
+    "earth_texture": "URL Tekstur Ufuk Bumi (bawaan / 'none' untuk vektor)",
+    "default_view": "Tampilan Default",
+    "view_both_combined": "Keduanya (Matahari & Bulan)",
+    "view_sun_only": "Hanya Matahari",
+    "view_moon_only": "Hanya Bulan",
+    "show_view_switcher": "Tampilkan Pengalih Tampilan",
+    "show_milestones": "Tampilkan Waktu Penting (Terbit/Terbenam)",
+    "show_stars": "Langit Berbintang di Malam Hari",
+    "show_constellations": "Proyeksikan Rasi Bintang Nyata",
+    "show_constellation_lines": "Garis Garis Rasi Bintang",
+    "show_astronomical_events": "Peristiwa Astronomi (Pita Status)",
+    "show_aurora": "Tampilkan Aurora",
+    "aurora_demo_mode": "Mode Demo Aurora (Uji Coba)",
+    "aurora_entity": "Entitas Aurora (opsional / otomatis)"
+  },
+  "phases": {
+    "new_moon": "Bulan Baru",
+    "waxing_crescent": "Sabit Muda",
+    "first_quarter": "Kuartal Pertama",
+    "waxing_gibbous": "Cembung Awal",
+    "full_moon": "Bulan Purnama",
+    "waning_gibbous": "Cembung Akhir",
+    "last_quarter": "Kuartal Akhir",
+    "waning_crescent": "Sabit Tua"
+  },
+  "constellations": {
+    "ursa_major": {
+      "title": "Bintang Biduk (Beruang Besar)",
+      "label": "Bintang Biduk"
+    },
+    "ursa_minor": {
+      "title": "Beruang Kecil & Bintang Kutub",
+      "label": "Beruang Kecil"
+    },
+    "cassiopeia": {
+      "title": "Kasiopeia",
+      "label": "Kasiopeia"
+    },
+    "orion": {
+      "title": "Rasi Bintang Waluku (Orion)",
+      "label": "Waluku (Orion)"
+    },
+    "summer_triangle": {
+      "title": "Segitiga Musim Panas & Cygnus",
+      "label": "Segitiga Musim Panas"
+    },
+    "taurus_pleiades": {
+      "title": "Taurus & Bintang Tujuh",
+      "label": "Taurus & Pleiades"
+    },
+    "gemini": {
+      "title": "Gemini (Bintang Kembar)",
+      "label": "Gemini"
+    },
+    "leo": {
+      "title": "Singa (Leo)",
+      "label": "Singa (Leo)"
+    },
+    "canis_major": {
+      "title": "Anjing Besar (Sirius)",
+      "label": "Sirius (Anjing Besar)"
+    },
+    "pegasus": {
+      "title": "Pegasus (Kuda Bersayap)",
+      "label": "Pegasus"
+    },
+    "crux": {
+      "title": "Salib Selatan (Gubug Penceng)",
+      "label": "Salib Selatan"
+    }
+  },
+  "planets": {
+    "venus": {
+      "title": "Venus (Bintang Kejora)",
+      "label": "Venus"
+    },
+    "jupiter": {
+      "title": "Jupiter (Planet Raksasa)",
+      "label": "Jupiter"
+    },
+    "mars": {
+      "title": "Mars (Planet Merah)",
+      "label": "Mars"
+    }
+  },
+  "solstices": {
+    "march_equinox": "Ekuinoks Maret",
+    "june_solstice": "Titik Balik Juni",
+    "september_equinox": "Ekuinoks September",
+    "december_solstice": "Titik Balik Desember"
+  },
+  "meteor_showers": {
+    "quadrantids": "Quadrantid",
+    "lyrids": "Lyrid",
+    "eta_aquariids": "Eta Akuarid",
+    "perseids": "Perseid",
+    "orionids": "Orionid",
+    "leonids": "Leonid",
+    "geminids": "Geminid",
+    "ursids": "Ursid"
+  },
+  "eclipses": {
+    "types": {
+      "total_solar": "Gerhana Matahari Total",
+      "partial_lunar": "Gerhana Bulan Sebagian",
+      "annular_solar": "Gerhana Matahari Cincin",
+      "great_total_solar": "Gerhana Matahari Total Akbar",
+      "total_lunar_new_year": "Gerhana Bulan Total (Tahun Baru)",
+      "total_lunar": "Gerhana Bulan Total"
+    },
+    "regions": {
+      "europe_greenland_spain": "Eropa / Greenland / Spanyol",
+      "pacific_americas_europe": "Pasifik / Amerika / Eropa",
+      "south_america_antarctica": "Amerika Selatan / Antartika",
+      "mediterranean_north_africa_egypt": "Laut Tengah / Afrika Utara / Mesir",
+      "globally_visible": "Terlihat global",
+      "australia_new_zealand": "Australia / Selandia Baru",
+      "europe_africa_asia": "Eropa / Afrika / Asia",
+      "americas_europe_africa": "Amerika / Eropa / Afrika"
+    }
+  }
+}

@@ -4,7 +4,7 @@
  * Visualizes real-time celestial trajectories, elevation, azimuth, milestones, and lunar phases.
  * 
  * Author: Adromir (https://github.com/adromir)
- * Version: 1.4.0
+ * Version: 1.4.1
  * License: MIT
  */
 
@@ -744,90 +744,224 @@
     { id: 'achernar', nameDe: 'Achernar', nameEn: 'Achernar', ra: 24.43, dec: -57.24, mag: 0.45 },
   ];
 
-  // All 11 major constellations with constituent stars, lines, and translation keys
+  // All 11 major constellations with authentic iconic asterisms, lines, and celestial centers
   const CONSTELLATIONS_CONFIG = {
+    orion: {
+      name: 'orion',
+      titleKey: 'constellations.orion.title',
+      labelKey: 'constellations.orion.label',
+      ra: 84.0, dec: 0.0,
+      labelDy: -28,
+      stars: [
+        { id: 'meissa', dx: 0, dy: -24, r: 1.4, color: '#ffffff' },
+        { id: 'betelgeuse', dx: -18, dy: -16, r: 2.3, color: '#ffb74d', shimmer: 'star-shimmer-6' },
+        { id: 'bellatrix', dx: 18, dy: -18, r: 1.9, color: '#e1f5fe' },
+        { id: 'alnitak', dx: -7, dy: 1, r: 1.6, color: '#ffffff' },
+        { id: 'alnilam', dx: 0, dy: 0, r: 1.7, color: '#ffffff' },
+        { id: 'mintaka', dx: 7, dy: -1, r: 1.6, color: '#ffffff' },
+        { id: 'm42', dx: 0, dy: 8, r: 1.4, color: '#f48fb1' },
+        { id: 'saiph', dx: -14, dy: 22, r: 1.8, color: '#e1f5fe' },
+        { id: 'rigel', dx: 19, dy: 21, r: 2.4, color: '#bbdefb', shimmer: 'star-shimmer-7' }
+      ],
+      lines: [
+        [0, -24, -18, -16], [0, -24, 18, -18],
+        [-18, -16, 18, -18],
+        [-18, -16, -7, 1], [18, -18, 7, -1],
+        [-7, 1, 0, 0], [0, 0, 7, -1],
+        [0, 0, 0, 8],
+        [-7, 1, -14, 22], [7, -1, 19, 21],
+        [-14, 22, 19, 21]
+      ]
+    },
     ursa_major: {
       name: 'ursa_major',
       titleKey: 'constellations.ursa_major.title',
       labelKey: 'constellations.ursa_major.label',
-      lines: [
-        ['dubhe', 'merak'], ['merak', 'phecda'], ['phecda', 'megrez'], ['megrez', 'dubhe'],
-        ['megrez', 'alioth'], ['alioth', 'mizar'], ['mizar', 'alkaid']
+      ra: 175.0, dec: 56.0,
+      labelDy: -20,
+      stars: [
+        { id: 'dubhe', dx: -26, dy: -8, r: 2.1, color: '#ffe082', shimmer: 'star-shimmer-1' },
+        { id: 'merak', dx: -24, dy: 8, r: 1.8, color: '#ffffff', shimmer: 'star-shimmer-2' },
+        { id: 'phecda', dx: 0, dy: 9, r: 1.8, color: '#ffffff', shimmer: 'star-shimmer-3' },
+        { id: 'megrez', dx: -2, dy: -6, r: 1.5, color: '#ffffff', shimmer: 'star-shimmer-4' },
+        { id: 'alioth', dx: 18, dy: -8, r: 2.0, color: '#ffffff', shimmer: 'star-shimmer-5' },
+        { id: 'mizar', dx: 36, dy: -14, r: 1.9, color: '#ffffff' },
+        { id: 'alkaid', dx: 52, dy: -18, r: 2.0, color: '#bbdefb' }
       ],
-      starIds: ['dubhe', 'merak', 'phecda', 'megrez', 'alioth', 'mizar', 'alkaid']
+      lines: [
+        [-26, -8, -24, 8], [-24, 8, 0, 9], [0, 9, -2, -6], [-2, -6, -26, -8],
+        [-2, -6, 18, -8], [18, -8, 36, -14], [36, -14, 52, -18]
+      ]
     },
     ursa_minor: {
       name: 'ursa_minor',
       titleKey: 'constellations.ursa_minor.title',
       labelKey: 'constellations.ursa_minor.label',
-      lines: [['polaris', 'kochab']],
-      starIds: ['polaris', 'kochab']
+      ra: 75.0, dec: 82.0,
+      labelDy: -18,
+      stars: [
+        { id: 'polaris', dx: -26, dy: 8, r: 2.4, color: '#fff9c4', shimmer: 'star-shimmer-8' },
+        { id: 'yildun', dx: -12, dy: 2, r: 1.4, color: '#ffffff' },
+        { id: 'anwar', dx: 2, dy: 4, r: 1.4, color: '#ffffff' },
+        { id: 'ahfa', dx: 14, dy: 13, r: 1.9, color: '#ffe082' },
+        { id: 'pherkad', dx: 24, dy: 0, r: 1.6, color: '#ffffff' },
+        { id: 'kochab', dx: 12, dy: -8, r: 1.8, color: '#ffffff' }
+      ],
+      lines: [
+        [-26, 8, -12, 2], [-12, 2, 2, 4], [2, 4, 14, 13],
+        [14, 13, 24, 0], [24, 0, 12, -8], [12, -8, 2, 4]
+      ]
     },
     cassiopeia: {
       name: 'cassiopeia',
       titleKey: 'constellations.cassiopeia.title',
       labelKey: 'constellations.cassiopeia.label',
-      lines: [['caph', 'schedar'], ['schedar', 'gammacas'], ['gammacas', 'ruchbah'], ['ruchbah', 'segin']],
-      starIds: ['caph', 'schedar', 'gammacas', 'ruchbah', 'segin']
-    },
-    orion: {
-      name: 'orion',
-      titleKey: 'constellations.orion.title',
-      labelKey: 'constellations.orion.label',
-      lines: [
-        ['betelgeuse', 'bellatrix'], ['bellatrix', 'rigel'], ['rigel', 'saiph'], ['saiph', 'betelgeuse'],
-        ['alnitak', 'alnilam'], ['alnilam', 'mintaka']
+      ra: 15.0, dec: 60.0,
+      labelDy: -16,
+      stars: [
+        { id: 'schedar', dx: -26, dy: -6, r: 2.0, color: '#ffe082' },
+        { id: 'caph', dx: -13, dy: 4, r: 1.9, color: '#ffffff' },
+        { id: 'gammacas', dx: 0, dy: -6, r: 2.0, color: '#bbdefb' },
+        { id: 'ruchbah', dx: 13, dy: 6, r: 1.7, color: '#ffffff' },
+        { id: 'segin', dx: 26, dy: -2, r: 1.6, color: '#ffffff' }
       ],
-      starIds: ['betelgeuse', 'bellatrix', 'rigel', 'saiph', 'alnitak', 'alnilam', 'mintaka']
+      lines: [
+        [-26, -6, -13, 4], [-13, 4, 0, -6], [0, -6, 13, 6], [13, 6, 26, -2]
+      ]
     },
     summer_triangle: {
       name: 'summer_triangle',
       titleKey: 'constellations.summer_triangle.title',
       labelKey: 'constellations.summer_triangle.label',
-      lines: [['vega', 'deneb'], ['deneb', 'altair'], ['altair', 'vega']],
-      starIds: ['vega', 'deneb', 'altair']
+      ra: 295.0, dec: 30.0,
+      labelDy: -24,
+      stars: [
+        { id: 'vega', dx: -28, dy: -8, r: 2.5, color: '#e1f5fe', shimmer: 'star-shimmer-1' },
+        { id: 'deneb', dx: 14, dy: -16, r: 2.2, color: '#ffffff', shimmer: 'star-shimmer-5' },
+        { id: 'altair', dx: 22, dy: 16, r: 2.3, color: '#fff9c4', shimmer: 'star-shimmer-3' },
+        { id: 'sadr', dx: 12, dy: -3, r: 1.7, color: '#ffffff' },
+        { id: 'albireo', dx: 0, dy: 6, r: 1.6, color: '#ffe082' }
+      ],
+      lines: [
+        [-28, -8, 14, -16], [14, -16, 22, 16], [22, 16, -28, -8],
+        [14, -16, 12, -3], [12, -3, 0, 6]
+      ]
     },
     taurus_pleiades: {
       name: 'taurus_pleiades',
       titleKey: 'constellations.taurus_pleiades.title',
       labelKey: 'constellations.taurus_pleiades.label',
-      lines: [['aldebaran', 'alcyone'], ['aldebaran', 'capella']],
-      starIds: ['aldebaran', 'alcyone', 'capella']
+      ra: 65.0, dec: 19.0,
+      labelDy: -20,
+      stars: [
+        { id: 'aldebaran', dx: 0, dy: 8, r: 2.3, color: '#ffb74d', shimmer: 'star-shimmer-2' },
+        { id: 'elnath', dx: -14, dy: -12, r: 1.8, color: '#ffffff' },
+        { id: 'tianguan', dx: 14, dy: -10, r: 1.5, color: '#ffffff' },
+        { id: 'hyad1', dx: -8, dy: -1, r: 1.3, color: '#ffffff' },
+        { id: 'hyad2', dx: 7, dy: -1, r: 1.3, color: '#ffffff' },
+        { id: 'alcyone', dx: 22, dy: 2, r: 1.7, color: '#bbdefb' },
+        { id: 'plei1', dx: 26, dy: 0, r: 1.2, color: '#e1f5fe' },
+        { id: 'plei2', dx: 21, dy: -4, r: 1.2, color: '#e1f5fe' },
+        { id: 'plei3', dx: 25, dy: 5, r: 1.1, color: '#e1f5fe' }
+      ],
+      lines: [
+        [-14, -12, -8, -1], [-8, -1, 0, 8], [0, 8, 7, -1], [7, -1, 14, -10]
+      ]
     },
     gemini: {
       name: 'gemini',
       titleKey: 'constellations.gemini.title',
       labelKey: 'constellations.gemini.label',
-      lines: [['castor', 'pollux']],
-      starIds: ['castor', 'pollux']
+      ra: 108.0, dec: 26.0,
+      labelDy: -20,
+      stars: [
+        { id: 'castor', dx: -9, dy: -12, r: 2.0, color: '#ffffff' },
+        { id: 'pollux', dx: 9, dy: -10, r: 2.3, color: '#ffe082', shimmer: 'star-shimmer-4' },
+        { id: 'wasat', dx: -10, dy: 4, r: 1.7, color: '#ffffff' },
+        { id: 'alhena', dx: 8, dy: 6, r: 1.8, color: '#ffffff' },
+        { id: 'mebsuta', dx: -12, dy: 16, r: 1.5, color: '#ffffff' },
+        { id: 'propus', dx: 10, dy: 18, r: 1.5, color: '#ffffff' }
+      ],
+      lines: [
+        [-9, -12, 9, -10],
+        [-9, -12, -10, 4], [-10, 4, -12, 16],
+        [9, -10, 8, 6], [8, 6, 10, 18]
+      ]
     },
     leo: {
       name: 'leo',
       titleKey: 'constellations.leo.title',
       labelKey: 'constellations.leo.label',
-      lines: [['regulus', 'algieba'], ['algieba', 'denebola']],
-      starIds: ['regulus', 'algieba', 'denebola']
+      ra: 155.0, dec: 15.0,
+      labelDy: -18,
+      stars: [
+        { id: 'regulus', dx: -24, dy: 10, r: 2.4, color: '#bbdefb', shimmer: 'star-shimmer-8' },
+        { id: 'algieba', dx: -14, dy: -2, r: 1.9, color: '#ffe082' },
+        { id: 'adhafera', dx: -4, dy: -10, r: 1.6, color: '#ffffff' },
+        { id: 'rasalas', dx: 4, dy: -13, r: 1.5, color: '#ffffff' },
+        { id: 'zosma', dx: 12, dy: -2, r: 1.8, color: '#ffffff' },
+        { id: 'denebola', dx: 28, dy: 4, r: 2.0, color: '#ffffff' },
+        { id: 'chertan', dx: 10, dy: 8, r: 1.7, color: '#ffffff' }
+      ],
+      lines: [
+        [-24, 10, -14, -2], [-14, -2, -4, -10], [-4, -10, 4, -13],
+        [-14, -2, 12, -2], [12, -2, 28, 4], [28, 4, 10, 8], [10, 8, -14, -2]
+      ]
     },
     canis_major: {
       name: 'canis_major',
       titleKey: 'constellations.canis_major.title',
       labelKey: 'constellations.canis_major.label',
-      lines: [['sirius', 'procyon']],
-      starIds: ['sirius', 'procyon']
+      ra: 102.0, dec: -20.0,
+      labelDy: -18,
+      stars: [
+        { id: 'sirius', dx: 0, dy: 0, r: 2.8, color: '#ffffff', shimmer: 'star-shimmer-1' },
+        { id: 'murzim', dx: -14, dy: -8, r: 1.8, color: '#bbdefb' },
+        { id: 'muliphein', dx: -6, dy: -14, r: 1.5, color: '#ffffff' },
+        { id: 'wezen', dx: 14, dy: 10, r: 1.9, color: '#ffe082' },
+        { id: 'aludra', dx: 24, dy: 6, r: 1.7, color: '#bbdefb' },
+        { id: 'adhara', dx: 12, dy: 20, r: 1.9, color: '#ffffff' }
+      ],
+      lines: [
+        [-14, -8, 0, 0], [0, 0, 14, 10], [14, 10, 24, 6],
+        [0, 0, -6, -14],
+        [14, 10, 12, 20]
+      ]
     },
     pegasus: {
       name: 'pegasus',
       titleKey: 'constellations.pegasus.title',
       labelKey: 'constellations.pegasus.label',
-      lines: [['alpheratz', 'scheat'], ['scheat', 'markab'], ['markab', 'algenib'], ['algenib', 'alpheratz']],
-      starIds: ['alpheratz', 'scheat', 'markab', 'algenib']
+      ra: 350.0, dec: 22.0,
+      labelDy: -24,
+      stars: [
+        { id: 'alpheratz', dx: -16, dy: -16, r: 2.0, color: '#ffe082' },
+        { id: 'scheat', dx: 16, dy: -16, r: 2.0, color: '#bbdefb' },
+        { id: 'markab', dx: 16, dy: 16, r: 2.0, color: '#ffffff' },
+        { id: 'algenib', dx: -16, dy: 16, r: 1.9, color: '#ffffff' },
+        { id: 'enif', dx: 30, dy: 6, r: 1.7, color: '#ffe082' }
+      ],
+      lines: [
+        [-16, -16, 16, -16], [16, -16, 16, 16], [16, 16, -16, 16], [-16, 16, -16, -16],
+        [16, 16, 30, 6]
+      ]
     },
     crux: {
       name: 'crux',
       titleKey: 'constellations.crux.title',
       labelKey: 'constellations.crux.label',
-      lines: [['acrux', 'gacrux'], ['mimosa', 'imai']],
-      starIds: ['acrux', 'gacrux', 'mimosa', 'imai']
+      ra: 186.0, dec: -60.0,
+      labelDy: -24,
+      stars: [
+        { id: 'gacrux', dx: 0, dy: -16, r: 2.1, color: '#ffcc80' },
+        { id: 'acrux', dx: 0, dy: 16, r: 2.4, color: '#bbdefb', shimmer: 'star-shimmer-7' },
+        { id: 'mimosa', dx: -14, dy: 1, r: 2.2, color: '#bbdefb' },
+        { id: 'imai', dx: 13, dy: -2, r: 1.7, color: '#ffffff' }
+      ],
+      lines: [
+        [0, -16, 0, 16],
+        [-14, 1, 13, -2]
+      ]
     }
   };
 
@@ -1484,8 +1618,88 @@
       if (this._config.show_stars !== false && (sky.type !== 'day' || data.sunElevation <= 0)) {
         const starOpacity = data.sunElevation < -12 ? 1.0 : (data.sunElevation < -6 ? 0.85 : (data.sunElevation < 0 ? 0.5 : 0.2));
 
-        // 1. Calculate dynamic horizontal positions (alt, az) and project all catalog stars onto the dome
-        const starMap = {};
+        // 1. Render all 11 major constellations with iconic asterisms anchored at celestial positions
+        const constellationStarIds = new Set();
+        let constLinesSvg = '';
+        let constStarsSvg = '';
+        let constOverlaysSvg = '';
+
+        const showConstellations = this._config.show_constellations !== false;
+        const showConstLines = this._config.show_constellation_lines !== false;
+
+        // Collect all constellation star IDs first so standalone catalog never duplicates them
+        Object.values(CONSTELLATIONS_CONFIG).forEach(c => {
+          c.stars.forEach(s => constellationStarIds.add(s.id));
+        });
+
+        if (showConstellations) {
+          Object.values(CONSTELLATIONS_CONFIG).forEach(c => {
+            // Compute horizontal coordinates for constellation center
+            const horiz = equatorialToHorizontal(c.ra, c.dec, lstDeg, lat);
+            // Constellation must be above horizon (e.g. Crux Dec -60° is always alt < 0 in Central Europe)
+            if (horiz.alt <= 0) return;
+
+            // Project astronomical center to observer dome
+            const pt = projectToDome(horiz.alt, horiz.az, heading);
+            if (!pt) return;
+
+            const cx = pt.x;
+            const cy = pt.y;
+            if (cy >= horizonY - 4) return;
+
+            // Render iconic constellation connecting lines
+            if (showConstLines && c.lines) {
+              let linesSvg = '';
+              c.lines.forEach(([x1, y1, x2, y2]) => {
+                const lx1 = (cx + x1).toFixed(1);
+                const ly1 = (cy + y1).toFixed(1);
+                const lx2 = (cx + x2).toFixed(1);
+                const ly2 = (cy + y2).toFixed(1);
+                linesSvg += `<line x1="${lx1}" y1="${ly1}" x2="${lx2}" y2="${ly2}" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />`;
+              });
+              constLinesSvg += `
+                <g class="const-lines" data-lines="${c.name}">
+                  ${linesSvg}
+                </g>
+              `;
+            }
+
+            // Render iconic constellation stars
+            c.stars.forEach(s => {
+              const sx = (cx + s.dx).toFixed(1);
+              const sy = (cy + s.dy).toFixed(1);
+              const r = (s.r || 1.6).toFixed(1);
+              const color = s.color || '#ffffff';
+              const shimClass = s.shimmer || '';
+              constStarsSvg += `
+                <g class="nav-star ${shimClass}">
+                  <circle cx="${sx}" cy="${sy}" r="${r}" fill="${color}" opacity="0.92" />
+                </g>
+              `;
+            });
+
+            // Interactive hit area & hover label
+            const labelY = Math.max(14, Math.round(cy + c.labelDy));
+            let hitLines = '';
+            if (c.lines) {
+              c.lines.forEach(([x1, y1, x2, y2]) => {
+                hitLines += `<line x1="${(cx + x1).toFixed(1)}" y1="${(cy + y1).toFixed(1)}" x2="${(cx + x2).toFixed(1)}" y2="${(cy + y2).toFixed(1)}" stroke="rgba(0,0,0,0.001)" stroke-width="24" />`;
+              });
+            }
+            let hitCircles = c.stars.map(s => `<circle cx="${(cx + s.dx).toFixed(1)}" cy="${(cy + s.dy).toFixed(1)}" r="14" fill="rgba(0,0,0,0.001)" />`).join('');
+
+            constOverlaysSvg += `
+              <g class="constellation-hit-group" data-name="${c.name}">
+                <title>${localize(c.titleKey, userLang)}</title>
+                ${hitLines}
+                ${hitCircles}
+                <text class="const-hover-label" x="${cx.toFixed(1)}" y="${labelY}">${localize(c.labelKey, userLang)}</text>
+              </g>
+            `;
+          });
+        }
+
+        // 2. Render visible standalone bright navigational landmark stars (e.g. Arcturus, Spica, Capella, Antares, Procyon)
         const shimmerClassList = [
           'star-shimmer-1', 'star-shimmer-2', 'star-shimmer-3', 'star-shimmer-4',
           'star-shimmer-5', 'star-shimmer-6', 'star-shimmer-7', 'star-shimmer-8'
@@ -1493,97 +1707,22 @@
         const landmarkShimmerStars = ['polaris', 'vega', 'betelgeuse', 'sirius', 'aldebaran', 'capella', 'arcturus', 'rigel'];
 
         STAR_CATALOG.forEach(star => {
+          if (constellationStarIds.has(star.id)) return;
           const horiz = equatorialToHorizontal(star.ra, star.dec, lstDeg, lat);
+          if (horiz.alt <= 0) return;
           const pt = projectToDome(horiz.alt, horiz.az, heading);
-          if (pt) {
-            starMap[star.id] = { ...star, alt: horiz.alt, az: horiz.az, x: pt.x, y: pt.y };
+          if (pt && pt.y < horizonY) {
+            const r = Math.max(1.2, Math.min(2.8, (3.5 - (star.mag || 2.0) * 0.6))).toFixed(1);
+            const shimIdx = landmarkShimmerStars.indexOf(star.id);
+            const shimClass = (shimIdx >= 0) ? shimmerClassList[shimIdx % shimmerClassList.length] : '';
+            const color = (star.mag && star.mag < 0.5) ? '#ffe082' : (star.mag && star.mag < 1.5 ? '#ffffff' : '#e2e8f0');
+
+            constStarsSvg += `
+              <g class="nav-star ${shimClass}">
+                <circle cx="${pt.x}" cy="${pt.y}" r="${r}" fill="${color}" opacity="0.9" />
+              </g>
+            `;
           }
-        });
-
-        // 2. Build Constellation lines and collect star elements
-        let constLinesSvg = '';
-        let constStarsSvg = '';
-        let constOverlaysSvg = '';
-        const renderedStars = new Set();
-
-        const showConstellations = this._config.show_constellations !== false;
-        const showConstLines = this._config.show_constellation_lines !== false;
-
-        if (showConstellations) {
-          Object.values(CONSTELLATIONS_CONFIG).forEach(c => {
-            const visibleStarsInConst = [];
-            c.starIds.forEach(id => {
-              if (starMap[id]) visibleStarsInConst.push(starMap[id]);
-            });
-
-            // If constellation has at least 2 visible stars in current field of view
-            if (visibleStarsInConst.length >= 2) {
-              let linesSvg = '';
-              if (showConstLines) {
-                c.lines.forEach(([idA, idB]) => {
-                  const sA = starMap[idA];
-                  const sB = starMap[idB];
-                  if (sA && sB) {
-                    linesSvg += `<line x1="${sA.x}" y1="${sA.y}" x2="${sB.x}" y2="${sB.y}" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />`;
-                  }
-                });
-              }
-
-              constLinesSvg += `
-                <g class="const-lines" data-lines="${c.name}">
-                  ${linesSvg}
-                </g>
-              `;
-
-              // Bounding box / centroid for hover hit area and hover label
-              let minX = 999, maxX = -999, minY = 999, maxY = -999, sumX = 0, sumY = 0;
-              visibleStarsInConst.forEach(s => {
-                if (s.x < minX) minX = s.x;
-                if (s.x > maxX) maxX = s.x;
-                if (s.y < minY) minY = s.y;
-                if (s.y > maxY) maxY = s.y;
-                sumX += s.x;
-                sumY += s.y;
-              });
-              const avgX = Math.round((sumX / visibleStarsInConst.length) * 10) / 10;
-              const labelY = Math.max(14, Math.round((minY - 10) * 10) / 10);
-
-              // Constellation interactive hit area (invisible fat lines & star zones)
-              let hitLines = '';
-              c.lines.forEach(([idA, idB]) => {
-                const sA = starMap[idA];
-                const sB = starMap[idB];
-                if (sA && sB) {
-                  hitLines += `<line x1="${sA.x}" y1="${sA.y}" x2="${sB.x}" y2="${sB.y}" stroke="rgba(0,0,0,0.001)" stroke-width="26" />`;
-                }
-              });
-              let hitCircles = visibleStarsInConst.map(s => `<circle cx="${s.x}" cy="${s.y}" r="18" fill="rgba(0,0,0,0.001)" />`).join('');
-
-              constOverlaysSvg += `
-                <g class="constellation-hit-group" data-name="${c.name}">
-                  <title>${localize(c.titleKey, userLang)}</title>
-                  ${hitLines}
-                  ${hitCircles}
-                  <text class="const-hover-label" x="${avgX}" y="${labelY}">${localize(c.labelKey, userLang)}</text>
-                </g>
-              `;
-            }
-          });
-        }
-
-        // Render visible catalog stars
-        Object.values(starMap).forEach(star => {
-          renderedStars.add(star.id);
-          const r = Math.max(1.2, Math.min(2.8, (3.5 - (star.mag || 2.0) * 0.6))).toFixed(1);
-          const shimIdx = landmarkShimmerStars.indexOf(star.id);
-          const shimClass = (shimIdx >= 0) ? shimmerClassList[shimIdx % shimmerClassList.length] : '';
-          const color = (star.mag && star.mag < 0.5) ? '#ffe082' : (star.mag && star.mag < 1.5 ? '#ffffff' : '#e2e8f0');
-
-          constStarsSvg += `
-            <g class="nav-star ${shimClass}">
-              <circle cx="${star.x}" cy="${star.y}" r="${r}" fill="${color}" opacity="0.9" />
-            </g>
-          `;
         });
 
         // 3. Render realistic faint background stars
@@ -1622,7 +1761,7 @@
 
         // Assemble celestial starfield SVG
         starFieldSvg = `
-          <g class="celestial-starfield" opacity="${starOpacity}">
+          <g class="celestial-starfield" opacity="${starOpacity}" clip-path="url(#skyDomeStarsClip)">
             <!-- Faint background field stars -->
             <g class="faint-stars">
               ${faintStarsSvg}
@@ -1851,13 +1990,21 @@
           }
           .cardinal-label {
             font-size: 10px;
-            font-weight: 600;
-            fill: rgba(255,255,255,0.7);
+            font-weight: 700;
+            fill: #ffffff;
             text-anchor: middle;
+            paint-order: stroke fill;
+            stroke: #080d1a;
+            stroke-width: 3.5px;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9));
+            user-select: none;
           }
           .cardinal-label.cardinal-sub {
-            font-size: 8px;
-            fill: rgba(255, 255, 255, 0.4);
+            font-size: 8.5px;
+            font-weight: 600;
+            fill: #e2e8f0;
+            stroke-width: 2.8px;
           }
           .planet-marker {
             cursor: pointer;
@@ -1865,9 +2012,13 @@
           }
           .milestone-text {
             font-size: 9.5px;
-            font-weight: 500;
-            fill: rgba(255,255,255,0.85);
+            font-weight: 600;
+            fill: rgba(255,255,255,0.95);
             text-anchor: middle;
+            paint-order: stroke fill;
+            stroke: #080d1a;
+            stroke-width: 2.5px;
+            stroke-linejoin: round;
           }
 
           /* Calm, Continuous, GPU-Composited Starlight Shimmer (Only 8 Bright Landmark Stars) */
@@ -2246,6 +2397,9 @@
 
             <svg class="sky-svg" viewBox="0 0 ${svgW} ${svgH}">
               <defs>
+                <clipPath id="skyDomeStarsClip">
+                  <rect x="0" y="0" width="${svgW}" height="${horizonY}" />
+                </clipPath>
                 <radialGradient id="sunDiscGrad" cx="50%" cy="50%" r="50%">
                   <stop offset="0%" stop-color="#ffffff" />
                   <stop offset="40%" stop-color="${sky.sunGlow}" />
@@ -2294,9 +2448,11 @@
                   ` : `
                     <circle cx="${sunX}" cy="${sunY}" r="14" fill="url(#sunDiscGrad)" />
                   `}
-                  <text x="${sunX}" y="${sunY - 18}" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="700">
-                    ${data.sunElevation.toFixed(1)}°
-                  </text>
+                  ${isDay ? `
+                    <text x="${sunX}" y="${sunY - 18}" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="700" style="paint-order: stroke fill; stroke: #080d1a; stroke-width: 3px; stroke-linejoin: round;">
+                      ${data.sunElevation.toFixed(1)}°
+                    </text>
+                  ` : ''}
                 </g>
               ` : ''}
 
@@ -2734,7 +2890,7 @@
   });
 
   console.info(
-    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.4.0 ',
+    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.4.1 ',
     'color: white; background: #0c1222; font-weight: 700; border-radius: 3px 0 0 3px;',
     'color: white; background: #ff9800; font-weight: 700; border-radius: 0 3px 3px 0;'
   );

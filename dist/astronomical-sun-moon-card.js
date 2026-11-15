@@ -4,7 +4,7 @@
  * Visualizes real-time celestial trajectories, elevation, azimuth, milestones, and lunar phases.
  * 
  * Author: Adromir (https://github.com/adromir)
- * Version: 1.4.1
+ * Version: 1.4.2
  * License: MIT
  */
 
@@ -751,26 +751,26 @@
       titleKey: 'constellations.orion.title',
       labelKey: 'constellations.orion.label',
       ra: 84.0, dec: 0.0,
-      labelDy: -28,
+      labelDy: -24,
       stars: [
-        { id: 'meissa', dx: 0, dy: -24, r: 1.4, color: '#ffffff' },
-        { id: 'betelgeuse', dx: -18, dy: -16, r: 2.3, color: '#ffb74d', shimmer: 'star-shimmer-6' },
-        { id: 'bellatrix', dx: 18, dy: -18, r: 1.9, color: '#e1f5fe' },
-        { id: 'alnitak', dx: -7, dy: 1, r: 1.6, color: '#ffffff' },
+        { id: 'meissa', dx: 0, dy: -17, r: 1.4, color: '#ffffff' },
+        { id: 'betelgeuse', dx: -12, dy: -11, r: 2.3, color: '#ffb74d', shimmer: 'star-shimmer-6' },
+        { id: 'bellatrix', dx: 12, dy: -12, r: 1.9, color: '#e1f5fe' },
+        { id: 'alnitak', dx: -5, dy: 1, r: 1.6, color: '#ffffff' },
         { id: 'alnilam', dx: 0, dy: 0, r: 1.7, color: '#ffffff' },
-        { id: 'mintaka', dx: 7, dy: -1, r: 1.6, color: '#ffffff' },
-        { id: 'm42', dx: 0, dy: 8, r: 1.4, color: '#f48fb1' },
-        { id: 'saiph', dx: -14, dy: 22, r: 1.8, color: '#e1f5fe' },
-        { id: 'rigel', dx: 19, dy: 21, r: 2.4, color: '#bbdefb', shimmer: 'star-shimmer-7' }
+        { id: 'mintaka', dx: 5, dy: -1, r: 1.6, color: '#ffffff' },
+        { id: 'm42', dx: 0, dy: 5, r: 1.3, color: '#f48fb1' },
+        { id: 'saiph', dx: -10, dy: 14, r: 1.8, color: '#e1f5fe' },
+        { id: 'rigel', dx: 13, dy: 13, r: 2.4, color: '#bbdefb', shimmer: 'star-shimmer-7' }
       ],
       lines: [
-        [0, -24, -18, -16], [0, -24, 18, -18],
-        [-18, -16, 18, -18],
-        [-18, -16, -7, 1], [18, -18, 7, -1],
-        [-7, 1, 0, 0], [0, 0, 7, -1],
-        [0, 0, 0, 8],
-        [-7, 1, -14, 22], [7, -1, 19, 21],
-        [-14, 22, 19, 21]
+        [0, -17, -12, -11], [0, -17, 12, -12],
+        [-12, -11, 12, -12],
+        [-12, -11, -5, 1], [12, -12, 5, -1],
+        [-5, 1, 0, 0], [0, 0, 5, -1],
+        [0, 0, 0, 5],
+        [-5, 1, -10, 14], [5, -1, 13, 13],
+        [-10, 14, 13, 13]
       ]
     },
     ursa_major: {
@@ -778,19 +778,19 @@
       titleKey: 'constellations.ursa_major.title',
       labelKey: 'constellations.ursa_major.label',
       ra: 175.0, dec: 56.0,
-      labelDy: -20,
+      labelDy: -18,
       stars: [
-        { id: 'dubhe', dx: -26, dy: -8, r: 2.1, color: '#ffe082', shimmer: 'star-shimmer-1' },
-        { id: 'merak', dx: -24, dy: 8, r: 1.8, color: '#ffffff', shimmer: 'star-shimmer-2' },
-        { id: 'phecda', dx: 0, dy: 9, r: 1.8, color: '#ffffff', shimmer: 'star-shimmer-3' },
-        { id: 'megrez', dx: -2, dy: -6, r: 1.5, color: '#ffffff', shimmer: 'star-shimmer-4' },
-        { id: 'alioth', dx: 18, dy: -8, r: 2.0, color: '#ffffff', shimmer: 'star-shimmer-5' },
-        { id: 'mizar', dx: 36, dy: -14, r: 1.9, color: '#ffffff' },
-        { id: 'alkaid', dx: 52, dy: -18, r: 2.0, color: '#bbdefb' }
+        { id: 'dubhe', dx: -20, dy: -6, r: 2.1, color: '#ffe082', shimmer: 'star-shimmer-1' },
+        { id: 'merak', dx: -18, dy: 6, r: 1.8, color: '#ffffff', shimmer: 'star-shimmer-2' },
+        { id: 'phecda', dx: 0, dy: 7, r: 1.8, color: '#ffffff', shimmer: 'star-shimmer-3' },
+        { id: 'megrez', dx: -2, dy: -5, r: 1.5, color: '#ffffff', shimmer: 'star-shimmer-4' },
+        { id: 'alioth', dx: 14, dy: -6, r: 2.0, color: '#ffffff', shimmer: 'star-shimmer-5' },
+        { id: 'mizar', dx: 28, dy: -10, r: 1.9, color: '#ffffff' },
+        { id: 'alkaid', dx: 40, dy: -13, r: 2.0, color: '#bbdefb' }
       ],
       lines: [
-        [-26, -8, -24, 8], [-24, 8, 0, 9], [0, 9, -2, -6], [-2, -6, -26, -8],
-        [-2, -6, 18, -8], [18, -8, 36, -14], [36, -14, 52, -18]
+        [-20, -6, -18, 6], [-18, 6, 0, 7], [0, 7, -2, -5], [-2, -5, -20, -6],
+        [-2, -5, 14, -6], [14, -6, 28, -10], [28, -10, 40, -13]
       ]
     },
     ursa_minor: {
@@ -798,18 +798,18 @@
       titleKey: 'constellations.ursa_minor.title',
       labelKey: 'constellations.ursa_minor.label',
       ra: 75.0, dec: 82.0,
-      labelDy: -18,
+      labelDy: -16,
       stars: [
-        { id: 'polaris', dx: -26, dy: 8, r: 2.4, color: '#fff9c4', shimmer: 'star-shimmer-8' },
-        { id: 'yildun', dx: -12, dy: 2, r: 1.4, color: '#ffffff' },
-        { id: 'anwar', dx: 2, dy: 4, r: 1.4, color: '#ffffff' },
-        { id: 'ahfa', dx: 14, dy: 13, r: 1.9, color: '#ffe082' },
-        { id: 'pherkad', dx: 24, dy: 0, r: 1.6, color: '#ffffff' },
-        { id: 'kochab', dx: 12, dy: -8, r: 1.8, color: '#ffffff' }
+        { id: 'polaris', dx: -20, dy: 6, r: 2.4, color: '#fff9c4', shimmer: 'star-shimmer-8' },
+        { id: 'yildun', dx: -10, dy: 2, r: 1.4, color: '#ffffff' },
+        { id: 'anwar', dx: 1, dy: 3, r: 1.4, color: '#ffffff' },
+        { id: 'ahfa', dx: 10, dy: 10, r: 1.8, color: '#ffe082' },
+        { id: 'pherkad', dx: 18, dy: 0, r: 1.6, color: '#ffffff' },
+        { id: 'kochab', dx: 9, dy: -6, r: 1.8, color: '#ffffff' }
       ],
       lines: [
-        [-26, 8, -12, 2], [-12, 2, 2, 4], [2, 4, 14, 13],
-        [14, 13, 24, 0], [24, 0, 12, -8], [12, -8, 2, 4]
+        [-20, 6, -10, 2], [-10, 2, 1, 3], [1, 3, 10, 10],
+        [10, 10, 18, 0], [18, 0, 9, -6], [9, -6, 1, 3]
       ]
     },
     cassiopeia: {
@@ -817,16 +817,16 @@
       titleKey: 'constellations.cassiopeia.title',
       labelKey: 'constellations.cassiopeia.label',
       ra: 15.0, dec: 60.0,
-      labelDy: -16,
+      labelDy: -14,
       stars: [
-        { id: 'schedar', dx: -26, dy: -6, r: 2.0, color: '#ffe082' },
-        { id: 'caph', dx: -13, dy: 4, r: 1.9, color: '#ffffff' },
-        { id: 'gammacas', dx: 0, dy: -6, r: 2.0, color: '#bbdefb' },
-        { id: 'ruchbah', dx: 13, dy: 6, r: 1.7, color: '#ffffff' },
-        { id: 'segin', dx: 26, dy: -2, r: 1.6, color: '#ffffff' }
+        { id: 'schedar', dx: -20, dy: -5, r: 2.0, color: '#ffe082' },
+        { id: 'caph', dx: -10, dy: 3, r: 1.9, color: '#ffffff' },
+        { id: 'gammacas', dx: 0, dy: -5, r: 2.0, color: '#bbdefb' },
+        { id: 'ruchbah', dx: 10, dy: 5, r: 1.7, color: '#ffffff' },
+        { id: 'segin', dx: 20, dy: -2, r: 1.6, color: '#ffffff' }
       ],
       lines: [
-        [-26, -6, -13, 4], [-13, 4, 0, -6], [0, -6, 13, 6], [13, 6, 26, -2]
+        [-20, -5, -10, 3], [-10, 3, 0, -5], [0, -5, 10, 5], [10, 5, 20, -2]
       ]
     },
     summer_triangle: {
@@ -834,58 +834,58 @@
       titleKey: 'constellations.summer_triangle.title',
       labelKey: 'constellations.summer_triangle.label',
       ra: 295.0, dec: 30.0,
-      labelDy: -24,
+      labelDy: -20,
       stars: [
-        { id: 'vega', dx: -28, dy: -8, r: 2.5, color: '#e1f5fe', shimmer: 'star-shimmer-1' },
-        { id: 'deneb', dx: 14, dy: -16, r: 2.2, color: '#ffffff', shimmer: 'star-shimmer-5' },
-        { id: 'altair', dx: 22, dy: 16, r: 2.3, color: '#fff9c4', shimmer: 'star-shimmer-3' },
-        { id: 'sadr', dx: 12, dy: -3, r: 1.7, color: '#ffffff' },
-        { id: 'albireo', dx: 0, dy: 6, r: 1.6, color: '#ffe082' }
+        { id: 'vega', dx: -22, dy: -6, r: 2.5, color: '#e1f5fe', shimmer: 'star-shimmer-1' },
+        { id: 'deneb', dx: 11, dy: -13, r: 2.2, color: '#ffffff', shimmer: 'star-shimmer-5' },
+        { id: 'altair', dx: 17, dy: 13, r: 2.3, color: '#fff9c4', shimmer: 'star-shimmer-3' },
+        { id: 'sadr', dx: 9, dy: -2, r: 1.7, color: '#ffffff' },
+        { id: 'albireo', dx: 0, dy: 5, r: 1.6, color: '#ffe082' }
       ],
       lines: [
-        [-28, -8, 14, -16], [14, -16, 22, 16], [22, 16, -28, -8],
-        [14, -16, 12, -3], [12, -3, 0, 6]
+        [-22, -6, 11, -13], [11, -13, 17, 13], [17, 13, -22, -6],
+        [11, -13, 9, -2], [9, -2, 0, 5]
       ]
     },
     taurus_pleiades: {
       name: 'taurus_pleiades',
       titleKey: 'constellations.taurus_pleiades.title',
       labelKey: 'constellations.taurus_pleiades.label',
-      ra: 65.0, dec: 19.0,
-      labelDy: -20,
+      ra: 69.0, dec: 16.5,
+      labelDy: -22,
       stars: [
-        { id: 'aldebaran', dx: 0, dy: 8, r: 2.3, color: '#ffb74d', shimmer: 'star-shimmer-2' },
-        { id: 'elnath', dx: -14, dy: -12, r: 1.8, color: '#ffffff' },
-        { id: 'tianguan', dx: 14, dy: -10, r: 1.5, color: '#ffffff' },
-        { id: 'hyad1', dx: -8, dy: -1, r: 1.3, color: '#ffffff' },
-        { id: 'hyad2', dx: 7, dy: -1, r: 1.3, color: '#ffffff' },
-        { id: 'alcyone', dx: 22, dy: 2, r: 1.7, color: '#bbdefb' },
-        { id: 'plei1', dx: 26, dy: 0, r: 1.2, color: '#e1f5fe' },
-        { id: 'plei2', dx: 21, dy: -4, r: 1.2, color: '#e1f5fe' },
-        { id: 'plei3', dx: 25, dy: 5, r: 1.1, color: '#e1f5fe' }
+        { id: 'aldebaran', dx: 0, dy: 0, r: 2.3, color: '#ffb74d', shimmer: 'star-shimmer-2' },
+        { id: 'elnath', dx: -10, dy: -12, r: 1.8, color: '#ffffff' },
+        { id: 'tianguan', dx: 10, dy: -10, r: 1.5, color: '#ffffff' },
+        { id: 'hyad1', dx: -6, dy: -2, r: 1.3, color: '#ffffff' },
+        { id: 'hyad2', dx: 5, dy: -2, r: 1.3, color: '#ffffff' },
+        { id: 'alcyone', dx: -18, dy: -14, r: 1.7, color: '#bbdefb' },
+        { id: 'plei1', dx: -21, dy: -16, r: 1.2, color: '#e1f5fe' },
+        { id: 'plei2', dx: -17, dy: -19, r: 1.2, color: '#e1f5fe' },
+        { id: 'plei3', dx: -22, dy: -12, r: 1.1, color: '#e1f5fe' }
       ],
       lines: [
-        [-14, -12, -8, -1], [-8, -1, 0, 8], [0, 8, 7, -1], [7, -1, 14, -10]
+        [-10, -12, -6, -2], [-6, -2, 0, 0], [0, 0, 5, -2], [5, -2, 10, -10]
       ]
     },
     gemini: {
       name: 'gemini',
       titleKey: 'constellations.gemini.title',
       labelKey: 'constellations.gemini.label',
-      ra: 108.0, dec: 26.0,
-      labelDy: -20,
+      ra: 114.0, dec: 28.0,
+      labelDy: -18,
       stars: [
-        { id: 'castor', dx: -9, dy: -12, r: 2.0, color: '#ffffff' },
-        { id: 'pollux', dx: 9, dy: -10, r: 2.3, color: '#ffe082', shimmer: 'star-shimmer-4' },
-        { id: 'wasat', dx: -10, dy: 4, r: 1.7, color: '#ffffff' },
-        { id: 'alhena', dx: 8, dy: 6, r: 1.8, color: '#ffffff' },
-        { id: 'mebsuta', dx: -12, dy: 16, r: 1.5, color: '#ffffff' },
-        { id: 'propus', dx: 10, dy: 18, r: 1.5, color: '#ffffff' }
+        { id: 'castor', dx: -7, dy: -10, r: 2.0, color: '#ffffff' },
+        { id: 'pollux', dx: 7, dy: -8, r: 2.3, color: '#ffe082', shimmer: 'star-shimmer-4' },
+        { id: 'wasat', dx: -8, dy: 3, r: 1.7, color: '#ffffff' },
+        { id: 'alhena', dx: 7, dy: 5, r: 1.8, color: '#ffffff' },
+        { id: 'mebsuta', dx: -9, dy: 13, r: 1.5, color: '#ffffff' },
+        { id: 'propus', dx: 8, dy: 14, r: 1.5, color: '#ffffff' }
       ],
       lines: [
-        [-9, -12, 9, -10],
-        [-9, -12, -10, 4], [-10, 4, -12, 16],
-        [9, -10, 8, 6], [8, 6, 10, 18]
+        [-7, -10, 7, -8],
+        [-7, -10, -8, 3], [-8, 3, -9, 13],
+        [7, -8, 7, 5], [7, 5, 8, 14]
       ]
     },
     leo: {
@@ -893,39 +893,39 @@
       titleKey: 'constellations.leo.title',
       labelKey: 'constellations.leo.label',
       ra: 155.0, dec: 15.0,
-      labelDy: -18,
+      labelDy: -16,
       stars: [
-        { id: 'regulus', dx: -24, dy: 10, r: 2.4, color: '#bbdefb', shimmer: 'star-shimmer-8' },
-        { id: 'algieba', dx: -14, dy: -2, r: 1.9, color: '#ffe082' },
-        { id: 'adhafera', dx: -4, dy: -10, r: 1.6, color: '#ffffff' },
-        { id: 'rasalas', dx: 4, dy: -13, r: 1.5, color: '#ffffff' },
-        { id: 'zosma', dx: 12, dy: -2, r: 1.8, color: '#ffffff' },
-        { id: 'denebola', dx: 28, dy: 4, r: 2.0, color: '#ffffff' },
-        { id: 'chertan', dx: 10, dy: 8, r: 1.7, color: '#ffffff' }
+        { id: 'regulus', dx: -18, dy: 8, r: 2.4, color: '#bbdefb', shimmer: 'star-shimmer-8' },
+        { id: 'algieba', dx: -11, dy: -2, r: 1.9, color: '#ffe082' },
+        { id: 'adhafera', dx: -3, dy: -8, r: 1.6, color: '#ffffff' },
+        { id: 'rasalas', dx: 3, dy: -10, r: 1.5, color: '#ffffff' },
+        { id: 'zosma', dx: 9, dy: -2, r: 1.8, color: '#ffffff' },
+        { id: 'denebola', dx: 22, dy: 3, r: 2.0, color: '#ffffff' },
+        { id: 'chertan', dx: 8, dy: 6, r: 1.7, color: '#ffffff' }
       ],
       lines: [
-        [-24, 10, -14, -2], [-14, -2, -4, -10], [-4, -10, 4, -13],
-        [-14, -2, 12, -2], [12, -2, 28, 4], [28, 4, 10, 8], [10, 8, -14, -2]
+        [-18, 8, -11, -2], [-11, -2, -3, -8], [-3, -8, 3, -10],
+        [-11, -2, 9, -2], [9, -2, 22, 3], [22, 3, 8, 6], [8, 6, -11, -2]
       ]
     },
     canis_major: {
       name: 'canis_major',
       titleKey: 'constellations.canis_major.title',
       labelKey: 'constellations.canis_major.label',
-      ra: 102.0, dec: -20.0,
-      labelDy: -18,
+      ra: 105.0, dec: -22.0,
+      labelDy: -16,
       stars: [
         { id: 'sirius', dx: 0, dy: 0, r: 2.8, color: '#ffffff', shimmer: 'star-shimmer-1' },
-        { id: 'murzim', dx: -14, dy: -8, r: 1.8, color: '#bbdefb' },
-        { id: 'muliphein', dx: -6, dy: -14, r: 1.5, color: '#ffffff' },
-        { id: 'wezen', dx: 14, dy: 10, r: 1.9, color: '#ffe082' },
-        { id: 'aludra', dx: 24, dy: 6, r: 1.7, color: '#bbdefb' },
-        { id: 'adhara', dx: 12, dy: 20, r: 1.9, color: '#ffffff' }
+        { id: 'murzim', dx: -9, dy: -5, r: 1.8, color: '#bbdefb' },
+        { id: 'muliphein', dx: -4, dy: -9, r: 1.5, color: '#ffffff' },
+        { id: 'wezen', dx: 9, dy: 7, r: 1.9, color: '#ffe082' },
+        { id: 'aludra', dx: 16, dy: 4, r: 1.7, color: '#bbdefb' },
+        { id: 'adhara', dx: 8, dy: 14, r: 1.9, color: '#ffffff' }
       ],
       lines: [
-        [-14, -8, 0, 0], [0, 0, 14, 10], [14, 10, 24, 6],
-        [0, 0, -6, -14],
-        [14, 10, 12, 20]
+        [-9, -5, 0, 0], [0, 0, 9, 7], [9, 7, 16, 4],
+        [0, 0, -4, -9],
+        [9, 7, 8, 14]
       ]
     },
     pegasus: {
@@ -933,17 +933,22 @@
       titleKey: 'constellations.pegasus.title',
       labelKey: 'constellations.pegasus.label',
       ra: 350.0, dec: 22.0,
-      labelDy: -24,
+      labelDy: -26,
       stars: [
-        { id: 'alpheratz', dx: -16, dy: -16, r: 2.0, color: '#ffe082' },
-        { id: 'scheat', dx: 16, dy: -16, r: 2.0, color: '#bbdefb' },
-        { id: 'markab', dx: 16, dy: 16, r: 2.0, color: '#ffffff' },
-        { id: 'algenib', dx: -16, dy: 16, r: 1.9, color: '#ffffff' },
-        { id: 'enif', dx: 30, dy: 6, r: 1.7, color: '#ffe082' }
+        { id: 'scheat', dx: -14, dy: -10, r: 2.1, color: '#bbdefb' },
+        { id: 'alpheratz', dx: 14, dy: -12, r: 2.2, color: '#ffe082' },
+        { id: 'algenib', dx: 12, dy: 14, r: 1.8, color: '#ffffff' },
+        { id: 'markab', dx: -16, dy: 12, r: 2.1, color: '#ffffff' },
+        { id: 'homam', dx: -28, dy: 14, r: 1.5, color: '#ffffff' },
+        { id: 'biham', dx: -38, dy: 12, r: 1.5, color: '#ffffff' },
+        { id: 'enif', dx: -48, dy: 6, r: 2.3, color: '#ffb74d', shimmer: 'star-shimmer-3' },
+        { id: 'matar', dx: -22, dy: -22, r: 1.7, color: '#ffffff' },
+        { id: 'pi_peg', dx: -32, dy: -28, r: 1.4, color: '#bbdefb' }
       ],
       lines: [
-        [-16, -16, 16, -16], [16, -16, 16, 16], [16, 16, -16, 16], [-16, 16, -16, -16],
-        [16, 16, 30, 6]
+        [-14, -10, 14, -12], [14, -12, 12, 14], [12, 14, -16, 12], [-16, 12, -14, -10],
+        [-16, 12, -28, 14], [-28, 14, -38, 12], [-38, 12, -48, 6],
+        [-14, -10, -22, -22], [-22, -22, -32, -28]
       ]
     },
     crux: {
@@ -951,51 +956,24 @@
       titleKey: 'constellations.crux.title',
       labelKey: 'constellations.crux.label',
       ra: 186.0, dec: -60.0,
-      labelDy: -24,
+      labelDy: -20,
       stars: [
-        { id: 'gacrux', dx: 0, dy: -16, r: 2.1, color: '#ffcc80' },
-        { id: 'acrux', dx: 0, dy: 16, r: 2.4, color: '#bbdefb', shimmer: 'star-shimmer-7' },
-        { id: 'mimosa', dx: -14, dy: 1, r: 2.2, color: '#bbdefb' },
-        { id: 'imai', dx: 13, dy: -2, r: 1.7, color: '#ffffff' }
+        { id: 'gacrux', dx: 0, dy: -14, r: 2.1, color: '#ffcc80' },
+        { id: 'acrux', dx: 0, dy: 14, r: 2.4, color: '#bbdefb', shimmer: 'star-shimmer-7' },
+        { id: 'mimosa', dx: -12, dy: 1, r: 2.2, color: '#bbdefb' },
+        { id: 'imai', dx: 11, dy: -2, r: 1.7, color: '#ffffff' }
       ],
       lines: [
-        [0, -16, 0, 16],
-        [-14, 1, 13, -2]
+        [0, -14, 0, 14],
+        [-12, 1, 11, -2]
       ]
     }
   };
 
-  // 28 realistic faint background stars spread across celestial sphere
-  const FAINT_STARS = [
-    { ra: 15.2, dec: 42.1, r: 0.9, op: 0.65 },
-    { ra: 45.8, dec: 65.3, r: 0.8, op: 0.70 },
-    { ra: 72.1, dec: 30.5, r: 1.0, op: 0.60 },
-    { ra: 95.4, dec: 12.2, r: 0.7, op: 0.55 },
-    { ra: 120.6, dec: 50.1, r: 0.9, op: 0.75 },
-    { ra: 142.3, dec: 25.8, r: 0.8, op: 0.60 },
-    { ra: 168.9, dec: 70.4, r: 1.1, op: 0.70 },
-    { ra: 190.2, dec: 35.6, r: 0.7, op: 0.65 },
-    { ra: 215.7, dec: 10.4, r: 0.9, op: 0.60 },
-    { ra: 238.4, dec: 48.2, r: 0.8, op: 0.70 },
-    { ra: 260.1, dec: 22.9, r: 1.0, op: 0.65 },
-    { ra: 285.5, dec: 55.3, r: 0.7, op: 0.70 },
-    { ra: 305.8, dec: 15.7, r: 0.9, op: 0.60 },
-    { ra: 330.2, dec: 62.4, r: 0.8, op: 0.75 },
-    { ra: 350.6, dec: 38.1, r: 1.0, op: 0.65 },
-    { ra: 28.4, dec: -5.2, r: 0.8, op: 0.60 },
-    { ra: 60.1, dec: 5.8, r: 0.9, op: 0.70 },
-    { ra: 85.3, dec: 28.4, r: 0.7, op: 0.65 },
-    { ra: 110.5, dec: -12.1, r: 1.0, op: 0.60 },
-    { ra: 135.2, dec: 38.9, r: 0.8, op: 0.70 },
-    { ra: 160.7, dec: -8.5, r: 0.7, op: 0.65 },
-    { ra: 185.1, dec: 22.3, r: 0.9, op: 0.75 },
-    { ra: 210.4, dec: 58.7, r: 0.8, op: 0.65 },
-    { ra: 235.9, dec: -15.4, r: 1.0, op: 0.60 },
-    { ra: 255.2, dec: 40.2, r: 0.7, op: 0.70 },
-    { ra: 280.6, dec: -2.1, r: 0.9, op: 0.65 },
-    { ra: 315.3, dec: 32.8, r: 0.8, op: 0.70 },
-    { ra: 340.7, dec: -8.9, r: 1.0, op: 0.60 }
-  ];
+  // 120+ Rich background filler stars rendered via GPU-accelerated CSS box-shadow
+  const STARFIELD_BOX_SHADOW_1 = "41.7cqw 5px #ffffff, 23.2cqw 32px #ffffff, 71.2cqw 5px #ffffff, 33.6cqw 74px #ffffff, 46.4cqw 74px #ffffff, 53.7cqw 47px #e1f5fe, 95.5cqw 37px #ffffff, 19.7cqw 88px #ffffff, 58.3cqw 34px #ffe082, 59.4cqw 24px #f5f5f5, 62.9cqw 100px #e1f5fe, 12.9cqw 98px #f5f5f5, 45.3cqw 60px #ffffff, 8.2cqw 32px #ffffff, 37.5cqw 55px #ffffff, 77.2cqw 69px #e1f5fe, 71.4cqw 13px #ffe082, 60.1cqw 36px #ffffff, 83.2cqw 75px #ffffff, 84.7cqw 71px #ffffff, 8.7cqw 66px #ffe082, 87.1cqw 105px #ffffff, 71.9cqw 22px #f5f5f5, 3.2cqw 69px #ffffff, 17.0cqw 81px #f5f5f5, 57.2cqw 101px #f5f5f5, 67.8cqw 69px #ffffff, 88.9cqw 28px #e1f5fe, 64.4cqw 22px #f5f5f5, 34.4cqw 93px #ffffff, 38.8cqw 78px #e1f5fe, 21.7cqw 19px #ffe082, 23.0cqw 64px #ffffff, 82.7cqw 47px #f5f5f5, 48.9cqw 13px #ffe082, 57.6cqw 5px #ffffff, 52.6cqw 66px #ffffff, 74.2cqw 32px #ffffff, 66.1cqw 49px #e1f5fe, 68.6cqw 57px #ffffff, 25.4cqw 100px #ffe082, 72.7cqw 13px #ffffff, 58.5cqw 46px #e1f5fe, 22.7cqw 36px #f5f5f5, 5.3cqw 26px #ffe082, 46.4cqw 59px #e1f5fe, 89.9cqw 74px #e1f5fe, 79.9cqw 11px #ffffff";
+  const STARFIELD_BOX_SHADOW_2 = "5.1cqw 67px #ffffff, 76.0cqw 73px #e0f2fe, 78.8cqw 87px #bbdefb, 52.7cqw 51px #ffffff, 36.8cqw 6px #fff9c4, 70.2cqw 94px #e0f2fe, 4.3cqw 57px #ffffff, 66.1cqw 37px #ffffff, 12.7cqw 74px #ffffff, 71.4cqw 12px #ffffff, 93.4cqw 90px #fff9c4, 23.7cqw 53px #fff9c4, 89.6cqw 39px #fff9c4, 48.3cqw 92px #fff9c4, 32.8cqw 54px #e0f2fe, 82.4cqw 65px #fff9c4, 48.2cqw 67px #fff9c4, 63.4cqw 102px #ffffff, 73.1cqw 13px #ffffff, 22.6cqw 40px #ffffff, 45.0cqw 25px #bbdefb, 85.5cqw 10px #bbdefb, 89.1cqw 35px #bbdefb, 95.2cqw 44px #fff9c4, 48.8cqw 78px #fff9c4, 83.2cqw 78px #ffffff, 49.4cqw 87px #bbdefb, 80.7cqw 45px #ffffff, 28.3cqw 95px #ffffff, 25.2cqw 78px #e0f2fe, 16.7cqw 35px #e0f2fe, 41.9cqw 10px #ffffff, 46.0cqw 41px #fff9c4, 68.2cqw 73px #ffffff, 53.6cqw 47px #ffffff, 41.3cqw 102px #ffffff";
+  const STARFIELD_BOX_SHADOW_3 = "2.9cqw 20px rgba(225,245,254,0.7), 11.2cqw 5px rgba(255,255,255,0.75), 87.4cqw 44px rgba(255,255,255,0.75), 76.3cqw 73px rgba(255,255,255,0.75), 18.6cqw 31px rgba(255,255,255,0.75), 53.3cqw 68px rgba(255,255,255,0.75), 25.1cqw 17px rgba(255,255,255,0.75), 73.0cqw 27px rgba(255,255,255,0.75), 41.7cqw 38px rgba(225,245,254,0.7), 70.0cqw 92px rgba(225,245,254,0.7), 2.8cqw 22px rgba(255,255,255,0.75), 77.0cqw 85px rgba(225,245,254,0.7), 39.3cqw 5px rgba(255,249,196,0.65), 28.6cqw 41px rgba(225,245,254,0.7), 85.7cqw 23px rgba(225,245,254,0.7), 55.5cqw 103px rgba(255,249,196,0.65), 76.8cqw 4px rgba(255,249,196,0.65), 92.4cqw 92px rgba(255,255,255,0.75), 45.2cqw 91px rgba(255,255,255,0.75), 74.0cqw 45px rgba(255,255,255,0.75), 23.6cqw 106px rgba(255,249,196,0.65), 32.9cqw 104px rgba(255,255,255,0.75), 44.6cqw 84px rgba(255,249,196,0.65), 1.7cqw 91px rgba(255,255,255,0.75), 43.0cqw 62px rgba(225,245,254,0.7), 13.3cqw 41px rgba(255,249,196,0.65), 51.3cqw 74px rgba(255,249,196,0.65), 2.1cqw 97px rgba(255,255,255,0.75), 4.3cqw 49px rgba(225,245,254,0.7), 98.9cqw 81px rgba(255,249,196,0.65), 32.6cqw 23px rgba(255,249,196,0.65), 42.3cqw 28px rgba(255,255,255,0.75), 70.9cqw 32px rgba(255,249,196,0.65), 61.1cqw 81px rgba(255,255,255,0.75), 53.8cqw 4px rgba(255,255,255,0.75), 89.9cqw 61px rgba(225,245,254,0.7), 14.1cqw 83px rgba(255,255,255,0.75), 63.3cqw 5px rgba(225,245,254,0.7), 82.3cqw 89px rgba(225,245,254,0.7), 14.0cqw 55px rgba(255,255,255,0.75), 95.2cqw 58px rgba(225,245,254,0.7), 72.7cqw 33px rgba(255,255,255,0.75), 85.4cqw 26px rgba(225,245,254,0.7), 76.0cqw 81px rgba(225,245,254,0.7), 85.5cqw 29px rgba(225,245,254,0.7)";
 
   // Dynamic Horizontal projection onto the card's 180° panorama celestial dome
   function projectToDome(alt, az, heading) {
@@ -1655,7 +1633,7 @@
                 const ly1 = (cy + y1).toFixed(1);
                 const lx2 = (cx + x2).toFixed(1);
                 const ly2 = (cy + y2).toFixed(1);
-                linesSvg += `<line x1="${lx1}" y1="${ly1}" x2="${lx2}" y2="${ly2}" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />`;
+                linesSvg += `<line x1="${lx1}" y1="${ly1}" x2="${lx2}" y2="${ly2}" />`;
               });
               constLinesSvg += `
                 <g class="const-lines" data-lines="${c.name}">
@@ -1664,7 +1642,7 @@
               `;
             }
 
-            // Render iconic constellation stars
+            // Render iconic constellation stars with solid dark backing so lines never cut into star dots
             c.stars.forEach(s => {
               const sx = (cx + s.dx).toFixed(1);
               const sy = (cy + s.dy).toFixed(1);
@@ -1673,7 +1651,8 @@
               const shimClass = s.shimmer || '';
               constStarsSvg += `
                 <g class="nav-star ${shimClass}">
-                  <circle cx="${sx}" cy="${sy}" r="${r}" fill="${color}" opacity="0.92" />
+                  <circle cx="${sx}" cy="${sy}" r="${(parseFloat(r) + 0.9).toFixed(1)}" fill="#080c16" />
+                  <circle cx="${sx}" cy="${sy}" r="${r}" fill="${color}" opacity="0.95" />
                 </g>
               `;
             });
@@ -1719,21 +1698,15 @@
 
             constStarsSvg += `
               <g class="nav-star ${shimClass}">
+                <circle cx="${pt.x}" cy="${pt.y}" r="${(parseFloat(r) + 0.9).toFixed(1)}" fill="#080c16" />
                 <circle cx="${pt.x}" cy="${pt.y}" r="${r}" fill="${color}" opacity="0.9" />
               </g>
             `;
           }
         });
 
-        // 3. Render realistic faint background stars
+        // 3. Faint background stars are rendered via GPU-accelerated CSS box-shadow in .starfield
         let faintStarsSvg = '';
-        FAINT_STARS.forEach(fs => {
-          const horiz = equatorialToHorizontal(fs.ra, fs.dec, lstDeg, lat);
-          const pt = projectToDome(horiz.alt, horiz.az, heading);
-          if (pt) {
-            faintStarsSvg += `<circle cx="${pt.x}" cy="${pt.y}" r="${fs.r}" fill="#ffffff" opacity="${(fs.op * 0.7).toFixed(2)}" />`;
-          }
-        });
 
         // 4. Compute and project Keplerian positions for Venus, Mars, Jupiter
         const planets = calculatePlanetPositions(now, lat, lon);
@@ -1910,6 +1883,66 @@
             overflow: hidden;
             box-shadow: inset 0 2px 10px rgba(0,0,0,0.25);
             transition: background 1s ease;
+            container-type: inline-size;
+          }
+          /* Dynamic CSS Starfield with 120+ Background Stars & Multi-Layer Pulsing (CSS box-shadow) */
+          .starfield {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+            opacity: ${starOpacity};
+            transition: opacity 1s ease;
+          }
+          .starfield::before, .starfield::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+          }
+          .starfield::before {
+            width: 1.5px;
+            height: 1.5px;
+            box-shadow: ${STARFIELD_BOX_SHADOW_1};
+            animation: pulse1 3.2s infinite alternate ease-in-out;
+          }
+          .starfield::after {
+            width: 2.2px;
+            height: 2.2px;
+            box-shadow: ${STARFIELD_BOX_SHADOW_2};
+            animation: pulse2 2.4s infinite alternate-reverse ease-in-out;
+          }
+          .starfield-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+          }
+          .starfield-layer::before {
+            content: "";
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            border-radius: 50%;
+            box-shadow: ${STARFIELD_BOX_SHADOW_3};
+            animation: pulse3 4.2s infinite alternate ease-in-out;
+          }
+          @keyframes pulse1 {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+          }
+          @keyframes pulse2 {
+            0% { opacity: 0.25; }
+            100% { opacity: 1; }
+          }
+          @keyframes pulse3 {
+            0% { opacity: 0.1; }
+            100% { opacity: 0.8; }
           }
           .sky-heading-overlay {
             position: absolute;
@@ -1948,6 +1981,8 @@
             font-weight: 700;
           }
           svg.sky-svg {
+            position: relative;
+            z-index: 2;
             display: block;
             width: 100%;
             height: auto;
@@ -2073,24 +2108,30 @@
             opacity: 1;
           }
 
-          /* Highlight constellation lines in the background starfield on hover */
-          .const-lines line {
-            transition: stroke 0.3s ease, stroke-width 0.3s ease, filter 0.3s ease;
+          /* Constellation connecting lines - completely hidden by default to keep the night sky pure and uncluttered, glowing only on hover */
+          .const-lines {
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
           }
-          .sky-svg:has([data-name="ursa_major"]:hover) [data-lines="ursa_major"] line,
-          .sky-svg:has([data-name="ursa_minor"]:hover) [data-lines="ursa_minor"] line,
-          .sky-svg:has([data-name="cassiopeia"]:hover) [data-lines="cassiopeia"] line,
-          .sky-svg:has([data-name="orion"]:hover) [data-lines="orion"] line,
-          .sky-svg:has([data-name="summer_triangle"]:hover) [data-lines="summer_triangle"] line,
-          .sky-svg:has([data-name="taurus_pleiades"]:hover) [data-lines="taurus_pleiades"] line,
-          .sky-svg:has([data-name="gemini"]:hover) [data-lines="gemini"] line,
-          .sky-svg:has([data-name="leo"]:hover) [data-lines="leo"] line,
-          .sky-svg:has([data-name="canis_major"]:hover) [data-lines="canis_major"] line,
-          .sky-svg:has([data-name="pegasus"]:hover) [data-lines="pegasus"] line,
-          .sky-svg:has([data-name="crux"]:hover) [data-lines="crux"] line {
+          .const-lines line {
             stroke: rgba(255, 224, 130, 0.85);
-            stroke-width: 1.2px;
+            stroke-width: 1.1px;
+            stroke-dasharray: 3, 3;
             filter: drop-shadow(0 0 3px rgba(255, 224, 130, 0.8));
+          }
+          .sky-svg:has([data-name="ursa_major"]:hover) [data-lines="ursa_major"],
+          .sky-svg:has([data-name="ursa_minor"]:hover) [data-lines="ursa_minor"],
+          .sky-svg:has([data-name="cassiopeia"]:hover) [data-lines="cassiopeia"],
+          .sky-svg:has([data-name="orion"]:hover) [data-lines="orion"],
+          .sky-svg:has([data-name="summer_triangle"]:hover) [data-lines="summer_triangle"],
+          .sky-svg:has([data-name="taurus_pleiades"]:hover) [data-lines="taurus_pleiades"],
+          .sky-svg:has([data-name="gemini"]:hover) [data-lines="gemini"],
+          .sky-svg:has([data-name="leo"]:hover) [data-lines="leo"],
+          .sky-svg:has([data-name="canis_major"]:hover) [data-lines="canis_major"],
+          .sky-svg:has([data-name="pegasus"]:hover) [data-lines="pegasus"],
+          .sky-svg:has([data-name="crux"]:hover) [data-lines="crux"] {
+            opacity: 1;
           }
 
           /* Metrics Section */
@@ -2384,6 +2425,7 @@
           ` : ''}
 
           <div class="sky-canvas-container">
+            <div class="starfield"><div class="starfield-layer"></div></div>
             ${this._config.show_heading_switcher !== false ? `
               <div class="sky-heading-overlay">
                 <button class="heading-nav-btn" data-dir="-1" title="Pan Left">‹</button>
@@ -2890,7 +2932,7 @@
   });
 
   console.info(
-    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.4.1 ',
+    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.4.2 ',
     'color: white; background: #0c1222; font-weight: 700; border-radius: 3px 0 0 3px;',
     'color: white; background: #ff9800; font-weight: 700; border-radius: 0 3px 3px 0;'
   );

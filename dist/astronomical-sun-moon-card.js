@@ -4,7 +4,7 @@
  * Visualizes real-time celestial trajectories, elevation, azimuth, milestones, and lunar phases.
  * 
  * Author: Adromir (https://github.com/adromir)
- * Version: 1.4.2
+ * Version: 1.4.3
  * License: MIT
  */
 
@@ -1593,8 +1593,9 @@
       // Real astrometric starfield, constellations, and planets projected to observer dome
       let starFieldSvg = '';
       let interactiveOverlaySvg = '';
+      let starOpacity = 0;
       if (this._config.show_stars !== false && (sky.type !== 'day' || data.sunElevation <= 0)) {
-        const starOpacity = data.sunElevation < -12 ? 1.0 : (data.sunElevation < -6 ? 0.85 : (data.sunElevation < 0 ? 0.5 : 0.2));
+        starOpacity = data.sunElevation < -12 ? 1.0 : (data.sunElevation < -6 ? 0.85 : (data.sunElevation < 0 ? 0.5 : 0.2));
 
         // 1. Render all 11 major constellations with iconic asterisms anchored at celestial positions
         const constellationStarIds = new Set();
@@ -2425,7 +2426,9 @@
           ` : ''}
 
           <div class="sky-canvas-container">
-            <div class="starfield"><div class="starfield-layer"></div></div>
+            ${this._config.show_stars !== false && (sky.type !== 'day' || data.sunElevation <= 0) ? `
+              <div class="starfield"><div class="starfield-layer"></div></div>
+            ` : ''}
             ${this._config.show_heading_switcher !== false ? `
               <div class="sky-heading-overlay">
                 <button class="heading-nav-btn" data-dir="-1" title="Pan Left">‹</button>
@@ -2932,7 +2935,7 @@
   });
 
   console.info(
-    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.4.2 ',
+    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.4.3 ',
     'color: white; background: #0c1222; font-weight: 700; border-radius: 3px 0 0 3px;',
     'color: white; background: #ff9800; font-weight: 700; border-radius: 0 3px 3px 0;'
   );

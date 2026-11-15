@@ -4,7 +4,7 @@
  * Visualizes real-time celestial trajectories, elevation, azimuth, milestones, and lunar phases.
  * 
  * Author: Adromir (https://github.com/adromir)
- * Version: 1.3.4
+ * Version: 1.3.5
  * License: MIT
  */
 
@@ -1218,24 +1218,15 @@
       const nadirY = 155;   // under horizon
 
       // Parametric trajectory equations for celestial dome:
-      // Sun curves (golden solar path)
-      const getSunSkyArcY = (x) => {
+      // Sky arc:   M 40 120 Q 240 -20 440 120 (solid)
+      // Night arc: M 440 120 Q 240 190 40 120 (dashed)
+      const getSkyArcY = (x) => {
         const u = Math.max(0, Math.min(1, (x - 40) / 400));
         return 120 - 280 * u * (1 - u);
       };
-      const getSunNightArcY = (x) => {
+      const getNightArcY = (x) => {
         const u = Math.max(0, Math.min(1, (x - 40) / 400));
         return 120 + 140 * u * (1 - u);
-      };
-
-      // Moon curves (silvery lunar path): distinct arc for separation in combined view
-      const getMoonSkyArcY = (x) => {
-        const u = Math.max(0, Math.min(1, (x - 40) / 400));
-        return 120 - 230 * u * (1 - u);
-      };
-      const getMoonNightArcY = (x) => {
-        const u = Math.max(0, Math.min(1, (x - 40) / 400));
-        return 120 + 120 * u * (1 - u);
       };
 
       // Map Sun Azimuth across the 400px wide arc (40 to 440)
@@ -1267,19 +1258,14 @@
       }
       sunX = Math.max(40, Math.min(440, sunX));
 
-      // Strictly lock Sun Y onto the drawn sun trajectory path!
+      // Strictly lock Sun Y onto the drawn trajectory path!
       const sunY = (data.isSunAboveHorizon || data.sunElevation >= 0)
-        ? getSunSkyArcY(sunX)
-        : getSunNightArcY(sunX);
+        ? getSkyArcY(sunX)
+        : getNightArcY(sunX);
 
-      // Arc paths for celestial dome:
-      // Sun curves
-      const sunSkyArcD = `M 40 ${horizonY} Q 240 -20 440 ${horizonY}`;
-      const sunNightArcD = `M 440 ${horizonY} Q 240 190 40 ${horizonY}`;
-
-      // Moon curves
-      const moonSkyArcD = `M 40 ${horizonY} Q 240 5 440 ${horizonY}`;
-      const moonNightArcD = `M 440 ${horizonY} Q 240 180 40 ${horizonY}`;
+      // Celestial trajectory arc paths:
+      const skyArcD = `M 40 ${horizonY} Q 240 -20 440 ${horizonY}`;
+      const nightArcD = `M 440 ${horizonY} Q 240 190 40 ${horizonY}`;
 
       // Starfield & Constellations for night / twilight (89 animated stars + constellation lines)
       let starFieldSvg = '';
@@ -1777,10 +1763,8 @@
       }
       moonX = Math.max(40, Math.min(440, moonX));
 
-      // Strictly lock Moon Y onto the drawn lunar trajectory path (stable across all view modes)
-      const moonY = isMoonAboveHorizon
-        ? getMoonSkyArcY(moonX)
-        : getMoonNightArcY(moonX);
+      // Strictly lock Moon Y onto the drawn sky trajectory path
+      const moonY = getSkyArcY(moonX);
 
       const showSun = this._viewMode === 'combined' || this._viewMode === 'sun_only';
       const showMoon = this._viewMode === 'combined' || this._viewMode === 'moon_only';
@@ -1856,28 +1840,32 @@
             stroke-width: 1.5;
             stroke-dasharray: 3 3;
           }
-          .dome-sky-arc, .dome-sun-arc {
-            stroke: rgba(255, 183, 77, 0.65);
+          .dome-sky-arc {
+            stroke: rgba(255, 255, 255, 0.45);
             stroke-width: 2px;
             fill: none;
+            transition: stroke 0.3s ease;
           }
-          .dome-night-arc, .dome-sun-night-arc {
-            stroke: rgba(255, 183, 77, 0.25);
+          .dome-night-arc {
+            stroke: rgba(255, 255, 255, 0.2);
             stroke-width: 1.5px;
             stroke-dasharray: 4 4;
             fill: none;
+            transition: stroke 0.3s ease;
           }
-          .dome-moon-arc {
-            stroke: rgba(186, 215, 255, 0.7);
-            stroke-width: 1.8px;
+          .dome-sky-arc.dome-sun-arc {
+            stroke: rgba(255, 183, 77, 0.7);
+          }
+          .dome-night-arc.dome-sun-night-arc {
+            stroke: rgba(255, 183, 77, 0.28);
+          }
+          .dome-sky-arc.dome-moon-arc {
+            stroke: rgba(186, 215, 255, 0.75);
             stroke-dasharray: 6 4;
-            fill: none;
           }
-          .dome-moon-night-arc {
-            stroke: rgba(186, 215, 255, 0.28);
-            stroke-width: 1.5px;
+          .dome-night-arc.dome-moon-night-arc {
+            stroke: rgba(186, 215, 255, 0.3);
             stroke-dasharray: 3 4;
-            fill: none;
           }
           .sun-element {
             filter: drop-shadow(0 0 12px ${sky.sunGlow});
@@ -2271,17 +2259,9 @@
               <!-- Starfield -->
               ${starFieldSvg}
 
-              <!-- Trajectory Arcs: Sun -->
-              ${showSun ? `
-                <path class="dome-sky-arc dome-sun-arc" d="${sunSkyArcD}" />
-                <path class="dome-night-arc dome-sun-night-arc" d="${sunNightArcD}" />
-              ` : ''}
-
-              <!-- Trajectory Arcs: Moon -->
-              ${showMoon ? `
-                <path class="dome-moon-arc" d="${moonSkyArcD}" />
-                <path class="dome-moon-night-arc" d="${moonNightArcD}" />
-              ` : ''}
+              <!-- Celestial Trajectory Arc (Single unified dome curve) -->
+              <path class="dome-sky-arc ${this._viewMode === 'moon_only' ? 'dome-moon-arc' : this._viewMode === 'sun_only' ? 'dome-sun-arc' : ''}" d="${skyArcD}" />
+              <path class="dome-night-arc ${this._viewMode === 'moon_only' ? 'dome-moon-night-arc' : this._viewMode === 'sun_only' ? 'dome-sun-night-arc' : ''}" d="${nightArcD}" />
 
               <!-- Earth Horizon Globe (if texture configured) -->
               ${this._effectiveEarthTexture ? `
@@ -2749,7 +2729,7 @@
   });
 
   console.info(
-    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.3.4 ',
+    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.3.5 ',
     'color: white; background: #0c1222; font-weight: 700; border-radius: 3px 0 0 3px;',
     'color: white; background: #ff9800; font-weight: 700; border-radius: 0 3px 3px 0;'
   );

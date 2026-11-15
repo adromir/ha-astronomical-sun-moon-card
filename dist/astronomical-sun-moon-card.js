@@ -4,7 +4,7 @@
  * Visualizes real-time celestial trajectories, elevation, azimuth, milestones, and lunar phases.
  * 
  * Author: Adromir (https://github.com/adromir)
- * Version: 1.3.3
+ * Version: 1.3.4
  * License: MIT
  */
 
@@ -1218,15 +1218,24 @@
       const nadirY = 155;   // under horizon
 
       // Parametric trajectory equations for celestial dome:
-      // Daytime arc:   M 40 120 Q 240 -20 440 120 (solid)
-      // Nighttime arc: M 440 120 Q 240 190 40 120 (dashed)
-      const getSkyArcY = (x) => {
+      // Sun curves (golden solar path)
+      const getSunSkyArcY = (x) => {
         const u = Math.max(0, Math.min(1, (x - 40) / 400));
         return 120 - 280 * u * (1 - u);
       };
-      const getNightArcY = (x) => {
+      const getSunNightArcY = (x) => {
         const u = Math.max(0, Math.min(1, (x - 40) / 400));
         return 120 + 140 * u * (1 - u);
+      };
+
+      // Moon curves (silvery lunar path): distinct arc for separation in combined view
+      const getMoonSkyArcY = (x) => {
+        const u = Math.max(0, Math.min(1, (x - 40) / 400));
+        return 120 - 230 * u * (1 - u);
+      };
+      const getMoonNightArcY = (x) => {
+        const u = Math.max(0, Math.min(1, (x - 40) / 400));
+        return 120 + 120 * u * (1 - u);
       };
 
       // Map Sun Azimuth across the 400px wide arc (40 to 440)
@@ -1258,16 +1267,19 @@
       }
       sunX = Math.max(40, Math.min(440, sunX));
 
-      // Strictly lock Sun Y onto the drawn trajectory path!
+      // Strictly lock Sun Y onto the drawn sun trajectory path!
       const sunY = (data.isSunAboveHorizon || data.sunElevation >= 0)
-        ? getSkyArcY(sunX)
-        : getNightArcY(sunX);
+        ? getSunSkyArcY(sunX)
+        : getSunNightArcY(sunX);
 
-      // Arc paths for celestial dome
-      // Parabolic curve for daytime sky
-      const skyArcD = `M 40 ${horizonY} Q 240 -20 440 ${horizonY}`;
-      // Sub-horizon dashed curve for night
-      const nightArcD = `M 440 ${horizonY} Q 240 190 40 ${horizonY}`;
+      // Arc paths for celestial dome:
+      // Sun curves
+      const sunSkyArcD = `M 40 ${horizonY} Q 240 -20 440 ${horizonY}`;
+      const sunNightArcD = `M 440 ${horizonY} Q 240 190 40 ${horizonY}`;
+
+      // Moon curves
+      const moonSkyArcD = `M 40 ${horizonY} Q 240 5 440 ${horizonY}`;
+      const moonNightArcD = `M 440 ${horizonY} Q 240 180 40 ${horizonY}`;
 
       // Starfield & Constellations for night / twilight (89 animated stars + constellation lines)
       let starFieldSvg = '';
@@ -1381,46 +1393,75 @@
             <!-- Orion Constellation -->
             <g class="constellation-group" data-name="orion">
               <g class="const-lines" data-lines="orion">
-                <line x1="315" y1="75" x2="282" y2="78" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="282" y1="78" x2="278" y2="114" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="278" y1="114" x2="312" y2="116" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="312" y1="116" x2="315" y2="75" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="306" y1="94" x2="299" y2="97" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="299" y1="97" x2="292" y2="100" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
+                <!-- Head to Shoulders -->
+                <line x1="300" y1="68" x2="282" y2="76" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
+                <line x1="300" y1="68" x2="318" y2="74" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
+                <!-- Shoulder line: Betelgeuse to Bellatrix -->
+                <line x1="282" y1="76" x2="318" y2="74" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
+                <!-- Torso: Shoulders to Belt (Hourglass pinch) -->
+                <line x1="282" y1="76" x2="293" y2="94" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
+                <line x1="318" y1="74" x2="307" y2="92" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
+                <!-- Belt: Alnitak to Alnilam to Mintaka -->
+                <line x1="293" y1="94" x2="300" y2="93" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
+                <line x1="300" y1="93" x2="307" y2="92" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
+                <!-- Sword: Hanging from belt -->
+                <line x1="300" y1="93" x2="300" y2="101" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
+                <!-- Lower body: Belt to Knees/Feet -->
+                <line x1="293" y1="94" x2="286" y2="116" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
+                <line x1="307" y1="92" x2="320" y2="114" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
+                <!-- Feet base: Saiph to Rigel -->
+                <line x1="286" y1="116" x2="320" y2="114" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
               </g>
 
+        <!-- Head: Meissa -->
         <g class="nav-star">
-          <circle cx="315" cy="75" r="4.1" fill="#ffcc80" opacity="0.25" />
-          <line x1="309.5" y1="75" x2="320.5" y2="75" stroke="#ffcc80" stroke-width="0.75" opacity="0.4" />
-          <line x1="315" y1="69.5" x2="315" y2="80.5" stroke="#ffcc80" stroke-width="0.75" opacity="0.4" />
-          <circle cx="315" cy="75" r="2.3" fill="#ffcc80" opacity="0.85" />
+          <circle cx="300" cy="68" r="1.4" fill="#ffffff" opacity="0.85" />
         </g>
 
-        <g class="nav-star">
-          <circle cx="282" cy="78" r="1.8" fill="#e1f5fe" opacity="0.85" />
+        <!-- Left Shoulder: Betelgeuse (Red/Orange Supergiant, Shimmer 6) -->
+        <g class="nav-star star-shimmer-6">
+          <circle cx="282" cy="76" r="4.1" fill="#ffb74d" opacity="0.25" />
+          <line x1="276.5" y1="76" x2="287.5" y2="76" stroke="#ffb74d" stroke-width="0.75" opacity="0.4" />
+          <line x1="282" y1="70.5" x2="282" y2="81.5" stroke="#ffb74d" stroke-width="0.75" opacity="0.4" />
+          <circle cx="282" cy="76" r="2.3" fill="#ffb74d" opacity="0.9" />
         </g>
 
+        <!-- Right Shoulder: Bellatrix -->
         <g class="nav-star">
-          <circle cx="306" cy="94" r="1.4" fill="#ffffff" opacity="0.85" />
+          <circle cx="318" cy="74" r="1.9" fill="#e1f5fe" opacity="0.85" />
         </g>
 
+        <!-- Belt: Alnitak (Left) -->
         <g class="nav-star">
-          <circle cx="299" cy="97" r="1.5" fill="#ffffff" opacity="0.85" />
+          <circle cx="293" cy="94" r="1.5" fill="#ffffff" opacity="0.85" />
         </g>
 
+        <!-- Belt: Alnilam (Center) -->
         <g class="nav-star">
-          <circle cx="292" cy="100" r="1.4" fill="#ffffff" opacity="0.85" />
+          <circle cx="300" cy="93" r="1.6" fill="#ffffff" opacity="0.85" />
         </g>
 
+        <!-- Belt: Mintaka (Right) -->
         <g class="nav-star">
-          <circle cx="312" cy="116" r="1.7" fill="#e1f5fe" opacity="0.85" />
+          <circle cx="307" cy="92" r="1.5" fill="#ffffff" opacity="0.85" />
         </g>
 
+        <!-- Sword: Orion Nebula M42 -->
         <g class="nav-star">
-          <circle cx="278" cy="114" r="4.3" fill="#bbdefb" opacity="0.25" />
-          <line x1="272.2" y1="114" x2="283.8" y2="114" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
-          <line x1="278" y1="108.2" x2="278" y2="119.8" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
-          <circle cx="278" cy="114" r="2.4" fill="#bbdefb" opacity="0.85" />
+          <circle cx="300" cy="101" r="1.4" fill="#f48fb1" opacity="0.85" />
+        </g>
+
+        <!-- Left Knee: Saiph -->
+        <g class="nav-star">
+          <circle cx="286" cy="116" r="1.8" fill="#e1f5fe" opacity="0.85" />
+        </g>
+
+        <!-- Right Foot: Rigel (Brilliant Blue-White Supergiant, Shimmer 7) -->
+        <g class="nav-star star-shimmer-7">
+          <circle cx="320" cy="114" r="4.3" fill="#bbdefb" opacity="0.25" />
+          <line x1="314.2" y1="114" x2="325.8" y2="114" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
+          <line x1="320" y1="108.2" x2="320" y2="119.8" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
+          <circle cx="320" cy="114" r="2.4" fill="#bbdefb" opacity="0.9" />
         </g>
             </g>
             <!-- Summer Triangle & Cygnus -->
@@ -1707,30 +1748,39 @@
       const lat = (this._hass && this._hass.config && this._hass.config.latitude) || 50.0;
       const lon = (this._hass && this._hass.config && this._hass.config.longitude) || 10.0;
       const moonPos = calculateMoonPosition(now, lat, lon);
+      const isMoonAboveHorizon = (moonPos.alt >= 0);
 
       let moonX = 240;
-      if (moonPos.az <= 180) {
-        // East to South: map [minAz, 180] -> [40, 240]
-        const azMin = 60;
-        const frac = Math.max(0, Math.min(1, (moonPos.az - azMin) / (180 - azMin)));
-        moonX = 40 + frac * 200;
+      if (isMoonAboveHorizon) {
+        if (moonPos.az <= 180) {
+          // East to South: map [minAz, 180] -> [40, 240]
+          const azMin = 60;
+          const frac = Math.max(0, Math.min(1, (moonPos.az - azMin) / (180 - azMin)));
+          moonX = 40 + frac * 200;
+        } else {
+          // South to West: map [180, maxAz] -> [240, 440]
+          const azMax = 300;
+          const frac = Math.max(0, Math.min(1, (moonPos.az - 180) / (azMax - 180)));
+          moonX = 240 + frac * 200;
+        }
       } else {
-        // South to West: map [180, maxAz] -> [240, 440]
-        const azMax = 300;
-        const frac = Math.max(0, Math.min(1, (moonPos.az - 180) / (azMax - 180)));
-        moonX = 240 + frac * 200;
+        // Below horizon (Night/Sub-horizon):
+        if (moonPos.az >= 180) {
+          // Moonset towards nadir: map [180, 360] -> [440, 240]
+          const frac = Math.max(0, Math.min(1, (moonPos.az - 180) / 180));
+          moonX = 440 - frac * 200;
+        } else {
+          // Nadir towards moonrise: map [0, 180] -> [240, 40]
+          const frac = Math.max(0, Math.min(1, moonPos.az / 180));
+          moonX = 240 - frac * 200;
+        }
       }
       moonX = Math.max(40, Math.min(440, moonX));
 
-      // Strictly lock Moon Y onto the drawn trajectory path!
-      // In combined mode at night, the illuminated night sky dome displays the Moon on skyArc.
-      // In moon_only mode, above horizon = skyArc, below horizon = nightArc.
-      let moonY = horizonY;
-      if (this._viewMode === 'moon_only') {
-        moonY = moonPos.alt >= 0 ? getSkyArcY(moonX) : getNightArcY(moonX);
-      } else {
-        moonY = getSkyArcY(moonX);
-      }
+      // Strictly lock Moon Y onto the drawn lunar trajectory path (stable across all view modes)
+      const moonY = isMoonAboveHorizon
+        ? getMoonSkyArcY(moonX)
+        : getMoonNightArcY(moonX);
 
       const showSun = this._viewMode === 'combined' || this._viewMode === 'sun_only';
       const showMoon = this._viewMode === 'combined' || this._viewMode === 'moon_only';
@@ -1806,15 +1856,27 @@
             stroke-width: 1.5;
             stroke-dasharray: 3 3;
           }
-          .dome-sky-arc {
-            stroke: rgba(255,255,255,0.45);
-            stroke-width: 2;
+          .dome-sky-arc, .dome-sun-arc {
+            stroke: rgba(255, 183, 77, 0.65);
+            stroke-width: 2px;
             fill: none;
           }
-          .dome-night-arc {
-            stroke: rgba(255,255,255,0.2);
-            stroke-width: 1.5;
+          .dome-night-arc, .dome-sun-night-arc {
+            stroke: rgba(255, 183, 77, 0.25);
+            stroke-width: 1.5px;
             stroke-dasharray: 4 4;
+            fill: none;
+          }
+          .dome-moon-arc {
+            stroke: rgba(186, 215, 255, 0.7);
+            stroke-width: 1.8px;
+            stroke-dasharray: 6 4;
+            fill: none;
+          }
+          .dome-moon-night-arc {
+            stroke: rgba(186, 215, 255, 0.28);
+            stroke-width: 1.5px;
+            stroke-dasharray: 3 4;
             fill: none;
           }
           .sun-element {
@@ -2209,10 +2271,16 @@
               <!-- Starfield -->
               ${starFieldSvg}
 
-              <!-- Trajectory Arcs -->
+              <!-- Trajectory Arcs: Sun -->
               ${showSun ? `
-                <path class="dome-sky-arc" d="${skyArcD}" />
-                <path class="dome-night-arc" d="${nightArcD}" />
+                <path class="dome-sky-arc dome-sun-arc" d="${sunSkyArcD}" />
+                <path class="dome-night-arc dome-sun-night-arc" d="${sunNightArcD}" />
+              ` : ''}
+
+              <!-- Trajectory Arcs: Moon -->
+              ${showMoon ? `
+                <path class="dome-moon-arc" d="${moonSkyArcD}" />
+                <path class="dome-moon-night-arc" d="${moonNightArcD}" />
               ` : ''}
 
               <!-- Earth Horizon Globe (if texture configured) -->
@@ -2274,7 +2342,7 @@
                     { name: 'ursa_major', title: 'constellations.ursa_major.title', label: 'constellations.ursa_major.label', pts: '125,38 232,32 232,56 168,76 128,74', x: 170, y: 34 },
                     { name: 'ursa_minor', title: 'constellations.ursa_minor.title', label: 'constellations.ursa_minor.label', pts: '68,18 128,14 128,44 68,40', x: 95, y: 14 },
                     { name: 'cassiopeia', title: 'constellations.cassiopeia.title', label: 'constellations.cassiopeia.label', pts: '355,50 432,50 432,76 355,76', x: 395, y: 46 },
-                    { name: 'orion', title: 'constellations.orion.title', label: 'constellations.orion.label', pts: '268,68 328,68 325,124 268,124', x: 298, y: 62 },
+                    { name: 'orion', title: 'constellations.orion.title', label: 'constellations.orion.label', pts: '272,62 328,62 328,122 272,122', x: 300, y: 56 },
                     { name: 'summer_triangle', title: 'constellations.summer_triangle.title', label: 'constellations.summer_triangle.label', pts: '240,12 332,12 332,48 240,48', x: 285, y: 12 },
                     { name: 'taurus_pleiades', title: 'constellations.taurus_pleiades.title', label: 'constellations.taurus_pleiades.label', pts: '224,66 268,66 268,114 224,114', x: 244, y: 64 },
                     { name: 'gemini', title: 'constellations.gemini.title', label: 'constellations.gemini.label', pts: '178,74 218,74 218,118 178,118', x: 195, y: 72 },
@@ -2419,7 +2487,9 @@
       const buttons = this.shadowRoot.querySelectorAll('.view-btn');
       buttons.forEach(btn => {
         btn.addEventListener('click', (e) => {
-          this._viewMode = e.target.getAttribute('data-view');
+          const target = e.target.closest('.view-btn');
+          if (!target) return;
+          this._viewMode = target.getAttribute('data-view');
           this._hasUserSwitchedView = true;
           this.render();
         });
@@ -2679,7 +2749,7 @@
   });
 
   console.info(
-    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.3.3 ',
+    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.3.4 ',
     'color: white; background: #0c1222; font-weight: 700; border-radius: 3px 0 0 3px;',
     'color: white; background: #ff9800; font-weight: 700; border-radius: 0 3px 3px 0;'
   );

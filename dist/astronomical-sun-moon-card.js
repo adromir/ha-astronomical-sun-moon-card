@@ -4,7 +4,7 @@
  * Visualizes real-time celestial trajectories, elevation, azimuth, milestones, and lunar phases.
  * 
  * Author: Adromir (https://github.com/adromir)
- * Version: 1.3.2
+ * Version: 1.3.3
  * License: MIT
  */
 
@@ -1278,10 +1278,7 @@
             <!-- All Major Constellations with Triple Localization (DE, EN, ID) -->
             <!-- Big Dipper (Ursa Major) -->
             <g class="constellation-group" data-name="ursa_major">
-              <title>${localize('constellations.ursa_major.title', userLang)}</title>
-              <polygon points="125,38 232,32 232,56 168,76 128,74" class="const-hit-area" />
-              <text class="const-hover-label" x="170" y="34">${localize('constellations.ursa_major.label', userLang)}</text>
-              <g class="const-lines">
+              <g class="const-lines" data-lines="ursa_major">
                 <line x1="135" y1="48" x2="140" y2="66" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="140" y1="66" x2="165" y2="68" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="165" y1="68" x2="163" y2="52" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
@@ -1291,54 +1288,37 @@
                 <line x1="205" y1="44" x2="225" y2="40" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
               </g>
 
-        <g class="nav-star">
-          <circle cx="135" cy="48" r="2.0" fill="#ffe082" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="8.4s" begin="-2.6s" repeatCount="indefinite" />
-          </circle>
+        <g class="nav-star star-shimmer-1">
+          <circle cx="135" cy="48" r="2.0" fill="#ffe082" opacity="0.85" />
         </g>
 
-        <g class="nav-star">
-          <circle cx="140" cy="66" r="1.8" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="9.7s" begin="-5.3s" repeatCount="indefinite" />
-          </circle>
+        <g class="nav-star star-shimmer-2">
+          <circle cx="140" cy="66" r="1.8" fill="#ffffff" opacity="0.85" />
         </g>
 
-        <g class="nav-star">
-          <circle cx="165" cy="68" r="1.8" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="11.1s" begin="-7.9s" repeatCount="indefinite" />
-          </circle>
+        <g class="nav-star star-shimmer-3">
+          <circle cx="165" cy="68" r="1.8" fill="#ffffff" opacity="0.85" />
         </g>
 
-        <g class="nav-star">
-          <circle cx="163" cy="52" r="1.5" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="12.5s" begin="-10.5s" repeatCount="indefinite" />
-          </circle>
+        <g class="nav-star star-shimmer-4">
+          <circle cx="163" cy="52" r="1.5" fill="#ffffff" opacity="0.85" />
         </g>
 
-        <g class="nav-star">
-          <circle cx="185" cy="50" r="2.0" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="13.9s" begin="-13.1s" repeatCount="indefinite" />
-          </circle>
+        <g class="nav-star star-shimmer-5">
+          <circle cx="185" cy="50" r="2.0" fill="#ffffff" opacity="0.85" />
         </g>
 
-        <g class="nav-star">
-          <circle cx="205" cy="44" r="1.9" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="15.2s" begin="-0.6s" repeatCount="indefinite" />
-          </circle>
+        <g class="nav-star star-shimmer-6">
+          <circle cx="205" cy="44" r="1.9" fill="#ffffff" opacity="0.85" />
         </g>
 
-        <g class="nav-star">
-          <circle cx="225" cy="40" r="2.0" fill="#bbdefb" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="7.6s" begin="-3.2s" repeatCount="indefinite" />
-          </circle>
+        <g class="nav-star star-shimmer-7">
+          <circle cx="225" cy="40" r="2.0" fill="#bbdefb" opacity="0.85" />
         </g>
             </g>
             <!-- Little Dipper & Polaris -->
             <g class="constellation-group" data-name="ursa_minor">
-              <title>${localize('constellations.ursa_minor.title', userLang)}</title>
-              <polygon points="68,18 128,14 128,44 68,40" class="const-hit-area" />
-              <text class="const-hover-label" x="95" y="14">${localize('constellations.ursa_minor.label', userLang)}</text>
-              <g class="const-lines">
+              <g class="const-lines" data-lines="ursa_minor">
                 <line x1="75" y1="32" x2="90" y2="25" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="90" y1="25" x2="105" y2="28" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="105" y1="28" x2="122" y2="38" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
@@ -1346,51 +1326,32 @@
                 <line x1="120" y1="20" x2="105" y2="28" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
               </g>
 
-        <g class="nav-star">
-          <circle cx="75" cy="32" r="4.3" fill="#fff9c4" opacity="0.25">
-            <animate attributeName="opacity" values="0.25;0.25;0.12;0.50;0.25" keyTimes="0;0.82;0.88;0.94;1" dur="9.0s" begin="-3.1s" repeatCount="indefinite" />
-          </circle>
-          <line x1="69.2" y1="32" x2="80.8" y2="32" stroke="#fff9c4" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="9.0s" begin="-3.1s" repeatCount="indefinite" />
-          </line>
-          <line x1="75" y1="26.2" x2="75" y2="37.8" stroke="#fff9c4" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="9.0s" begin="-3.1s" repeatCount="indefinite" />
-          </line>
-          <circle cx="75" cy="32" r="2.4" fill="#fff9c4" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="9.0s" begin="-3.1s" repeatCount="indefinite" />
-          </circle>
+        <g class="nav-star star-shimmer-8">
+          <circle cx="75" cy="32" r="4.3" fill="#fff9c4" opacity="0.25" />
+          <line x1="69.2" y1="32" x2="80.8" y2="32" stroke="#fff9c4" stroke-width="0.75" opacity="0.4" />
+          <line x1="75" y1="26.2" x2="75" y2="37.8" stroke="#fff9c4" stroke-width="0.75" opacity="0.4" />
+          <circle cx="75" cy="32" r="2.4" fill="#fff9c4" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="90" cy="25" r="1.4" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="10.3s" begin="-3.0s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="90" cy="25" r="1.4" fill="#ffffff" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="105" cy="28" r="1.4" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="11.7s" begin="-2.9s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="105" cy="28" r="1.4" fill="#ffffff" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="122" cy="38" r="2.0" fill="#ffe082" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="13.1s" begin="-2.8s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="122" cy="38" r="2.0" fill="#ffe082" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="120" cy="20" r="1.7" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="14.4s" begin="-2.7s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="120" cy="20" r="1.7" fill="#ffffff" opacity="0.85" />
         </g>
             </g>
             <!-- Cassiopeia -->
             <g class="constellation-group" data-name="cassiopeia">
-              <title>${localize('constellations.cassiopeia.title', userLang)}</title>
-              <polygon points="355,50 432,50 432,76 355,76" class="const-hit-area" />
-              <text class="const-hover-label" x="395" y="46">${localize('constellations.cassiopeia.label', userLang)}</text>
-              <g class="const-lines">
+              <g class="const-lines" data-lines="cassiopeia">
                 <line x1="365" y1="58" x2="380" y2="66" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="380" y1="66" x2="395" y2="58" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="395" y1="58" x2="410" y2="68" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
@@ -1398,41 +1359,28 @@
               </g>
 
         <g class="nav-star">
-          <circle cx="365" cy="58" r="1.9" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="15.8s" begin="-2.6s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="365" cy="58" r="1.9" fill="#ffffff" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="380" cy="66" r="2.0" fill="#ffe082" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="8.2s" begin="-4.1s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="380" cy="66" r="2.0" fill="#ffe082" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="395" cy="58" r="1.9" fill="#bbdefb" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="9.6s" begin="-1.2s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="395" cy="58" r="1.9" fill="#bbdefb" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="410" cy="68" r="1.7" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="10.9s" begin="-9.3s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="410" cy="68" r="1.7" fill="#ffffff" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="424" cy="62" r="1.6" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="12.3s" begin="-7.8s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="424" cy="62" r="1.6" fill="#ffffff" opacity="0.85" />
         </g>
             </g>
             <!-- Orion Constellation -->
             <g class="constellation-group" data-name="orion">
-              <title>${localize('constellations.orion.title', userLang)}</title>
-              <polygon points="268,68 328,68 325,124 268,124" class="const-hit-area" />
-              <text class="const-hover-label" x="298" y="62">${localize('constellations.orion.label', userLang)}</text>
-              <g class="const-lines">
+              <g class="const-lines" data-lines="orion">
                 <line x1="315" y1="75" x2="282" y2="78" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="282" y1="78" x2="278" y2="114" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="278" y1="114" x2="312" y2="116" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
@@ -1442,71 +1390,42 @@
               </g>
 
         <g class="nav-star">
-          <circle cx="315" cy="75" r="4.1" fill="#ffcc80" opacity="0.25">
-            <animate attributeName="opacity" values="0.25;0.25;0.12;0.50;0.25" keyTimes="0;0.82;0.88;0.94;1" dur="13.7s" begin="-6.4s" repeatCount="indefinite" />
-          </circle>
-          <line x1="309.5" y1="75" x2="320.5" y2="75" stroke="#ffcc80" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="13.7s" begin="-6.4s" repeatCount="indefinite" />
-          </line>
-          <line x1="315" y1="69.5" x2="315" y2="80.5" stroke="#ffcc80" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="13.7s" begin="-6.4s" repeatCount="indefinite" />
-          </line>
-          <circle cx="315" cy="75" r="2.3" fill="#ffcc80" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="13.7s" begin="-6.4s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="315" cy="75" r="4.1" fill="#ffcc80" opacity="0.25" />
+          <line x1="309.5" y1="75" x2="320.5" y2="75" stroke="#ffcc80" stroke-width="0.75" opacity="0.4" />
+          <line x1="315" y1="69.5" x2="315" y2="80.5" stroke="#ffcc80" stroke-width="0.75" opacity="0.4" />
+          <circle cx="315" cy="75" r="2.3" fill="#ffcc80" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="282" cy="78" r="1.8" fill="#e1f5fe" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="15.0s" begin="-4.9s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="282" cy="78" r="1.8" fill="#e1f5fe" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="306" cy="94" r="1.4" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="7.4s" begin="-0.8s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="306" cy="94" r="1.4" fill="#ffffff" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="299" cy="97" r="1.5" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="8.8s" begin="-2.6s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="299" cy="97" r="1.5" fill="#ffffff" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="292" cy="100" r="1.4" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="10.1s" begin="-7.2s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="292" cy="100" r="1.4" fill="#ffffff" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="312" cy="116" r="1.7" fill="#e1f5fe" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="11.5s" begin="-2.9s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="312" cy="116" r="1.7" fill="#e1f5fe" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="278" cy="114" r="4.3" fill="#bbdefb" opacity="0.25">
-            <animate attributeName="opacity" values="0.25;0.25;0.12;0.50;0.25" keyTimes="0;0.82;0.88;0.94;1" dur="12.9s" begin="-11.6s" repeatCount="indefinite" />
-          </circle>
-          <line x1="272.2" y1="114" x2="283.8" y2="114" stroke="#bbdefb" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="12.9s" begin="-11.6s" repeatCount="indefinite" />
-          </line>
-          <line x1="278" y1="108.2" x2="278" y2="119.8" stroke="#bbdefb" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="12.9s" begin="-11.6s" repeatCount="indefinite" />
-          </line>
-          <circle cx="278" cy="114" r="2.4" fill="#bbdefb" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="12.9s" begin="-11.6s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="278" cy="114" r="4.3" fill="#bbdefb" opacity="0.25" />
+          <line x1="272.2" y1="114" x2="283.8" y2="114" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
+          <line x1="278" y1="108.2" x2="278" y2="119.8" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
+          <circle cx="278" cy="114" r="2.4" fill="#bbdefb" opacity="0.85" />
         </g>
             </g>
             <!-- Summer Triangle & Cygnus -->
-            <g class="constellation-group" data-name="cygnus_summer">
-              <title>${localize('constellations.summer_triangle.title', userLang)}</title>
-              <polygon points="240,12 332,12 332,48 240,48" class="const-hit-area" />
-              <text class="const-hover-label" x="285" y="12">${localize('constellations.summer_triangle.label', userLang)}</text>
-              <g class="const-lines">
+            <g class="constellation-group" data-name="summer_triangle">
+              <g class="const-lines" data-lines="summer_triangle">
                 <line x1="248" y1="24" x2="295" y2="20" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="295" y1="20" x2="322" y2="40" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="322" y1="40" x2="248" y2="24" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
@@ -1515,68 +1434,37 @@
               </g>
 
         <g class="nav-star">
-          <circle cx="248" cy="24" r="4.5" fill="#e1f5fe" opacity="0.25">
-            <animate attributeName="opacity" values="0.25;0.25;0.12;0.50;0.25" keyTimes="0;0.82;0.88;0.94;1" dur="14.2s" begin="-8.8s" repeatCount="indefinite" />
-          </circle>
-          <line x1="242.0" y1="24" x2="254.0" y2="24" stroke="#e1f5fe" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="14.2s" begin="-8.8s" repeatCount="indefinite" />
-          </line>
-          <line x1="248" y1="18.0" x2="248" y2="30.0" stroke="#e1f5fe" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="14.2s" begin="-8.8s" repeatCount="indefinite" />
-          </line>
-          <circle cx="248" cy="24" r="2.5" fill="#e1f5fe" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="14.2s" begin="-8.8s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="248" cy="24" r="4.5" fill="#e1f5fe" opacity="0.25" />
+          <line x1="242.0" y1="24" x2="254.0" y2="24" stroke="#e1f5fe" stroke-width="0.75" opacity="0.4" />
+          <line x1="248" y1="18.0" x2="248" y2="30.0" stroke="#e1f5fe" stroke-width="0.75" opacity="0.4" />
+          <circle cx="248" cy="24" r="2.5" fill="#e1f5fe" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="295" cy="20" r="4.0" fill="#ffffff" opacity="0.25">
-            <animate attributeName="opacity" values="0.25;0.25;0.12;0.50;0.25" keyTimes="0;0.82;0.88;0.94;1" dur="15.6s" begin="-5.9s" repeatCount="indefinite" />
-          </circle>
-          <line x1="289.7" y1="20" x2="300.3" y2="20" stroke="#ffffff" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="15.6s" begin="-5.9s" repeatCount="indefinite" />
-          </line>
-          <line x1="295" y1="14.7" x2="295" y2="25.3" stroke="#ffffff" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="15.6s" begin="-5.9s" repeatCount="indefinite" />
-          </line>
-          <circle cx="295" cy="20" r="2.2" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="15.6s" begin="-5.9s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="295" cy="20" r="4.0" fill="#ffffff" opacity="0.25" />
+          <line x1="289.7" y1="20" x2="300.3" y2="20" stroke="#ffffff" stroke-width="0.75" opacity="0.4" />
+          <line x1="295" y1="14.7" x2="295" y2="25.3" stroke="#ffffff" stroke-width="0.75" opacity="0.4" />
+          <circle cx="295" cy="20" r="2.2" fill="#ffffff" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="322" cy="40" r="4.1" fill="#fff9c4" opacity="0.25">
-            <animate attributeName="opacity" values="0.25;0.25;0.12;0.50;0.25" keyTimes="0;0.82;0.88;0.94;1" dur="8.0s" begin="-7.1s" repeatCount="indefinite" />
-          </circle>
-          <line x1="316.5" y1="40" x2="327.5" y2="40" stroke="#fff9c4" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="8.0s" begin="-7.1s" repeatCount="indefinite" />
-          </line>
-          <line x1="322" y1="34.5" x2="322" y2="45.5" stroke="#fff9c4" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="8.0s" begin="-7.1s" repeatCount="indefinite" />
-          </line>
-          <circle cx="322" cy="40" r="2.3" fill="#fff9c4" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="8.0s" begin="-7.1s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="322" cy="40" r="4.1" fill="#fff9c4" opacity="0.25" />
+          <line x1="316.5" y1="40" x2="327.5" y2="40" stroke="#fff9c4" stroke-width="0.75" opacity="0.4" />
+          <line x1="322" y1="34.5" x2="322" y2="45.5" stroke="#fff9c4" stroke-width="0.75" opacity="0.4" />
+          <circle cx="322" cy="40" r="2.3" fill="#fff9c4" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="294" cy="33" r="1.7" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="9.4s" begin="-8.1s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="294" cy="33" r="1.7" fill="#ffffff" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="275" cy="32" r="1.6" fill="#ffe082" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="10.7s" begin="-1.2s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="275" cy="32" r="1.6" fill="#ffe082" opacity="0.85" />
         </g>
             </g>
             <!-- Taurus & Pleiades (Seven Sisters) -->
             <g class="constellation-group" data-name="taurus_pleiades">
-              <title>${localize('constellations.taurus_pleiades.title', userLang)}</title>
-              <polygon points="224,66 268,66 268,114 224,114" class="const-hit-area" />
-              <text class="const-hover-label" x="244" y="64">${localize('constellations.taurus_pleiades.label', userLang)}</text>
-              <g class="const-lines">
+              <g class="const-lines" data-lines="taurus_pleiades">
                 <line x1="232" y1="76" x2="240" y2="95" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="240" y1="95" x2="252" y2="105" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="254" y1="78" x2="260" y2="75" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
@@ -1585,188 +1473,116 @@
               </g>
 
         <g class="nav-star">
-          <circle cx="240" cy="95" r="4.1" fill="#ffb74d" opacity="0.25">
-            <animate attributeName="opacity" values="0.25;0.25;0.12;0.50;0.25" keyTimes="0;0.82;0.88;0.94;1" dur="12.1s" begin="-6.3s" repeatCount="indefinite" />
-          </circle>
-          <line x1="234.5" y1="95" x2="245.5" y2="95" stroke="#ffb74d" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="12.1s" begin="-6.3s" repeatCount="indefinite" />
-          </line>
-          <line x1="240" y1="89.5" x2="240" y2="100.5" stroke="#ffb74d" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="12.1s" begin="-6.3s" repeatCount="indefinite" />
-          </line>
-          <circle cx="240" cy="95" r="2.3" fill="#ffb74d" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="12.1s" begin="-6.3s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="240" cy="95" r="4.1" fill="#ffb74d" opacity="0.25" />
+          <line x1="234.5" y1="95" x2="245.5" y2="95" stroke="#ffb74d" stroke-width="0.75" opacity="0.4" />
+          <line x1="240" y1="89.5" x2="240" y2="100.5" stroke="#ffb74d" stroke-width="0.75" opacity="0.4" />
+          <circle cx="240" cy="95" r="2.3" fill="#ffb74d" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="232" cy="76" r="1.8" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="13.5s" begin="-0.7s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="232" cy="76" r="1.8" fill="#ffffff" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="252" cy="105" r="1.5" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="14.8s" begin="-10.0s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="252" cy="105" r="1.5" fill="#ffffff" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="254" cy="78" r="1.3" fill="#e1f5fe" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="7.2s" begin="-0.3s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="254" cy="78" r="1.3" fill="#e1f5fe" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="260" cy="75" r="1.1" fill="#e1f5fe" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="8.6s" begin="-3.6s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="260" cy="75" r="1.1" fill="#e1f5fe" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="250" cy="74" r="1.1" fill="#e1f5fe" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="10.0s" begin="-2.5s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="250" cy="74" r="1.1" fill="#e1f5fe" opacity="0.85" />
         </g>
             </g>
             <!-- Gemini -->
             <g class="constellation-group" data-name="gemini">
-              <title>${localize('constellations.gemini.title', userLang)}</title>
-              <polygon points="178,74 218,74 218,118 178,118" class="const-hit-area" />
-              <text class="const-hover-label" x="195" y="72">${localize('constellations.gemini.label', userLang)}</text>
-              <g class="const-lines">
+              <g class="const-lines" data-lines="gemini">
                 <line x1="190" y1="82" x2="204" y2="92" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="190" y1="82" x2="185" y2="108" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="204" y1="92" x2="208" y2="110" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
               </g>
 
         <g class="nav-star">
-          <circle cx="190" cy="82" r="1.9" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="11.3s" begin="-4.1s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="190" cy="82" r="1.9" fill="#ffffff" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="204" cy="92" r="4.0" fill="#ffe082" opacity="0.25">
-            <animate attributeName="opacity" values="0.25;0.25;0.12;0.50;0.25" keyTimes="0;0.82;0.88;0.94;1" dur="12.7s" begin="-8.5s" repeatCount="indefinite" />
-          </circle>
-          <line x1="198.7" y1="92" x2="209.3" y2="92" stroke="#ffe082" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="12.7s" begin="-8.5s" repeatCount="indefinite" />
-          </line>
-          <line x1="204" y1="86.7" x2="204" y2="97.3" stroke="#ffe082" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="12.7s" begin="-8.5s" repeatCount="indefinite" />
-          </line>
-          <circle cx="204" cy="92" r="2.2" fill="#ffe082" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="12.7s" begin="-8.5s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="204" cy="92" r="4.0" fill="#ffe082" opacity="0.25" />
+          <line x1="198.7" y1="92" x2="209.3" y2="92" stroke="#ffe082" stroke-width="0.75" opacity="0.4" />
+          <line x1="204" y1="86.7" x2="204" y2="97.3" stroke="#ffe082" stroke-width="0.75" opacity="0.4" />
+          <circle cx="204" cy="92" r="2.2" fill="#ffe082" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="185" cy="108" r="1.7" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="14.1s" begin="-1.5s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="185" cy="108" r="1.7" fill="#ffffff" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="208" cy="110" r="1.5" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="15.4s" begin="-10.0s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="208" cy="110" r="1.5" fill="#ffffff" opacity="0.85" />
         </g>
             </g>
             <!-- Leo -->
             <g class="constellation-group" data-name="leo">
-              <title>${localize('constellations.leo.title', userLang)}</title>
-              <polygon points="45,72 122,72 122,106 45,106" class="const-hit-area" />
-              <text class="const-hover-label" x="85" y="70">${localize('constellations.leo.label', userLang)}</text>
-              <g class="const-lines">
+              <g class="const-lines" data-lines="leo">
                 <line x1="55" y1="96" x2="74" y2="82" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="74" y1="82" x2="95" y2="78" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="95" y1="78" x2="114" y2="88" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
               </g>
 
         <g class="nav-star">
-          <circle cx="55" cy="96" r="4.1" fill="#bbdefb" opacity="0.25">
-            <animate attributeName="opacity" values="0.25;0.25;0.12;0.50;0.25" keyTimes="0;0.82;0.88;0.94;1" dur="7.8s" begin="-3.8s" repeatCount="indefinite" />
-          </circle>
-          <line x1="49.5" y1="96" x2="60.5" y2="96" stroke="#bbdefb" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="7.8s" begin="-3.8s" repeatCount="indefinite" />
-          </line>
-          <line x1="55" y1="90.5" x2="55" y2="101.5" stroke="#bbdefb" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="7.8s" begin="-3.8s" repeatCount="indefinite" />
-          </line>
-          <circle cx="55" cy="96" r="2.3" fill="#bbdefb" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="7.8s" begin="-3.8s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="55" cy="96" r="4.1" fill="#bbdefb" opacity="0.25" />
+          <line x1="49.5" y1="96" x2="60.5" y2="96" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
+          <line x1="55" y1="90.5" x2="55" y2="101.5" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
+          <circle cx="55" cy="96" r="2.3" fill="#bbdefb" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="74" cy="82" r="1.8" fill="#ffe082" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="9.2s" begin="-7.0s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="74" cy="82" r="1.8" fill="#ffe082" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="95" cy="78" r="1.7" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="10.5s" begin="-5.1s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="95" cy="78" r="1.7" fill="#ffffff" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="114" cy="88" r="1.9" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="11.9s" begin="-5.9s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="114" cy="88" r="1.9" fill="#ffffff" opacity="0.85" />
         </g>
             </g>
             <!-- Canis Major (Sirius) -->
             <g class="constellation-group" data-name="canis_major">
-              <title>${localize('constellations.canis_major.title', userLang)}</title>
-              <polygon points="328,90 375,90 375,124 328,124" class="const-hit-area" />
-              <text class="const-hover-label" x="350" y="88">${localize('constellations.canis_major.label', userLang)}</text>
-              <g class="const-lines">
+              <g class="const-lines" data-lines="canis_major">
                 <line x1="348" y1="112" x2="336" y2="98" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="348" y1="112" x2="362" y2="100" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="362" y1="100" x2="365" y2="116" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
               </g>
 
         <g class="nav-star">
-          <circle cx="348" cy="112" r="4.9" fill="#ffffff" opacity="0.25">
-            <animate attributeName="opacity" values="0.25;0.25;0.12;0.50;0.25" keyTimes="0;0.82;0.88;0.94;1" dur="13.3s" begin="-9.5s" repeatCount="indefinite" />
-          </circle>
-          <line x1="341.5" y1="112" x2="354.5" y2="112" stroke="#ffffff" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="13.3s" begin="-9.5s" repeatCount="indefinite" />
-          </line>
-          <line x1="348" y1="105.5" x2="348" y2="118.5" stroke="#ffffff" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="13.3s" begin="-9.5s" repeatCount="indefinite" />
-          </line>
-          <circle cx="348" cy="112" r="2.7" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="13.3s" begin="-9.5s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="348" cy="112" r="4.9" fill="#ffffff" opacity="0.25" />
+          <line x1="341.5" y1="112" x2="354.5" y2="112" stroke="#ffffff" stroke-width="0.75" opacity="0.4" />
+          <line x1="348" y1="105.5" x2="348" y2="118.5" stroke="#ffffff" stroke-width="0.75" opacity="0.4" />
+          <circle cx="348" cy="112" r="2.7" fill="#ffffff" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="336" cy="98" r="1.8" fill="#bbdefb" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="14.7s" begin="-1.1s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="336" cy="98" r="1.8" fill="#bbdefb" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="362" cy="100" r="1.8" fill="#ffe082" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="7.0s" begin="-1.6s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="362" cy="100" r="1.8" fill="#ffe082" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="365" cy="116" r="2.0" fill="#bbdefb" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="8.4s" begin="-6.1s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="365" cy="116" r="2.0" fill="#bbdefb" opacity="0.85" />
         </g>
             </g>
             <!-- Pegasus -->
             <g class="constellation-group" data-name="pegasus">
-              <title>${localize('constellations.pegasus.title', userLang)}</title>
-              <polygon points="418,50 460,50 460,110 418,110" class="const-hit-area" />
-              <text class="const-hover-label" x="438" y="46">${localize('constellations.pegasus.label', userLang)}</text>
-              <g class="const-lines">
+              <g class="const-lines" data-lines="pegasus">
                 <line x1="442" y1="60" x2="428" y2="80" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="428" y1="80" x2="438" y2="102" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="438" y1="102" x2="452" y2="84" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
@@ -1774,211 +1590,107 @@
               </g>
 
         <g class="nav-star">
-          <circle cx="442" cy="60" r="1.9" fill="#ffe082" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="9.8s" begin="-9.1s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="442" cy="60" r="1.9" fill="#ffe082" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="428" cy="80" r="1.9" fill="#bbdefb" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="11.1s" begin="-6.4s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="428" cy="80" r="1.9" fill="#bbdefb" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="452" cy="84" r="1.9" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="12.5s" begin="-6.5s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="452" cy="84" r="1.9" fill="#ffffff" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="438" cy="102" r="1.8" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="13.9s" begin="-9.3s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="438" cy="102" r="1.8" fill="#ffffff" opacity="0.85" />
         </g>
             </g>
             <!-- Southern Cross (Crux) -->
             <g class="constellation-group" data-name="crux">
-              <title>${localize('constellations.crux.title', userLang)}</title>
-              <polygon points="132,86 172,86 172,122 132,122" class="const-hit-area" />
-              <text class="const-hover-label" x="152" y="84">${localize('constellations.crux.label', userLang)}</text>
-              <g class="const-lines">
+              <g class="const-lines" data-lines="crux">
                 <line x1="152" y1="94" x2="152" y2="116" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
                 <line x1="140" y1="105" x2="164" y2="106" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
               </g>
 
         <g class="nav-star">
-          <circle cx="152" cy="116" r="4.1" fill="#bbdefb" opacity="0.25">
-            <animate attributeName="opacity" values="0.25;0.25;0.12;0.50;0.25" keyTimes="0;0.82;0.88;0.94;1" dur="15.2s" begin="-14.8s" repeatCount="indefinite" />
-          </circle>
-          <line x1="146.5" y1="116" x2="157.5" y2="116" stroke="#bbdefb" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="15.2s" begin="-14.8s" repeatCount="indefinite" />
-          </line>
-          <line x1="152" y1="110.5" x2="152" y2="121.5" stroke="#bbdefb" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="15.2s" begin="-14.8s" repeatCount="indefinite" />
-          </line>
-          <circle cx="152" cy="116" r="2.3" fill="#bbdefb" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="15.2s" begin="-14.8s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="152" cy="116" r="4.1" fill="#bbdefb" opacity="0.25" />
+          <line x1="146.5" y1="116" x2="157.5" y2="116" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
+          <line x1="152" y1="110.5" x2="152" y2="121.5" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
+          <circle cx="152" cy="116" r="2.3" fill="#bbdefb" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="152" cy="94" r="2.0" fill="#ffcc80" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="7.6s" begin="-2.4s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="152" cy="94" r="2.0" fill="#ffcc80" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="140" cy="105" r="3.8" fill="#bbdefb" opacity="0.25">
-            <animate attributeName="opacity" values="0.25;0.25;0.12;0.50;0.25" keyTimes="0;0.82;0.88;0.94;1" dur="9.0s" begin="-7.3s" repeatCount="indefinite" />
-          </circle>
-          <line x1="135.0" y1="105" x2="145.0" y2="105" stroke="#bbdefb" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="9.0s" begin="-7.3s" repeatCount="indefinite" />
-          </line>
-          <line x1="140" y1="100.0" x2="140" y2="110.0" stroke="#bbdefb" stroke-width="0.75" opacity="0.4">
-            <animate attributeName="opacity" values="0.4;0.4;0.15;0.8;0.4" keyTimes="0;0.82;0.88;0.94;1" dur="9.0s" begin="-7.3s" repeatCount="indefinite" />
-          </line>
-          <circle cx="140" cy="105" r="2.1" fill="#bbdefb" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="9.0s" begin="-7.3s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="140" cy="105" r="3.8" fill="#bbdefb" opacity="0.25" />
+          <line x1="135.0" y1="105" x2="145.0" y2="105" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
+          <line x1="140" y1="100.0" x2="140" y2="110.0" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
+          <circle cx="140" cy="105" r="2.1" fill="#bbdefb" opacity="0.85" />
         </g>
 
         <g class="nav-star">
-          <circle cx="164" cy="106" r="1.6" fill="#ffffff" opacity="0.85">
-            <animate attributeName="opacity" values="0.85;0.85;0.45;1.0;0.85" keyTimes="0;0.82;0.88;0.94;1" dur="10.4s" begin="-10.1s" repeatCount="indefinite" />
-          </circle>
+          <circle cx="164" cy="106" r="1.6" fill="#ffffff" opacity="0.85" />
         </g>
             </g>
 
             <!-- Relevant Celestial Bodies & Planets (Venus, Jupiter, Mars) -->
             <!-- Venus (Evening Star) -->
-            <g class="nav-star-interactive">
-              <title>${localize('planets.venus.title', userLang)}</title>
-              <circle cx="66" cy="52" r="14" class="star-hit-area" />
-              <text class="star-hover-label" x="66" y="40">${localize('planets.venus.label', userLang)}</text>
+            
         <g class="celestial-planet">
           <circle cx="66" cy="52" r="6.2" fill="#fffde7" opacity="0.25" />
           <circle cx="66" cy="52" r="2.8" fill="#fffde7" />
-        </g>
+        
             </g>
             <!-- Jupiter -->
-            <g class="nav-star-interactive">
-              <title>${localize('planets.jupiter.title', userLang)}</title>
-              <circle cx="332" cy="48" r="14" class="star-hit-area" />
-              <text class="star-hover-label" x="332" y="36">${localize('planets.jupiter.label', userLang)}</text>
+            
         <g class="celestial-planet">
           <circle cx="332" cy="48" r="5.7" fill="#fff8e1" opacity="0.25" />
           <circle cx="332" cy="48" r="2.6" fill="#fff8e1" />
-        </g>
+        
             </g>
             <!-- Mars (Red Planet) -->
-            <g class="nav-star-interactive">
-              <title>${localize('planets.mars.title', userLang)}</title>
-              <circle cx="382" cy="92" r="14" class="star-hit-area" />
-              <text class="star-hover-label" x="382" y="80">${localize('planets.mars.label', userLang)}</text>
+            
         <g class="celestial-planet">
           <circle cx="382" cy="92" r="5.3" fill="#ff8a65" opacity="0.25" />
           <circle cx="382" cy="92" r="2.4" fill="#ff8a65" />
-        </g>
+        
             </g>
 
             <!-- Collision-Free Calm Background Stars (No synchronicity, no stutter, no Dauerfunkeln) -->
-            <circle cx="104" cy="58" r="1.08" fill="#ffffff" opacity="0.51">
-              <animate attributeName="opacity" values="0.51;0.51;0.20;0.66;0.51" keyTimes="0;0.82;0.88;0.94;1" dur="12.4s" begin="-10.9s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="34" cy="42" r="0.89" fill="#ffffff" opacity="0.75">
-              <animate attributeName="opacity" values="0.75;0.75;0.30;0.98;0.75" keyTimes="0;0.82;0.88;0.94;1" dur="12.5s" begin="-7.4s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="147" cy="17" r="0.7" fill="#ffffff" opacity="0.68">
-              <animate attributeName="opacity" values="0.68;0.68;0.27;0.88;0.68" keyTimes="0;0.82;0.88;0.94;1" dur="13.6s" begin="-8.4s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="366" cy="27" r="1.17" fill="#ffffff" opacity="0.51">
-              <animate attributeName="opacity" values="0.51;0.51;0.20;0.66;0.51" keyTimes="0;0.82;0.88;0.94;1" dur="11.1s" begin="-3.9s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="248" cy="44" r="1.19" fill="#ffffff" opacity="0.79">
-              <animate attributeName="opacity" values="0.79;0.79;0.32;1.00;0.79" keyTimes="0;0.82;0.88;0.94;1" dur="10.2s" begin="-12.2s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="406" cy="108" r="1.23" fill="#ffffff" opacity="0.52">
-              <animate attributeName="opacity" values="0.52;0.52;0.21;0.68;0.52" keyTimes="0;0.82;0.88;0.94;1" dur="13.0s" begin="-15.0s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="192" cy="62" r="1.09" fill="#ffffff" opacity="0.65">
-              <animate attributeName="opacity" values="0.65;0.65;0.26;0.85;0.65" keyTimes="0;0.82;0.88;0.94;1" dur="9.6s" begin="-0.7s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="37" cy="76" r="1.24" fill="#ffffff" opacity="0.5">
-              <animate attributeName="opacity" values="0.5;0.5;0.20;0.65;0.5" keyTimes="0;0.82;0.88;0.94;1" dur="15.6s" begin="-2.4s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="185" cy="24" r="0.74" fill="#ffffff" opacity="0.78">
-              <animate attributeName="opacity" values="0.78;0.78;0.31;1.00;0.78" keyTimes="0;0.82;0.88;0.94;1" dur="16.2s" begin="-7.2s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="213" cy="17" r="1.05" fill="#ffffff" opacity="0.6">
-              <animate attributeName="opacity" values="0.6;0.6;0.24;0.78;0.6" keyTimes="0;0.82;0.88;0.94;1" dur="11.2s" begin="-14.0s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="350" cy="18" r="1.09" fill="#ffffff" opacity="0.51">
-              <animate attributeName="opacity" values="0.51;0.51;0.20;0.66;0.51" keyTimes="0;0.82;0.88;0.94;1" dur="16.3s" begin="-5.4s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="449" cy="31" r="0.79" fill="#ffffff" opacity="0.63">
-              <animate attributeName="opacity" values="0.63;0.63;0.25;0.82;0.63" keyTimes="0;0.82;0.88;0.94;1" dur="16.4s" begin="-8.6s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="235" cy="18" r="0.81" fill="#ffffff" opacity="0.61">
-              <animate attributeName="opacity" values="0.61;0.61;0.24;0.79;0.61" keyTimes="0;0.82;0.88;0.94;1" dur="14.4s" begin="-14.7s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="416" cy="26" r="0.7" fill="#ffffff" opacity="0.78">
-              <animate attributeName="opacity" values="0.78;0.78;0.31;1.00;0.78" keyTimes="0;0.82;0.88;0.94;1" dur="15.1s" begin="-3.6s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="418" cy="89" r="0.82" fill="#ffffff" opacity="0.7">
-              <animate attributeName="opacity" values="0.7;0.7;0.28;0.91;0.7" keyTimes="0;0.82;0.88;0.94;1" dur="16.1s" begin="-1.3s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="262" cy="37" r="1.21" fill="#ffffff" opacity="0.53">
-              <animate attributeName="opacity" values="0.53;0.53;0.21;0.69;0.53" keyTimes="0;0.82;0.88;0.94;1" dur="14.3s" begin="-1.6s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="87" cy="52" r="1.0" fill="#ffffff" opacity="0.75">
-              <animate attributeName="opacity" values="0.75;0.75;0.30;0.98;0.75" keyTimes="0;0.82;0.88;0.94;1" dur="11.1s" begin="-7.5s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="128" cy="99" r="0.7" fill="#ffffff" opacity="0.65">
-              <animate attributeName="opacity" values="0.65;0.65;0.26;0.85;0.65" keyTimes="0;0.82;0.88;0.94;1" dur="16.0s" begin="-14.5s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="108" cy="41" r="0.89" fill="#ffffff" opacity="0.63">
-              <animate attributeName="opacity" values="0.63;0.63;0.25;0.82;0.63" keyTimes="0;0.82;0.88;0.94;1" dur="8.9s" begin="-10.4s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="373" cy="16" r="0.95" fill="#ffffff" opacity="0.48">
-              <animate attributeName="opacity" values="0.48;0.48;0.19;0.62;0.48" keyTimes="0;0.82;0.88;0.94;1" dur="14.7s" begin="-4.4s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="196" cy="16" r="0.8" fill="#ffffff" opacity="0.64">
-              <animate attributeName="opacity" values="0.64;0.64;0.26;0.83;0.64" keyTimes="0;0.82;0.88;0.94;1" dur="15.5s" begin="-9.1s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="323" cy="108" r="1.06" fill="#ffffff" opacity="0.66">
-              <animate attributeName="opacity" values="0.66;0.66;0.26;0.86;0.66" keyTimes="0;0.82;0.88;0.94;1" dur="15.0s" begin="-10.3s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="46" cy="31" r="0.71" fill="#ffffff" opacity="0.7">
-              <animate attributeName="opacity" values="0.7;0.7;0.28;0.91;0.7" keyTimes="0;0.82;0.88;0.94;1" dur="10.0s" begin="-13.3s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="53" cy="82" r="1.08" fill="#ffffff" opacity="0.49">
-              <animate attributeName="opacity" values="0.49;0.49;0.20;0.64;0.49" keyTimes="0;0.82;0.88;0.94;1" dur="15.5s" begin="-7.9s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="85" cy="100" r="0.8" fill="#ffffff" opacity="0.63">
-              <animate attributeName="opacity" values="0.63;0.63;0.25;0.82;0.63" keyTimes="0;0.82;0.88;0.94;1" dur="15.3s" begin="-2.8s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="433" cy="28" r="0.81" fill="#ffffff" opacity="0.77">
-              <animate attributeName="opacity" values="0.77;0.77;0.31;1.00;0.77" keyTimes="0;0.82;0.88;0.94;1" dur="8.6s" begin="-8.5s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="76" cy="111" r="0.74" fill="#ffffff" opacity="0.66">
-              <animate attributeName="opacity" values="0.66;0.66;0.26;0.86;0.66" keyTimes="0;0.82;0.88;0.94;1" dur="15.2s" begin="-4.9s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="274" cy="45" r="1.12" fill="#ffffff" opacity="0.47">
-              <animate attributeName="opacity" values="0.47;0.47;0.19;0.61;0.47" keyTimes="0;0.82;0.88;0.94;1" dur="9.0s" begin="-2.1s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="224" cy="99" r="1.19" fill="#ffffff" opacity="0.77">
-              <animate attributeName="opacity" values="0.77;0.77;0.31;1.00;0.77" keyTimes="0;0.82;0.88;0.94;1" dur="9.1s" begin="-10.6s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="164" cy="18" r="0.71" fill="#ffffff" opacity="0.66">
-              <animate attributeName="opacity" values="0.66;0.66;0.26;0.86;0.66" keyTimes="0;0.82;0.88;0.94;1" dur="11.1s" begin="-14.5s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="350" cy="52" r="1.14" fill="#ffffff" opacity="0.45">
-              <animate attributeName="opacity" values="0.45;0.45;0.18;0.59;0.45" keyTimes="0;0.82;0.88;0.94;1" dur="11.4s" begin="-12.8s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="25" cy="112" r="0.94" fill="#ffffff" opacity="0.7">
-              <animate attributeName="opacity" values="0.7;0.7;0.28;0.91;0.7" keyTimes="0;0.82;0.88;0.94;1" dur="11.4s" begin="-8.3s" repeatCount="indefinite" />
-            </circle>
+            <circle cx="104" cy="58" r="1.08" fill="#ffffff" opacity="0.51" />
+            <circle cx="34" cy="42" r="0.89" fill="#ffffff" opacity="0.75" />
+            <circle cx="147" cy="17" r="0.7" fill="#ffffff" opacity="0.68" />
+            <circle cx="366" cy="27" r="1.17" fill="#ffffff" opacity="0.51" />
+            <circle cx="248" cy="44" r="1.19" fill="#ffffff" opacity="0.79" />
+            <circle cx="406" cy="108" r="1.23" fill="#ffffff" opacity="0.52" />
+            <circle cx="192" cy="62" r="1.09" fill="#ffffff" opacity="0.65" />
+            <circle cx="37" cy="76" r="1.24" fill="#ffffff" opacity="0.5" />
+            <circle cx="185" cy="24" r="0.74" fill="#ffffff" opacity="0.78" />
+            <circle cx="213" cy="17" r="1.05" fill="#ffffff" opacity="0.6" />
+            <circle cx="350" cy="18" r="1.09" fill="#ffffff" opacity="0.51" />
+            <circle cx="449" cy="31" r="0.79" fill="#ffffff" opacity="0.63" />
+            <circle cx="235" cy="18" r="0.81" fill="#ffffff" opacity="0.61" />
+            <circle cx="416" cy="26" r="0.7" fill="#ffffff" opacity="0.78" />
+            <circle cx="418" cy="89" r="0.82" fill="#ffffff" opacity="0.7" />
+            <circle cx="262" cy="37" r="1.21" fill="#ffffff" opacity="0.53" />
+            <circle cx="87" cy="52" r="1.0" fill="#ffffff" opacity="0.75" />
+            <circle cx="128" cy="99" r="0.7" fill="#ffffff" opacity="0.65" />
+            <circle cx="108" cy="41" r="0.89" fill="#ffffff" opacity="0.63" />
+            <circle cx="373" cy="16" r="0.95" fill="#ffffff" opacity="0.48" />
+            <circle cx="196" cy="16" r="0.8" fill="#ffffff" opacity="0.64" />
+            <circle cx="323" cy="108" r="1.06" fill="#ffffff" opacity="0.66" />
+            <circle cx="46" cy="31" r="0.71" fill="#ffffff" opacity="0.7" />
+            <circle cx="53" cy="82" r="1.08" fill="#ffffff" opacity="0.49" />
+            <circle cx="85" cy="100" r="0.8" fill="#ffffff" opacity="0.63" />
+            <circle cx="433" cy="28" r="0.81" fill="#ffffff" opacity="0.77" />
+            <circle cx="76" cy="111" r="0.74" fill="#ffffff" opacity="0.66" />
+            <circle cx="274" cy="45" r="1.12" fill="#ffffff" opacity="0.47" />
+            <circle cx="224" cy="99" r="1.19" fill="#ffffff" opacity="0.77" />
+            <circle cx="164" cy="18" r="0.71" fill="#ffffff" opacity="0.66" />
+            <circle cx="350" cy="52" r="1.14" fill="#ffffff" opacity="0.45" />
+            <circle cx="25" cy="112" r="0.94" fill="#ffffff" opacity="0.7" />
 
             <!-- Shooting Star Animation -->
             <g class="shooting-star">
@@ -2122,72 +1834,76 @@
             text-anchor: middle;
           }
 
-          /* Interactive Constellations & Star Labels */
-          .constellation-group, .nav-star-interactive {
+          /* Calm, Continuous, GPU-Composited Starlight Shimmer (Only 8 Bright Landmark Stars) */
+          @keyframes star-shimmer-a {
+            0%, 100% { opacity: 0.95; }
+            50% { opacity: 0.35; }
+          }
+          @keyframes star-shimmer-b {
+            0%, 100% { opacity: 0.90; }
+            50% { opacity: 0.40; }
+          }
+          @keyframes star-shimmer-c {
+            0%, 100% { opacity: 0.85; }
+            50% { opacity: 0.30; }
+          }
+          .star-shimmer-1 { animation: star-shimmer-a 7.4s ease-in-out infinite; }
+          .star-shimmer-2 { animation: star-shimmer-b 9.2s ease-in-out infinite -2.7s; }
+          .star-shimmer-3 { animation: star-shimmer-c 11.5s ease-in-out infinite -5.8s; }
+          .star-shimmer-4 { animation: star-shimmer-a 8.6s ease-in-out infinite -4.1s; }
+          .star-shimmer-5 { animation: star-shimmer-b 12.8s ease-in-out infinite -7.3s; }
+          .star-shimmer-6 { animation: star-shimmer-c 10.1s ease-in-out infinite -3.5s; }
+          .star-shimmer-7 { animation: star-shimmer-a 13.7s ease-in-out infinite -8.2s; }
+          .star-shimmer-8 { animation: star-shimmer-b 8.0s ease-in-out infinite -1.4s; }
+
+          /* Interactive Constellations & Top-Layer Hover Tooltips */
+          .constellation-hit-group, .planet-hit-group {
             cursor: pointer;
-          }
-          .constellation-group line {
-            transition: stroke 0.3s ease, stroke-width 0.3s ease, filter 0.3s ease;
-          }
-          .constellation-group:hover line {
-            stroke: rgba(255, 255, 255, 0.85);
-            stroke-width: 1.2px;
-            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
-          }
-          .const-hover-label, .star-hover-label {
-            opacity: 0;
-            transition: opacity 0.25s ease-in-out;
-            fill: #ffffff;
-            font-size: 9.5px;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            text-anchor: middle;
-            pointer-events: none;
-            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.8));
-            user-select: none;
-          }
-          .constellation-group:hover .const-hover-label,
-          .nav-star-interactive:hover .star-hover-label {
-            opacity: 1;
           }
           .const-hit-area, .star-hit-area {
             fill: rgba(0, 0, 0, 0.001);
             stroke: transparent;
             cursor: pointer;
+          }
+          .const-hover-label, .star-hover-label {
+            opacity: 0;
+            transition: opacity 0.25s ease-in-out;
+            fill: #ffe082;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            text-anchor: middle;
+            pointer-events: none;
+            paint-order: stroke fill;
+            stroke: #080c18;
+            stroke-width: 3.5px;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 6px rgba(0, 0, 0, 0.9));
+            user-select: none;
+          }
+          .constellation-hit-group:hover .const-hover-label,
+          .planet-hit-group:hover .star-hover-label {
+            opacity: 1;
           }
 
-          /* Interactive Constellations & Star Labels */
-          .constellation-group, .nav-star-interactive {
-            cursor: pointer;
-          }
-          .constellation-group line {
+          /* Highlight constellation lines in the background starfield on hover */
+          .const-lines line {
             transition: stroke 0.3s ease, stroke-width 0.3s ease, filter 0.3s ease;
           }
-          .constellation-group:hover line {
-            stroke: rgba(255, 255, 255, 0.85);
+          .sky-svg:has([data-name="ursa_major"]:hover) [data-lines="ursa_major"] line,
+          .sky-svg:has([data-name="ursa_minor"]:hover) [data-lines="ursa_minor"] line,
+          .sky-svg:has([data-name="cassiopeia"]:hover) [data-lines="cassiopeia"] line,
+          .sky-svg:has([data-name="orion"]:hover) [data-lines="orion"] line,
+          .sky-svg:has([data-name="summer_triangle"]:hover) [data-lines="summer_triangle"] line,
+          .sky-svg:has([data-name="taurus_pleiades"]:hover) [data-lines="taurus_pleiades"] line,
+          .sky-svg:has([data-name="gemini"]:hover) [data-lines="gemini"] line,
+          .sky-svg:has([data-name="leo"]:hover) [data-lines="leo"] line,
+          .sky-svg:has([data-name="canis_major"]:hover) [data-lines="canis_major"] line,
+          .sky-svg:has([data-name="pegasus"]:hover) [data-lines="pegasus"] line,
+          .sky-svg:has([data-name="crux"]:hover) [data-lines="crux"] line {
+            stroke: rgba(255, 224, 130, 0.85);
             stroke-width: 1.2px;
-            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
-          }
-          .const-hover-label, .star-hover-label {
-            opacity: 0;
-            transition: opacity 0.25s ease-in-out;
-            fill: #ffffff;
-            font-size: 9.5px;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            text-anchor: middle;
-            pointer-events: none;
-            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 4px rgba(0, 0, 0, 0.8));
-            user-select: none;
-          }
-          .constellation-group:hover .const-hover-label,
-          .nav-star-interactive:hover .star-hover-label {
-            opacity: 1;
-          }
-          .const-hit-area, .star-hit-area {
-            fill: rgba(0, 0, 0, 0.001);
-            stroke: transparent;
-            cursor: pointer;
+            filter: drop-shadow(0 0 3px rgba(255, 224, 130, 0.8));
           }
 
           /* Metrics Section */
@@ -2546,6 +2262,46 @@
                   <text x="16" y="${moonY >= 45 ? -6 : 38}" text-anchor="middle" fill="#e2e8f0" font-size="9.5" font-weight="600">
                     ${data.illumination}%
                   </text>
+                </g>
+              ` : ''}
+            
+
+              <!-- Interactive Constellations & Planets Overlay (Rendered ON TOP of Sun, Moon & Horizon) -->
+              ${(this._config.show_stars !== false && (sky.type !== 'day' || data.sunElevation <= 0)) ? `
+                <g class="sky-interactive-overlay">
+                  <!-- Constellation Hit Areas and Hover Labels -->
+                  ${[
+                    { name: 'ursa_major', title: 'constellations.ursa_major.title', label: 'constellations.ursa_major.label', pts: '125,38 232,32 232,56 168,76 128,74', x: 170, y: 34 },
+                    { name: 'ursa_minor', title: 'constellations.ursa_minor.title', label: 'constellations.ursa_minor.label', pts: '68,18 128,14 128,44 68,40', x: 95, y: 14 },
+                    { name: 'cassiopeia', title: 'constellations.cassiopeia.title', label: 'constellations.cassiopeia.label', pts: '355,50 432,50 432,76 355,76', x: 395, y: 46 },
+                    { name: 'orion', title: 'constellations.orion.title', label: 'constellations.orion.label', pts: '268,68 328,68 325,124 268,124', x: 298, y: 62 },
+                    { name: 'summer_triangle', title: 'constellations.summer_triangle.title', label: 'constellations.summer_triangle.label', pts: '240,12 332,12 332,48 240,48', x: 285, y: 12 },
+                    { name: 'taurus_pleiades', title: 'constellations.taurus_pleiades.title', label: 'constellations.taurus_pleiades.label', pts: '224,66 268,66 268,114 224,114', x: 244, y: 64 },
+                    { name: 'gemini', title: 'constellations.gemini.title', label: 'constellations.gemini.label', pts: '178,74 218,74 218,118 178,118', x: 195, y: 72 },
+                    { name: 'leo', title: 'constellations.leo.title', label: 'constellations.leo.label', pts: '45,72 122,72 122,106 45,106', x: 85, y: 70 },
+                    { name: 'canis_major', title: 'constellations.canis_major.title', label: 'constellations.canis_major.label', pts: '328,90 375,90 375,124 328,124', x: 350, y: 88 },
+                    { name: 'pegasus', title: 'constellations.pegasus.title', label: 'constellations.pegasus.label', pts: '418,50 460,50 460,110 418,110', x: 438, y: 46 },
+                    { name: 'crux', title: 'constellations.crux.title', label: 'constellations.crux.label', pts: '132,86 172,86 172,122 132,122', x: 152, y: 84 },
+                  ].map(c => `
+                    <g class="constellation-hit-group" data-name="${c.name}">
+                      <title>${localize(c.title, userLang)}</title>
+                      <polygon points="${c.pts}" class="const-hit-area" />
+                      <text class="const-hover-label" x="${c.x}" y="${c.y}">${localize(c.label, userLang)}</text>
+                    </g>
+                  `).join('')}
+
+                  <!-- Planet Hit Areas and Hover Labels -->
+                  ${[
+                    { name: 'venus', title: 'planets.venus.title', label: 'planets.venus.label', cx: 66, cy: 52, x: 66, y: 38 },
+                    { name: 'jupiter', title: 'planets.jupiter.title', label: 'planets.jupiter.label', cx: 332, cy: 48, x: 332, y: 34 },
+                    { name: 'mars', title: 'planets.mars.title', label: 'planets.mars.label', cx: 382, cy: 92, x: 382, y: 78 }
+                  ].map(p => `
+                    <g class="planet-hit-group" data-name="${p.name}">
+                      <title>${localize(p.title, userLang)}</title>
+                      <circle cx="${p.cx}" cy="${p.cy}" r="14" class="star-hit-area" />
+                      <text class="star-hover-label" x="${p.x}" y="${p.y}">${localize(p.label, userLang)}</text>
+                    </g>
+                  `).join('')}
                 </g>
               ` : ''}
             </svg>
@@ -2923,7 +2679,7 @@
   });
 
   console.info(
-    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.3.2 ',
+    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.3.3 ',
     'color: white; background: #0c1222; font-weight: 700; border-radius: 3px 0 0 3px;',
     'color: white; background: #ff9800; font-weight: 700; border-radius: 0 3px 3px 0;'
   );

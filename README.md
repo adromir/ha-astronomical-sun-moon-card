@@ -32,12 +32,13 @@ A modern, highly tactile Lovelace Custom Card for Home Assistant that visualizes
     - **Civil Twilight / Dusk** (-6° – 0°): Deep magenta, indigo, and evening dusk.
     - **Nautical Twilight** (-12° – -6°): Deep navy twilight.
     - **Astronomical Night** (< -12°): Cosmic midnight black with shimmering starfield!
-- **Comprehensive Night Sky, Major Constellations & Planets (v1.3.2)**:
+- **Comprehensive Night Sky, Major Constellations & Planets (v1.3.3)**:
   - Features 11 major constellations (Ursa Major, Ursa Minor, Cassiopeia, Orion, Summer Triangle / Cygnus, Taurus & Pleiades, Gemini, Leo, Canis Major, Pegasus, Crux / Southern Cross).
   - Prominent celestial planets (Venus, Jupiter, Mars) shining with steady beacon discs.
   - Interactive mouseover with full triple localization (**German DE, English EN, Indonesian ID**), glowing line accents, and accessible tooltips.
-  - Organic, asynchronous, calm twinkling: 80%+ calm steady light, gentle non-synchronous shimmers (7.5s–16.5s cycles), and 100% GPU-composited opacity animations (zero CPU geometry lag or stutter).
-  - Strict Poisson-disc Euclidean clearance ($d \ge 13\text{px}$) across all 90 celestial points ensuring zero star overlapping or touching.
+  - **Top-Level Interactive Overlay**: Hit areas and hover labels are rendered on the uppermost SVG layer, guaranteeing that hover text is always visible and never occluded by the Moon, Sun, trajectory lines, or Earth globe.
+  - **Calm, Hardware-Composited Shimmer**: Shimmering is focused exclusively on 8 primary landmark navigation stars using GPU-composited CSS `@keyframes` with smooth `ease-in-out` transitions and non-synchronous prime cycle periods (7.4s–13.7s). All other background stars shine steadily, eliminating any stuttering, linear cuts, or animation resets.
+  - Strict Poisson-disc Euclidean clearance ($d \ge 13\text{px}$) across all celestial points ensuring zero star overlapping or touching.
 - **Animated Meteor Showers & Shooting Stars (v1.3.0)**:
   - Tracks 8 major annual meteor showers (Perseids, Geminids, Leonids, Quadrantids, etc.).
   - Animated shooting star streaks streak across the night sky dome, increasing in frequency near shower peaks.
@@ -88,7 +89,7 @@ A modern, highly tactile Lovelace Custom Card for Home Assistant that visualizes
 2. Upload `astronomical-sun-moon-card.js` into your `<config>/www/` directory.
 3. In Home Assistant, go to **Settings** > **Dashboards** > **Three dots (top right)** > **Resources**.
 4. Add resource:
-   - URL: `/local/astronomical-sun-moon-card.js?v=1.3.2`
+   - URL: `/local/astronomical-sun-moon-card.js?v=1.3.3`
    - Type: `JavaScript Module`
 
 ---

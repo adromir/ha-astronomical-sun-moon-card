@@ -46,9 +46,17 @@ A modern, highly tactile Lovelace Custom Card for Home Assistant that visualizes
     - **Civil Twilight / Dusk** (-6° – 0°): Deep magenta, indigo, and evening dusk.
     - **Nautical Twilight** (-12° – -6°): Deep navy twilight.
     - **Astronomical Night** (< -12°): Cosmic midnight black with shimmering starfield!
-- **Comprehensive Night Sky, Major Constellations & Planets (v1.3.3)**:
+- **Dynamic Local Astrometry & Real Night Sky (v1.4.0)**:
+  - Exact astronomical horizontal coordinates $(\text{alt}, \text{az})$ computed live from your Home Assistant instance's latitude, longitude, and Local Sidereal Time (LST).
+  - Physically accurate local visibility: Stars and constellations below the local horizon (such as the Southern Cross / Crux in Central Europe) are never rendered. When viewed from the Southern Hemisphere, Crux and southern landmarks appear in all their glory.
+  - Dynamic Keplerian planetary mechanics compute real-time positions for beacon planets (**Venus, Mars, Jupiter**).
+- **360° Compass Heading & Interactive Sky Dome Panning (v1.4.0)**:
+  - Quick-switch viewing direction buttons (**North 0°**, **East 90°**, **South 180°**, **West 270°**) and smooth pan step buttons (`‹` / `›`).
+  - Dynamic sliding cardinal markers along the horizon line that smoothly shift as you pan across the sky.
+  - Automatic hemisphere-aware default heading (South in the Northern Hemisphere, North in the Southern Hemisphere), configurable via the visual editor.
+- **Comprehensive Night Sky, Major Constellations & Planets**:
   - Features 11 major constellations (Ursa Major, Ursa Minor, Cassiopeia, Orion, Summer Triangle / Cygnus, Taurus & Pleiades, Gemini, Leo, Canis Major, Pegasus, Crux / Southern Cross).
-  - Prominent celestial planets (Venus, Jupiter, Mars) shining with steady beacon discs.
+  - Prominent celestial planets (Venus, Jupiter, Mars) shining with steady beacon discs and live Keplerian positioning.
   - Interactive mouseover with full triple localization (**German DE, English EN, Indonesian ID**), glowing line accents, and accessible tooltips.
   - **Top-Level Interactive Overlay**: Hit areas and hover labels are rendered on the uppermost SVG layer, guaranteeing that hover text is always visible and never occluded by the Moon, Sun, trajectory lines, or Earth globe.
   - **Calm, Hardware-Composited Shimmer**: Shimmering is focused exclusively on 8 primary landmark navigation stars using GPU-composited CSS `@keyframes` with smooth `ease-in-out` transitions and non-synchronous prime cycle periods (7.4s–13.7s). All other background stars shine steadily, eliminating any stuttering, linear cuts, or animation resets.
@@ -103,7 +111,7 @@ A modern, highly tactile Lovelace Custom Card for Home Assistant that visualizes
 2. Upload `astronomical-sun-moon-card.js` into your `<config>/www/` directory.
 3. In Home Assistant, go to **Settings** > **Dashboards** > **Three dots (top right)** > **Resources**.
 4. Add resource:
-   - URL: `/local/astronomical-sun-moon-card.js?v=1.3.3`
+   - URL: `/local/astronomical-sun-moon-card.js?v=1.4.0`
    - Type: `JavaScript Module`
 
 ---

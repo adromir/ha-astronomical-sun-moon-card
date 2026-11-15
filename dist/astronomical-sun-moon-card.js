@@ -4,7 +4,7 @@
  * Visualizes real-time celestial trajectories, elevation, azimuth, milestones, and lunar phases.
  * 
  * Author: Adromir (https://github.com/adromir)
- * Version: 1.3.6
+ * Version: 1.4.0
  * License: MIT
  */
 
@@ -38,6 +38,7 @@
             "next_full_moon": "Next Full Moon",
             "full_moon_in": "Full moon in",
             "new_moon_in": "New moon in",
+            "north": "North",
             "east": "East",
             "south": "South",
             "west": "West",
@@ -66,6 +67,8 @@
             "view_sun_only": "Sun Only",
             "view_moon_only": "Moon Only",
             "show_view_switcher": "Show View Switcher",
+            "show_heading_switcher": "Show Heading Switcher",
+            "default_heading": "Default Viewing Heading (0° North, 180° South)",
             "show_milestones": "Show Milestones (Rise/Set)",
             "show_stars": "Show Night Stars",
             "show_constellations": "Project Real Constellations",
@@ -206,6 +209,7 @@
             "next_full_moon": "Nächster Vollmond",
             "full_moon_in": "Vollmond in",
             "new_moon_in": "Neumond in",
+            "north": "Nord",
             "east": "Ost",
             "south": "Süd",
             "west": "West",
@@ -234,6 +238,8 @@
             "view_sun_only": "Nur Sonne",
             "view_moon_only": "Nur Mond",
             "show_view_switcher": "Ansichtswähler anzeigen",
+            "show_heading_switcher": "Blickrichtungs-Wähler anzeigen",
+            "default_heading": "Standard-Blickrichtung (0° Nord, 180° Süd)",
             "show_milestones": "Meilensteine (Aufgang/Untergang) anzeigen",
             "show_stars": "Sternenhimmel bei Nacht",
             "show_constellations": "Echte Sternbilder projizieren",
@@ -374,6 +380,7 @@
             "next_full_moon": "Bulan Purnama Berikutnya",
             "full_moon_in": "Purnama dlm",
             "new_moon_in": "Bulan baru dlm",
+            "north": "Utara",
             "east": "Timur",
             "south": "Selatan",
             "west": "Barat",
@@ -402,6 +409,8 @@
             "view_sun_only": "Hanya Matahari",
             "view_moon_only": "Hanya Bulan",
             "show_view_switcher": "Tampilkan Pengalih Tampilan",
+            "show_heading_switcher": "Tampilkan Pengalih Arah Pandang",
+            "default_heading": "Arah Pandang Default (0° Utara, 180° Selatan)",
             "show_milestones": "Tampilkan Waktu Penting (Terbit/Terbenam)",
             "show_stars": "Langit Berbintang di Malam Hari",
             "show_constellations": "Proyeksikan Rasi Bintang Nyata",
@@ -669,7 +678,7 @@
     return equatorialToHorizontal(ra, dec, lstDeg, latDeg);
   }
 
-  // Curated catalog of ~45 recognizable navigational stars across both hemispheres
+  // Curated catalog of major navigational stars across both celestial hemispheres
   const STAR_CATALOG = [
     // Ursa Minor & Pole
     { id: 'polaris', nameDe: 'Polarstern', nameEn: 'Polaris', ra: 37.95, dec: 89.26, mag: 2.0 },
@@ -699,6 +708,7 @@
     { id: 'procyon', nameDe: 'Prokyon', nameEn: 'Procyon', ra: 114.83, dec: 5.22, mag: 0.38 },
     // Taurus & Auriga
     { id: 'aldebaran', nameDe: 'Aldebaran', nameEn: 'Aldebaran', ra: 68.98, dec: 16.51, mag: 0.85 },
+    { id: 'alcyone', nameDe: 'Alkyone', nameEn: 'Alcyone', ra: 56.87, dec: 24.11, mag: 2.87 },
     { id: 'capella', nameDe: 'Capella', nameEn: 'Capella', ra: 79.17, dec: 45.99, mag: 0.08 },
     // Gemini (Zwillinge)
     { id: 'pollux', nameDe: 'Pollux', nameEn: 'Pollux', ra: 116.33, dec: 28.03, mag: 1.16 },
@@ -718,6 +728,11 @@
     { id: 'gammacas', nameDe: 'Gamma Cas', nameEn: 'Gamma Cas', ra: 14.18, dec: 60.72, mag: 2.15 },
     { id: 'ruchbah', nameDe: 'Ruchbah', nameEn: 'Ruchbah', ra: 19.52, dec: 60.23, mag: 2.68 },
     { id: 'segin', nameDe: 'Segin', nameEn: 'Segin', ra: 26.68, dec: 63.67, mag: 3.35 },
+    // Pegasus (Herbstviereck)
+    { id: 'alpheratz', nameDe: 'Alpheratz', nameEn: 'Alpheratz', ra: 2.10, dec: 29.09, mag: 2.06 },
+    { id: 'scheat', nameDe: 'Scheat', nameEn: 'Scheat', ra: 345.95, dec: 28.08, mag: 2.42 },
+    { id: 'markab', nameDe: 'Markab', nameEn: 'Markab', ra: 346.19, dec: 15.21, mag: 2.49 },
+    { id: 'algenib', nameDe: 'Algenib', nameEn: 'Algenib', ra: 3.34, dec: 15.18, mag: 2.83 },
     // Southern Hemisphere (Südlicher Sternenhimmel)
     { id: 'canopus', nameDe: 'Canopus', nameEn: 'Canopus', ra: 95.99, dec: -52.70, mag: -0.74 },
     { id: 'alphacen', nameDe: 'Alpha Centauri', nameEn: 'Alpha Centauri', ra: 219.90, dec: -60.83, mag: -0.27 },
@@ -729,27 +744,190 @@
     { id: 'achernar', nameDe: 'Achernar', nameEn: 'Achernar', ra: 24.43, dec: -57.24, mag: 0.45 },
   ];
 
-  // Identifiers for constellation stick figures
-  const CONSTELLATION_LINES = [
-    // Ursa Major (Großer Wagen)
-    ['dubhe', 'merak'], ['merak', 'phecda'], ['phecda', 'megrez'], ['megrez', 'dubhe'],
-    ['megrez', 'alioth'], ['alioth', 'mizar'], ['mizar', 'alkaid'],
-    // Orion
-    ['betelgeuse', 'bellatrix'], ['bellatrix', 'rigel'], ['rigel', 'saiph'], ['saiph', 'betelgeuse'],
-    ['alnitak', 'alnilam'], ['alnilam', 'mintaka'],
-    // Cassiopeia
-    ['caph', 'schedar'], ['schedar', 'gammacas'], ['gammacas', 'ruchbah'], ['ruchbah', 'segin'],
-    // Summer Triangle
-    ['vega', 'deneb'], ['deneb', 'altair'], ['altair', 'vega'],
-    // Gemini
-    ['castor', 'pollux'],
-    // Leo
-    ['regulus', 'algieba'], ['algieba', 'denebola'],
-    // Crux (Kreuz des Südens)
-    ['acrux', 'gacrux'], ['mimosa', 'imai'],
-    // Centaurus
-    ['alphacen', 'hadar']
+  // All 11 major constellations with constituent stars, lines, and translation keys
+  const CONSTELLATIONS_CONFIG = {
+    ursa_major: {
+      name: 'ursa_major',
+      titleKey: 'constellations.ursa_major.title',
+      labelKey: 'constellations.ursa_major.label',
+      lines: [
+        ['dubhe', 'merak'], ['merak', 'phecda'], ['phecda', 'megrez'], ['megrez', 'dubhe'],
+        ['megrez', 'alioth'], ['alioth', 'mizar'], ['mizar', 'alkaid']
+      ],
+      starIds: ['dubhe', 'merak', 'phecda', 'megrez', 'alioth', 'mizar', 'alkaid']
+    },
+    ursa_minor: {
+      name: 'ursa_minor',
+      titleKey: 'constellations.ursa_minor.title',
+      labelKey: 'constellations.ursa_minor.label',
+      lines: [['polaris', 'kochab']],
+      starIds: ['polaris', 'kochab']
+    },
+    cassiopeia: {
+      name: 'cassiopeia',
+      titleKey: 'constellations.cassiopeia.title',
+      labelKey: 'constellations.cassiopeia.label',
+      lines: [['caph', 'schedar'], ['schedar', 'gammacas'], ['gammacas', 'ruchbah'], ['ruchbah', 'segin']],
+      starIds: ['caph', 'schedar', 'gammacas', 'ruchbah', 'segin']
+    },
+    orion: {
+      name: 'orion',
+      titleKey: 'constellations.orion.title',
+      labelKey: 'constellations.orion.label',
+      lines: [
+        ['betelgeuse', 'bellatrix'], ['bellatrix', 'rigel'], ['rigel', 'saiph'], ['saiph', 'betelgeuse'],
+        ['alnitak', 'alnilam'], ['alnilam', 'mintaka']
+      ],
+      starIds: ['betelgeuse', 'bellatrix', 'rigel', 'saiph', 'alnitak', 'alnilam', 'mintaka']
+    },
+    summer_triangle: {
+      name: 'summer_triangle',
+      titleKey: 'constellations.summer_triangle.title',
+      labelKey: 'constellations.summer_triangle.label',
+      lines: [['vega', 'deneb'], ['deneb', 'altair'], ['altair', 'vega']],
+      starIds: ['vega', 'deneb', 'altair']
+    },
+    taurus_pleiades: {
+      name: 'taurus_pleiades',
+      titleKey: 'constellations.taurus_pleiades.title',
+      labelKey: 'constellations.taurus_pleiades.label',
+      lines: [['aldebaran', 'alcyone'], ['aldebaran', 'capella']],
+      starIds: ['aldebaran', 'alcyone', 'capella']
+    },
+    gemini: {
+      name: 'gemini',
+      titleKey: 'constellations.gemini.title',
+      labelKey: 'constellations.gemini.label',
+      lines: [['castor', 'pollux']],
+      starIds: ['castor', 'pollux']
+    },
+    leo: {
+      name: 'leo',
+      titleKey: 'constellations.leo.title',
+      labelKey: 'constellations.leo.label',
+      lines: [['regulus', 'algieba'], ['algieba', 'denebola']],
+      starIds: ['regulus', 'algieba', 'denebola']
+    },
+    canis_major: {
+      name: 'canis_major',
+      titleKey: 'constellations.canis_major.title',
+      labelKey: 'constellations.canis_major.label',
+      lines: [['sirius', 'procyon']],
+      starIds: ['sirius', 'procyon']
+    },
+    pegasus: {
+      name: 'pegasus',
+      titleKey: 'constellations.pegasus.title',
+      labelKey: 'constellations.pegasus.label',
+      lines: [['alpheratz', 'scheat'], ['scheat', 'markab'], ['markab', 'algenib'], ['algenib', 'alpheratz']],
+      starIds: ['alpheratz', 'scheat', 'markab', 'algenib']
+    },
+    crux: {
+      name: 'crux',
+      titleKey: 'constellations.crux.title',
+      labelKey: 'constellations.crux.label',
+      lines: [['acrux', 'gacrux'], ['mimosa', 'imai']],
+      starIds: ['acrux', 'gacrux', 'mimosa', 'imai']
+    }
+  };
+
+  // 28 realistic faint background stars spread across celestial sphere
+  const FAINT_STARS = [
+    { ra: 15.2, dec: 42.1, r: 0.9, op: 0.65 },
+    { ra: 45.8, dec: 65.3, r: 0.8, op: 0.70 },
+    { ra: 72.1, dec: 30.5, r: 1.0, op: 0.60 },
+    { ra: 95.4, dec: 12.2, r: 0.7, op: 0.55 },
+    { ra: 120.6, dec: 50.1, r: 0.9, op: 0.75 },
+    { ra: 142.3, dec: 25.8, r: 0.8, op: 0.60 },
+    { ra: 168.9, dec: 70.4, r: 1.1, op: 0.70 },
+    { ra: 190.2, dec: 35.6, r: 0.7, op: 0.65 },
+    { ra: 215.7, dec: 10.4, r: 0.9, op: 0.60 },
+    { ra: 238.4, dec: 48.2, r: 0.8, op: 0.70 },
+    { ra: 260.1, dec: 22.9, r: 1.0, op: 0.65 },
+    { ra: 285.5, dec: 55.3, r: 0.7, op: 0.70 },
+    { ra: 305.8, dec: 15.7, r: 0.9, op: 0.60 },
+    { ra: 330.2, dec: 62.4, r: 0.8, op: 0.75 },
+    { ra: 350.6, dec: 38.1, r: 1.0, op: 0.65 },
+    { ra: 28.4, dec: -5.2, r: 0.8, op: 0.60 },
+    { ra: 60.1, dec: 5.8, r: 0.9, op: 0.70 },
+    { ra: 85.3, dec: 28.4, r: 0.7, op: 0.65 },
+    { ra: 110.5, dec: -12.1, r: 1.0, op: 0.60 },
+    { ra: 135.2, dec: 38.9, r: 0.8, op: 0.70 },
+    { ra: 160.7, dec: -8.5, r: 0.7, op: 0.65 },
+    { ra: 185.1, dec: 22.3, r: 0.9, op: 0.75 },
+    { ra: 210.4, dec: 58.7, r: 0.8, op: 0.65 },
+    { ra: 235.9, dec: -15.4, r: 1.0, op: 0.60 },
+    { ra: 255.2, dec: 40.2, r: 0.7, op: 0.70 },
+    { ra: 280.6, dec: -2.1, r: 0.9, op: 0.65 },
+    { ra: 315.3, dec: 32.8, r: 0.8, op: 0.70 },
+    { ra: 340.7, dec: -8.9, r: 1.0, op: 0.60 }
   ];
+
+  // Dynamic Horizontal projection onto the card's 180° panorama celestial dome
+  function projectToDome(alt, az, heading) {
+    if (alt <= 0) return null; // below horizon
+    let diff = ((az - heading + 540) % 360) - 180;
+    if (Math.abs(diff) > 92) return null; // outside 180° front-facing view
+    const rad = alt * TO_RAD;
+    const cosAlt = Math.cos(rad);
+    const sinAlt = Math.sin(rad);
+    // Sinusoidal dome projection: converges smoothly to zenith (240, 22)
+    const x = 240 + diff * 2.2222 * cosAlt;
+    const y = 120 - sinAlt * 98;
+    return { x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 };
+  }
+
+  // Planetary positions (Venus, Mars, Jupiter) via Keplerian celestial mechanics
+  function calculatePlanetPositions(date = new Date(), latDeg = 50, lonDeg = 10) {
+    const jd = (date.getTime() / 86400000) + 2440587.5;
+    const d = jd - 2451545.0; // days since J2000.0
+
+    const M_sun = ((357.529 + 0.98560028 * d) % 360 + 360) % 360 * TO_RAD;
+    const L_sun = ((280.459 + 0.98564736 * d) % 360 + 360) % 360 * TO_RAD;
+    const lambda_sun = L_sun + (1.915 * Math.sin(M_sun) + 0.020 * Math.sin(2 * M_sun)) * TO_RAD;
+    const r_sun = 1.00014 - 0.01671 * Math.cos(M_sun);
+    const x_earth = -r_sun * Math.cos(lambda_sun);
+    const y_earth = -r_sun * Math.sin(lambda_sun);
+
+    const eps = 23.439 * TO_RAD;
+    const lstDeg = calculateLocalSiderealTime(date, lonDeg);
+
+    const planets = [
+      { id: 'venus', color: '#fff9c4', size: 2.8, a: 0.72333, e: 0.00677, M: ((175.738 + 1.60213022 * d) % 360 + 360) % 360 * TO_RAD, L: ((181.980 + 1.60213022 * d) % 360 + 360) % 360 * TO_RAD },
+      { id: 'mars', color: '#ff7043', size: 2.4, a: 1.52368, e: 0.09340, M: ((19.373 + 0.52402078 * d) % 360 + 360) % 360 * TO_RAD, L: ((355.453 + 0.52402078 * d) % 360 + 360) % 360 * TO_RAD },
+      { id: 'jupiter', color: '#ffe082', size: 3.2, a: 5.20260, e: 0.04849, M: ((20.020 + 0.08308530 * d) % 360 + 360) % 360 * TO_RAD, L: ((34.404 + 0.08308530 * d) % 360 + 360) % 360 * TO_RAD }
+    ];
+
+    return planets.map(p => {
+      const v = p.M + (2 * p.e - p.e * p.e * p.e / 4) * Math.sin(p.M) + (5 / 4) * p.e * p.e * Math.sin(2 * p.M);
+      const r = p.a * (1 - p.e * p.e) / (1 + p.e * Math.cos(v));
+      const lam = p.L + (2 * p.e - p.e * p.e * p.e / 4) * Math.sin(p.M) + (5 / 4) * p.e * p.e * Math.sin(2 * p.M);
+      const xp = r * Math.cos(lam);
+      const yp = r * Math.sin(lam);
+
+      const x_geo = xp - x_earth;
+      const y_geo = yp - y_earth;
+      const lam_geo = Math.atan2(y_geo, x_geo);
+
+      const sinDec = Math.sin(eps) * Math.sin(lam_geo);
+      const dec = Math.asin(Math.max(-1, Math.min(1, sinDec))) * TO_DEG;
+      const y_ra = Math.cos(eps) * Math.sin(lam_geo);
+      const x_ra = Math.cos(lam_geo);
+      const ra = ((Math.atan2(y_ra, x_ra) * TO_DEG) % 360 + 360) % 360;
+
+      const horiz = equatorialToHorizontal(ra, dec, lstDeg, latDeg);
+      return {
+        id: p.id,
+        color: p.color,
+        size: p.size,
+        ra,
+        dec,
+        alt: horiz.alt,
+        az: horiz.az,
+        visible: horiz.alt > 0
+      };
+    });
+  }
 
   // --- METEOR SHOWERS (Annual major showers) ---
   const METEOR_SHOWERS = [
@@ -1210,6 +1388,13 @@
       const userLang = (this._hass && this._hass.language) ? this._hass.language.substring(0, 2).toLowerCase() : 'en';
       const upcomingEvents = this._config.show_astronomical_events !== false ? getUpcomingAstronomicalEvents(now, userLang).slice(0, 5) : [];
 
+      const lat = (this._hass && this._hass.config && this._hass.config.latitude !== undefined) ? this._hass.config.latitude : 50.0;
+      const lon = (this._hass && this._hass.config && this._hass.config.longitude !== undefined) ? this._hass.config.longitude : 10.0;
+      const defaultHeading = (lat >= 0) ? 180 : 0;
+      const heading = (this._heading !== undefined) ? this._heading : (this._config.default_heading !== undefined ? Number(this._config.default_heading) : defaultHeading);
+      const lstDeg = calculateLocalSiderealTime(now, lon);
+      const isTrajectoryInView = Math.abs(((heading - defaultHeading + 540) % 360) - 180) <= 45;
+
       // Dimensions for the celestial SVG dome
       const svgW = 480;
       const svgH = 170;
@@ -1267,472 +1452,207 @@
       const skyArcD = `M 40 ${horizonY} Q 240 -20 440 ${horizonY}`;
       const nightArcD = `M 440 ${horizonY} Q 240 190 40 ${horizonY}`;
 
-      // Starfield & Constellations for night / twilight (89 animated stars + constellation lines)
+      // Sliding cardinal markers along horizon line based on current viewing heading
+      const cardinalDefs = [
+        { az: 0, label: 'card.north', deg: '0°', isMajor: true },
+        { az: 45, label: 'NO', deg: '45°', isMajor: false },
+        { az: 90, label: 'card.east', deg: '90°', isMajor: true },
+        { az: 135, label: 'SO', deg: '135°', isMajor: false },
+        { az: 180, label: 'card.south', deg: '180°', isMajor: true },
+        { az: 225, label: 'SW', deg: '225°', isMajor: false },
+        { az: 270, label: 'card.west', deg: '270°', isMajor: true },
+        { az: 315, label: 'NW', deg: '315°', isMajor: false }
+      ];
+
+      let cardinalMarkersSvg = '';
+      cardinalDefs.forEach(c => {
+        let diff = ((c.az - heading + 540) % 360) - 180;
+        if (Math.abs(diff) <= 90) {
+          const x = Math.round((240 + diff * (200 / 90)) * 10) / 10;
+          if (c.isMajor) {
+            const name = localize(c.label, userLang);
+            cardinalMarkersSvg += `<text x="${x}" y="${horizonY + 14}" class="cardinal-label">${name} (${c.deg})</text>`;
+          } else {
+            cardinalMarkersSvg += `<text x="${x}" y="${horizonY + 12}" class="cardinal-label cardinal-sub">${c.deg}</text>`;
+          }
+        }
+      });
+
+      // Real astrometric starfield, constellations, and planets projected to observer dome
       let starFieldSvg = '';
+      let interactiveOverlaySvg = '';
       if (this._config.show_stars !== false && (sky.type !== 'day' || data.sunElevation <= 0)) {
         const starOpacity = data.sunElevation < -12 ? 1.0 : (data.sunElevation < -6 ? 0.85 : (data.sunElevation < 0 ? 0.5 : 0.2));
+
+        // 1. Calculate dynamic horizontal positions (alt, az) and project all catalog stars onto the dome
+        const starMap = {};
+        const shimmerClassList = [
+          'star-shimmer-1', 'star-shimmer-2', 'star-shimmer-3', 'star-shimmer-4',
+          'star-shimmer-5', 'star-shimmer-6', 'star-shimmer-7', 'star-shimmer-8'
+        ];
+        const landmarkShimmerStars = ['polaris', 'vega', 'betelgeuse', 'sirius', 'aldebaran', 'capella', 'arcturus', 'rigel'];
+
+        STAR_CATALOG.forEach(star => {
+          const horiz = equatorialToHorizontal(star.ra, star.dec, lstDeg, lat);
+          const pt = projectToDome(horiz.alt, horiz.az, heading);
+          if (pt) {
+            starMap[star.id] = { ...star, alt: horiz.alt, az: horiz.az, x: pt.x, y: pt.y };
+          }
+        });
+
+        // 2. Build Constellation lines and collect star elements
+        let constLinesSvg = '';
+        let constStarsSvg = '';
+        let constOverlaysSvg = '';
+        const renderedStars = new Set();
+
+        const showConstellations = this._config.show_constellations !== false;
+        const showConstLines = this._config.show_constellation_lines !== false;
+
+        if (showConstellations) {
+          Object.values(CONSTELLATIONS_CONFIG).forEach(c => {
+            const visibleStarsInConst = [];
+            c.starIds.forEach(id => {
+              if (starMap[id]) visibleStarsInConst.push(starMap[id]);
+            });
+
+            // If constellation has at least 2 visible stars in current field of view
+            if (visibleStarsInConst.length >= 2) {
+              let linesSvg = '';
+              if (showConstLines) {
+                c.lines.forEach(([idA, idB]) => {
+                  const sA = starMap[idA];
+                  const sB = starMap[idB];
+                  if (sA && sB) {
+                    linesSvg += `<line x1="${sA.x}" y1="${sA.y}" x2="${sB.x}" y2="${sB.y}" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />`;
+                  }
+                });
+              }
+
+              constLinesSvg += `
+                <g class="const-lines" data-lines="${c.name}">
+                  ${linesSvg}
+                </g>
+              `;
+
+              // Bounding box / centroid for hover hit area and hover label
+              let minX = 999, maxX = -999, minY = 999, maxY = -999, sumX = 0, sumY = 0;
+              visibleStarsInConst.forEach(s => {
+                if (s.x < minX) minX = s.x;
+                if (s.x > maxX) maxX = s.x;
+                if (s.y < minY) minY = s.y;
+                if (s.y > maxY) maxY = s.y;
+                sumX += s.x;
+                sumY += s.y;
+              });
+              const avgX = Math.round((sumX / visibleStarsInConst.length) * 10) / 10;
+              const labelY = Math.max(14, Math.round((minY - 10) * 10) / 10);
+
+              // Constellation interactive hit area (invisible fat lines & star zones)
+              let hitLines = '';
+              c.lines.forEach(([idA, idB]) => {
+                const sA = starMap[idA];
+                const sB = starMap[idB];
+                if (sA && sB) {
+                  hitLines += `<line x1="${sA.x}" y1="${sA.y}" x2="${sB.x}" y2="${sB.y}" stroke="rgba(0,0,0,0.001)" stroke-width="26" />`;
+                }
+              });
+              let hitCircles = visibleStarsInConst.map(s => `<circle cx="${s.x}" cy="${s.y}" r="18" fill="rgba(0,0,0,0.001)" />`).join('');
+
+              constOverlaysSvg += `
+                <g class="constellation-hit-group" data-name="${c.name}">
+                  <title>${localize(c.titleKey, userLang)}</title>
+                  ${hitLines}
+                  ${hitCircles}
+                  <text class="const-hover-label" x="${avgX}" y="${labelY}">${localize(c.labelKey, userLang)}</text>
+                </g>
+              `;
+            }
+          });
+        }
+
+        // Render visible catalog stars
+        Object.values(starMap).forEach(star => {
+          renderedStars.add(star.id);
+          const r = Math.max(1.2, Math.min(2.8, (3.5 - (star.mag || 2.0) * 0.6))).toFixed(1);
+          const shimIdx = landmarkShimmerStars.indexOf(star.id);
+          const shimClass = (shimIdx >= 0) ? shimmerClassList[shimIdx % shimmerClassList.length] : '';
+          const color = (star.mag && star.mag < 0.5) ? '#ffe082' : (star.mag && star.mag < 1.5 ? '#ffffff' : '#e2e8f0');
+
+          constStarsSvg += `
+            <g class="nav-star ${shimClass}">
+              <circle cx="${star.x}" cy="${star.y}" r="${r}" fill="${color}" opacity="0.9" />
+            </g>
+          `;
+        });
+
+        // 3. Render realistic faint background stars
+        let faintStarsSvg = '';
+        FAINT_STARS.forEach(fs => {
+          const horiz = equatorialToHorizontal(fs.ra, fs.dec, lstDeg, lat);
+          const pt = projectToDome(horiz.alt, horiz.az, heading);
+          if (pt) {
+            faintStarsSvg += `<circle cx="${pt.x}" cy="${pt.y}" r="${fs.r}" fill="#ffffff" opacity="${(fs.op * 0.7).toFixed(2)}" />`;
+          }
+        });
+
+        // 4. Compute and project Keplerian positions for Venus, Mars, Jupiter
+        const planets = calculatePlanetPositions(now, lat, lon);
+        let planetsSvg = '';
+        let planetOverlaysSvg = '';
+
+        planets.forEach(p => {
+          const pt = projectToDome(p.alt, p.az, heading);
+          if (pt) {
+            planetsSvg += `
+              <g class="planet-marker" data-name="${p.id}">
+                <circle cx="${pt.x}" cy="${pt.y}" r="${(p.size + 1.8).toFixed(1)}" fill="${p.color}" opacity="0.28" filter="drop-shadow(0 0 4px ${p.color})" />
+                <circle cx="${pt.x}" cy="${pt.y}" r="${p.size}" fill="${p.color}" />
+              </g>
+            `;
+            planetOverlaysSvg += `
+              <g class="planet-hit-group" data-name="${p.id}">
+                <title>${localize('planets.' + p.id + '.title', userLang)}</title>
+                <circle cx="${pt.x}" cy="${pt.y}" r="16" class="star-hit-area" />
+                <text class="star-hover-label" x="${pt.x}" y="${Math.max(14, pt.y - 12)}">${localize('planets.' + p.id + '.label', userLang)}</text>
+              </g>
+            `;
+          }
+        });
+
+        // Assemble celestial starfield SVG
         starFieldSvg = `
           <g class="celestial-starfield" opacity="${starOpacity}">
-            <!-- All Major Constellations with Triple Localization (DE, EN, ID) -->
-            <!-- Big Dipper (Ursa Major) -->
-            <g class="constellation-group" data-name="ursa_major">
-              <g class="const-lines" data-lines="ursa_major">
-                <line x1="135" y1="48" x2="140" y2="66" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="140" y1="66" x2="165" y2="68" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="165" y1="68" x2="163" y2="52" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="163" y1="52" x2="135" y2="48" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="163" y1="52" x2="185" y2="50" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="185" y1="50" x2="205" y2="44" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="205" y1="44" x2="225" y2="40" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-              </g>
-
-        <g class="nav-star star-shimmer-1">
-          <circle cx="135" cy="48" r="2.0" fill="#ffe082" opacity="0.85" />
-        </g>
-
-        <g class="nav-star star-shimmer-2">
-          <circle cx="140" cy="66" r="1.8" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star star-shimmer-3">
-          <circle cx="165" cy="68" r="1.8" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star star-shimmer-4">
-          <circle cx="163" cy="52" r="1.5" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star star-shimmer-5">
-          <circle cx="185" cy="50" r="2.0" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star star-shimmer-6">
-          <circle cx="205" cy="44" r="1.9" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star star-shimmer-7">
-          <circle cx="225" cy="40" r="2.0" fill="#bbdefb" opacity="0.85" />
-        </g>
-            </g>
-            <!-- Little Dipper & Polaris -->
-            <g class="constellation-group" data-name="ursa_minor">
-              <g class="const-lines" data-lines="ursa_minor">
-                <line x1="75" y1="32" x2="90" y2="25" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="90" y1="25" x2="105" y2="28" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="105" y1="28" x2="122" y2="38" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="122" y1="38" x2="120" y2="20" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="120" y1="20" x2="105" y2="28" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-              </g>
-
-        <g class="nav-star star-shimmer-8">
-          <circle cx="75" cy="32" r="4.3" fill="#fff9c4" opacity="0.25" />
-          <line x1="69.2" y1="32" x2="80.8" y2="32" stroke="#fff9c4" stroke-width="0.75" opacity="0.4" />
-          <line x1="75" y1="26.2" x2="75" y2="37.8" stroke="#fff9c4" stroke-width="0.75" opacity="0.4" />
-          <circle cx="75" cy="32" r="2.4" fill="#fff9c4" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="90" cy="25" r="1.4" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="105" cy="28" r="1.4" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="122" cy="38" r="2.0" fill="#ffe082" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="120" cy="20" r="1.7" fill="#ffffff" opacity="0.85" />
-        </g>
-            </g>
-            <!-- Cassiopeia -->
-            <g class="constellation-group" data-name="cassiopeia">
-              <g class="const-lines" data-lines="cassiopeia">
-                <line x1="365" y1="58" x2="380" y2="66" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="380" y1="66" x2="395" y2="58" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="395" y1="58" x2="410" y2="68" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="410" y1="68" x2="424" y2="62" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-              </g>
-
-        <g class="nav-star">
-          <circle cx="365" cy="58" r="1.9" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="380" cy="66" r="2.0" fill="#ffe082" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="395" cy="58" r="1.9" fill="#bbdefb" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="410" cy="68" r="1.7" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="424" cy="62" r="1.6" fill="#ffffff" opacity="0.85" />
-        </g>
-            </g>
-            <!-- Orion Constellation -->
-            <g class="constellation-group" data-name="orion">
-              <g class="const-lines" data-lines="orion">
-                <!-- Head to Shoulders -->
-                <line x1="300" y1="68" x2="282" y2="76" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="300" y1="68" x2="318" y2="74" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <!-- Shoulder line: Betelgeuse to Bellatrix -->
-                <line x1="282" y1="76" x2="318" y2="74" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <!-- Torso: Shoulders to Belt (Hourglass pinch) -->
-                <line x1="282" y1="76" x2="293" y2="94" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="318" y1="74" x2="307" y2="92" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <!-- Belt: Alnitak to Alnilam to Mintaka -->
-                <line x1="293" y1="94" x2="300" y2="93" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="300" y1="93" x2="307" y2="92" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <!-- Sword: Hanging from belt -->
-                <line x1="300" y1="93" x2="300" y2="101" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <!-- Lower body: Belt to Knees/Feet -->
-                <line x1="293" y1="94" x2="286" y2="116" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="307" y1="92" x2="320" y2="114" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <!-- Feet base: Saiph to Rigel -->
-                <line x1="286" y1="116" x2="320" y2="114" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-              </g>
-
-        <!-- Head: Meissa -->
-        <g class="nav-star">
-          <circle cx="300" cy="68" r="1.4" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <!-- Left Shoulder: Betelgeuse (Red/Orange Supergiant, Shimmer 6) -->
-        <g class="nav-star star-shimmer-6">
-          <circle cx="282" cy="76" r="4.1" fill="#ffb74d" opacity="0.25" />
-          <line x1="276.5" y1="76" x2="287.5" y2="76" stroke="#ffb74d" stroke-width="0.75" opacity="0.4" />
-          <line x1="282" y1="70.5" x2="282" y2="81.5" stroke="#ffb74d" stroke-width="0.75" opacity="0.4" />
-          <circle cx="282" cy="76" r="2.3" fill="#ffb74d" opacity="0.9" />
-        </g>
-
-        <!-- Right Shoulder: Bellatrix -->
-        <g class="nav-star">
-          <circle cx="318" cy="74" r="1.9" fill="#e1f5fe" opacity="0.85" />
-        </g>
-
-        <!-- Belt: Alnitak (Left) -->
-        <g class="nav-star">
-          <circle cx="293" cy="94" r="1.5" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <!-- Belt: Alnilam (Center) -->
-        <g class="nav-star">
-          <circle cx="300" cy="93" r="1.6" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <!-- Belt: Mintaka (Right) -->
-        <g class="nav-star">
-          <circle cx="307" cy="92" r="1.5" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <!-- Sword: Orion Nebula M42 -->
-        <g class="nav-star">
-          <circle cx="300" cy="101" r="1.4" fill="#f48fb1" opacity="0.85" />
-        </g>
-
-        <!-- Left Knee: Saiph -->
-        <g class="nav-star">
-          <circle cx="286" cy="116" r="1.8" fill="#e1f5fe" opacity="0.85" />
-        </g>
-
-        <!-- Right Foot: Rigel (Brilliant Blue-White Supergiant, Shimmer 7) -->
-        <g class="nav-star star-shimmer-7">
-          <circle cx="320" cy="114" r="4.3" fill="#bbdefb" opacity="0.25" />
-          <line x1="314.2" y1="114" x2="325.8" y2="114" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
-          <line x1="320" y1="108.2" x2="320" y2="119.8" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
-          <circle cx="320" cy="114" r="2.4" fill="#bbdefb" opacity="0.9" />
-        </g>
-            </g>
-            <!-- Summer Triangle & Cygnus -->
-            <g class="constellation-group" data-name="summer_triangle">
-              <g class="const-lines" data-lines="summer_triangle">
-                <line x1="248" y1="24" x2="295" y2="20" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="295" y1="20" x2="322" y2="40" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="322" y1="40" x2="248" y2="24" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="295" y1="20" x2="294" y2="33" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="294" y1="33" x2="275" y2="32" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-              </g>
-
-        <g class="nav-star">
-          <circle cx="248" cy="24" r="4.5" fill="#e1f5fe" opacity="0.25" />
-          <line x1="242.0" y1="24" x2="254.0" y2="24" stroke="#e1f5fe" stroke-width="0.75" opacity="0.4" />
-          <line x1="248" y1="18.0" x2="248" y2="30.0" stroke="#e1f5fe" stroke-width="0.75" opacity="0.4" />
-          <circle cx="248" cy="24" r="2.5" fill="#e1f5fe" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="295" cy="20" r="4.0" fill="#ffffff" opacity="0.25" />
-          <line x1="289.7" y1="20" x2="300.3" y2="20" stroke="#ffffff" stroke-width="0.75" opacity="0.4" />
-          <line x1="295" y1="14.7" x2="295" y2="25.3" stroke="#ffffff" stroke-width="0.75" opacity="0.4" />
-          <circle cx="295" cy="20" r="2.2" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="322" cy="40" r="4.1" fill="#fff9c4" opacity="0.25" />
-          <line x1="316.5" y1="40" x2="327.5" y2="40" stroke="#fff9c4" stroke-width="0.75" opacity="0.4" />
-          <line x1="322" y1="34.5" x2="322" y2="45.5" stroke="#fff9c4" stroke-width="0.75" opacity="0.4" />
-          <circle cx="322" cy="40" r="2.3" fill="#fff9c4" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="294" cy="33" r="1.7" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="275" cy="32" r="1.6" fill="#ffe082" opacity="0.85" />
-        </g>
-            </g>
-            <!-- Taurus & Pleiades (Seven Sisters) -->
-            <g class="constellation-group" data-name="taurus_pleiades">
-              <g class="const-lines" data-lines="taurus_pleiades">
-                <line x1="232" y1="76" x2="240" y2="95" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="240" y1="95" x2="252" y2="105" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="254" y1="78" x2="260" y2="75" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="260" y1="75" x2="250" y2="74" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="250" y1="74" x2="254" y2="78" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-              </g>
-
-        <g class="nav-star">
-          <circle cx="240" cy="95" r="4.1" fill="#ffb74d" opacity="0.25" />
-          <line x1="234.5" y1="95" x2="245.5" y2="95" stroke="#ffb74d" stroke-width="0.75" opacity="0.4" />
-          <line x1="240" y1="89.5" x2="240" y2="100.5" stroke="#ffb74d" stroke-width="0.75" opacity="0.4" />
-          <circle cx="240" cy="95" r="2.3" fill="#ffb74d" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="232" cy="76" r="1.8" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="252" cy="105" r="1.5" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="254" cy="78" r="1.3" fill="#e1f5fe" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="260" cy="75" r="1.1" fill="#e1f5fe" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="250" cy="74" r="1.1" fill="#e1f5fe" opacity="0.85" />
-        </g>
-            </g>
-            <!-- Gemini -->
-            <g class="constellation-group" data-name="gemini">
-              <g class="const-lines" data-lines="gemini">
-                <line x1="190" y1="82" x2="204" y2="92" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="190" y1="82" x2="185" y2="108" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="204" y1="92" x2="208" y2="110" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-              </g>
-
-        <g class="nav-star">
-          <circle cx="190" cy="82" r="1.9" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="204" cy="92" r="4.0" fill="#ffe082" opacity="0.25" />
-          <line x1="198.7" y1="92" x2="209.3" y2="92" stroke="#ffe082" stroke-width="0.75" opacity="0.4" />
-          <line x1="204" y1="86.7" x2="204" y2="97.3" stroke="#ffe082" stroke-width="0.75" opacity="0.4" />
-          <circle cx="204" cy="92" r="2.2" fill="#ffe082" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="185" cy="108" r="1.7" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="208" cy="110" r="1.5" fill="#ffffff" opacity="0.85" />
-        </g>
-            </g>
-            <!-- Leo -->
-            <g class="constellation-group" data-name="leo">
-              <g class="const-lines" data-lines="leo">
-                <line x1="55" y1="96" x2="74" y2="82" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="74" y1="82" x2="95" y2="78" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="95" y1="78" x2="114" y2="88" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-              </g>
-
-        <g class="nav-star">
-          <circle cx="55" cy="96" r="4.1" fill="#bbdefb" opacity="0.25" />
-          <line x1="49.5" y1="96" x2="60.5" y2="96" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
-          <line x1="55" y1="90.5" x2="55" y2="101.5" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
-          <circle cx="55" cy="96" r="2.3" fill="#bbdefb" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="74" cy="82" r="1.8" fill="#ffe082" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="95" cy="78" r="1.7" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="114" cy="88" r="1.9" fill="#ffffff" opacity="0.85" />
-        </g>
-            </g>
-            <!-- Canis Major (Sirius) -->
-            <g class="constellation-group" data-name="canis_major">
-              <g class="const-lines" data-lines="canis_major">
-                <line x1="348" y1="112" x2="336" y2="98" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="348" y1="112" x2="362" y2="100" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="362" y1="100" x2="365" y2="116" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-              </g>
-
-        <g class="nav-star">
-          <circle cx="348" cy="112" r="4.9" fill="#ffffff" opacity="0.25" />
-          <line x1="341.5" y1="112" x2="354.5" y2="112" stroke="#ffffff" stroke-width="0.75" opacity="0.4" />
-          <line x1="348" y1="105.5" x2="348" y2="118.5" stroke="#ffffff" stroke-width="0.75" opacity="0.4" />
-          <circle cx="348" cy="112" r="2.7" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="336" cy="98" r="1.8" fill="#bbdefb" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="362" cy="100" r="1.8" fill="#ffe082" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="365" cy="116" r="2.0" fill="#bbdefb" opacity="0.85" />
-        </g>
-            </g>
-            <!-- Pegasus -->
-            <g class="constellation-group" data-name="pegasus">
-              <g class="const-lines" data-lines="pegasus">
-                <line x1="442" y1="60" x2="428" y2="80" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="428" y1="80" x2="438" y2="102" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="438" y1="102" x2="452" y2="84" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="452" y1="84" x2="442" y2="60" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-              </g>
-
-        <g class="nav-star">
-          <circle cx="442" cy="60" r="1.9" fill="#ffe082" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="428" cy="80" r="1.9" fill="#bbdefb" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="452" cy="84" r="1.9" fill="#ffffff" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="438" cy="102" r="1.8" fill="#ffffff" opacity="0.85" />
-        </g>
-            </g>
-            <!-- Southern Cross (Crux) -->
-            <g class="constellation-group" data-name="crux">
-              <g class="const-lines" data-lines="crux">
-                <line x1="152" y1="94" x2="152" y2="116" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-                <line x1="140" y1="105" x2="164" y2="106" stroke="rgba(255,255,255,0.22)" stroke-width="0.8" stroke-dasharray="3,3" />
-              </g>
-
-        <g class="nav-star">
-          <circle cx="152" cy="116" r="4.1" fill="#bbdefb" opacity="0.25" />
-          <line x1="146.5" y1="116" x2="157.5" y2="116" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
-          <line x1="152" y1="110.5" x2="152" y2="121.5" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
-          <circle cx="152" cy="116" r="2.3" fill="#bbdefb" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="152" cy="94" r="2.0" fill="#ffcc80" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="140" cy="105" r="3.8" fill="#bbdefb" opacity="0.25" />
-          <line x1="135.0" y1="105" x2="145.0" y2="105" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
-          <line x1="140" y1="100.0" x2="140" y2="110.0" stroke="#bbdefb" stroke-width="0.75" opacity="0.4" />
-          <circle cx="140" cy="105" r="2.1" fill="#bbdefb" opacity="0.85" />
-        </g>
-
-        <g class="nav-star">
-          <circle cx="164" cy="106" r="1.6" fill="#ffffff" opacity="0.85" />
-        </g>
+            <!-- Faint background field stars -->
+            <g class="faint-stars">
+              ${faintStarsSvg}
             </g>
 
-            <!-- Relevant Celestial Bodies & Planets (Venus, Jupiter, Mars) -->
-            <!-- Venus (Evening Star) -->
-            
-        <g class="celestial-planet">
-          <circle cx="66" cy="52" r="6.2" fill="#fffde7" opacity="0.25" />
-          <circle cx="66" cy="52" r="2.8" fill="#fffde7" />
-        
-            </g>
-            <!-- Jupiter -->
-            
-        <g class="celestial-planet">
-          <circle cx="332" cy="48" r="5.7" fill="#fff8e1" opacity="0.25" />
-          <circle cx="332" cy="48" r="2.6" fill="#fff8e1" />
-        
-            </g>
-            <!-- Mars (Red Planet) -->
-            
-        <g class="celestial-planet">
-          <circle cx="382" cy="92" r="5.3" fill="#ff8a65" opacity="0.25" />
-          <circle cx="382" cy="92" r="2.4" fill="#ff8a65" />
-        
+            <!-- Major Constellation connecting lines -->
+            ${constLinesSvg}
+
+            <!-- Navigational catalog stars with calm starlight shimmer -->
+            <g class="catalog-stars">
+              ${constStarsSvg}
             </g>
 
-            <!-- Collision-Free Calm Background Stars (No synchronicity, no stutter, no Dauerfunkeln) -->
-            <circle cx="104" cy="58" r="1.08" fill="#ffffff" opacity="0.51" />
-            <circle cx="34" cy="42" r="0.89" fill="#ffffff" opacity="0.75" />
-            <circle cx="147" cy="17" r="0.7" fill="#ffffff" opacity="0.68" />
-            <circle cx="366" cy="27" r="1.17" fill="#ffffff" opacity="0.51" />
-            <circle cx="248" cy="44" r="1.19" fill="#ffffff" opacity="0.79" />
-            <circle cx="406" cy="108" r="1.23" fill="#ffffff" opacity="0.52" />
-            <circle cx="192" cy="62" r="1.09" fill="#ffffff" opacity="0.65" />
-            <circle cx="37" cy="76" r="1.24" fill="#ffffff" opacity="0.5" />
-            <circle cx="185" cy="24" r="0.74" fill="#ffffff" opacity="0.78" />
-            <circle cx="213" cy="17" r="1.05" fill="#ffffff" opacity="0.6" />
-            <circle cx="350" cy="18" r="1.09" fill="#ffffff" opacity="0.51" />
-            <circle cx="449" cy="31" r="0.79" fill="#ffffff" opacity="0.63" />
-            <circle cx="235" cy="18" r="0.81" fill="#ffffff" opacity="0.61" />
-            <circle cx="416" cy="26" r="0.7" fill="#ffffff" opacity="0.78" />
-            <circle cx="418" cy="89" r="0.82" fill="#ffffff" opacity="0.7" />
-            <circle cx="262" cy="37" r="1.21" fill="#ffffff" opacity="0.53" />
-            <circle cx="87" cy="52" r="1.0" fill="#ffffff" opacity="0.75" />
-            <circle cx="128" cy="99" r="0.7" fill="#ffffff" opacity="0.65" />
-            <circle cx="108" cy="41" r="0.89" fill="#ffffff" opacity="0.63" />
-            <circle cx="373" cy="16" r="0.95" fill="#ffffff" opacity="0.48" />
-            <circle cx="196" cy="16" r="0.8" fill="#ffffff" opacity="0.64" />
-            <circle cx="323" cy="108" r="1.06" fill="#ffffff" opacity="0.66" />
-            <circle cx="46" cy="31" r="0.71" fill="#ffffff" opacity="0.7" />
-            <circle cx="53" cy="82" r="1.08" fill="#ffffff" opacity="0.49" />
-            <circle cx="85" cy="100" r="0.8" fill="#ffffff" opacity="0.63" />
-            <circle cx="433" cy="28" r="0.81" fill="#ffffff" opacity="0.77" />
-            <circle cx="76" cy="111" r="0.74" fill="#ffffff" opacity="0.66" />
-            <circle cx="274" cy="45" r="1.12" fill="#ffffff" opacity="0.47" />
-            <circle cx="224" cy="99" r="1.19" fill="#ffffff" opacity="0.77" />
-            <circle cx="164" cy="18" r="0.71" fill="#ffffff" opacity="0.66" />
-            <circle cx="350" cy="52" r="1.14" fill="#ffffff" opacity="0.45" />
-            <circle cx="25" cy="112" r="0.94" fill="#ffffff" opacity="0.7" />
-
-            <!-- Shooting Star Animation -->
-            <g class="shooting-star">
-              <path d="M 120 25 L 75 48" stroke="url(#meteorGradient)" stroke-width="1.8" stroke-linecap="round" opacity="0">
-                <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.1;0.15;0.25;1" dur="9s" begin="2s" repeatCount="indefinite" />
-                <animateTransform attributeName="transform" type="translate" values="0 0; -60 30; -120 60" dur="9s" begin="2s" repeatCount="indefinite" />
-              </path>
+            <!-- Dynamic Keplerian Planets (Venus, Mars, Jupiter) -->
+            <g class="planets-layer">
+              ${planetsSvg}
             </g>
+          </g>
+        `;
+
+        // Assemble interactive hover overlay (rendered on top of all celestial objects)
+        interactiveOverlaySvg = `
+          <g class="sky-interactive-overlay">
+            ${constOverlaysSvg}
+            ${planetOverlaysSvg}
           </g>
         `;
       }
 
       // Real astronomical position of the Moon
-      const lat = (this._hass && this._hass.config && this._hass.config.latitude) || 50.0;
-      const lon = (this._hass && this._hass.config && this._hass.config.longitude) || 10.0;
       const moonPos = calculateMoonPosition(now, lat, lon);
       const isMoonAboveHorizon = (moonPos.alt >= 0);
 
@@ -1789,6 +1709,7 @@
 
       const showSun = this._viewMode === 'combined' || this._viewMode === 'sun_only';
       const showMoon = this._viewMode === 'combined' || this._viewMode === 'moon_only';
+      const showTrajectory = isTrajectoryInView || this._config.always_show_trajectory;
 
       this.shadowRoot.innerHTML = `
         <style>
@@ -1851,6 +1772,42 @@
             box-shadow: inset 0 2px 10px rgba(0,0,0,0.25);
             transition: background 1s ease;
           }
+          .sky-heading-overlay {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            background: rgba(10, 16, 30, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 2px 4px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            z-index: 5;
+          }
+          .heading-btn, .heading-nav-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.72rem;
+            font-weight: 500;
+            padding: 2px 6px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            line-height: 1.2;
+          }
+          .heading-btn:hover, .heading-nav-btn:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.15);
+          }
+          .heading-btn.active {
+            background: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            font-weight: 700;
+          }
           svg.sky-svg {
             display: block;
             width: 100%;
@@ -1897,6 +1854,14 @@
             font-weight: 600;
             fill: rgba(255,255,255,0.7);
             text-anchor: middle;
+          }
+          .cardinal-label.cardinal-sub {
+            font-size: 8px;
+            fill: rgba(255, 255, 255, 0.4);
+          }
+          .planet-marker {
+            cursor: pointer;
+            transition: transform 0.2s ease;
           }
           .milestone-text {
             font-size: 9.5px;
@@ -2268,6 +2233,17 @@
           ` : ''}
 
           <div class="sky-canvas-container">
+            ${this._config.show_heading_switcher !== false ? `
+              <div class="sky-heading-overlay">
+                <button class="heading-nav-btn" data-dir="-1" title="Pan Left">‹</button>
+                <button class="heading-btn ${Math.round(heading) === 0 ? 'active' : ''}" data-heading="0">${localize('card.north', userLang)}</button>
+                <button class="heading-btn ${Math.round(heading) === 90 ? 'active' : ''}" data-heading="90">${localize('card.east', userLang)}</button>
+                <button class="heading-btn ${Math.round(heading) === 180 ? 'active' : ''}" data-heading="180">${localize('card.south', userLang)}</button>
+                <button class="heading-btn ${Math.round(heading) === 270 ? 'active' : ''}" data-heading="270">${localize('card.west', userLang)}</button>
+                <button class="heading-nav-btn" data-dir="1" title="Pan Right">›</button>
+              </div>
+            ` : ''}
+
             <svg class="sky-svg" viewBox="0 0 ${svgW} ${svgH}">
               <defs>
                 <radialGradient id="sunDiscGrad" cx="50%" cy="50%" r="50%">
@@ -2281,8 +2257,10 @@
               ${starFieldSvg}
 
               <!-- Celestial Trajectory Arc (Day/Night swapped dome curve) -->
-              <path class="${skyArcClass}" d="${skyArcD}" />
-              <path class="${nightArcClass}" d="${nightArcD}" />
+              ${showTrajectory ? `
+                <path class="${skyArcClass}" d="${skyArcD}" />
+                <path class="${nightArcClass}" d="${nightArcD}" />
+              ` : ''}
 
               <!-- Earth Horizon Globe (if texture configured) -->
               ${this._effectiveEarthTexture ? `
@@ -2297,20 +2275,18 @@
               <!-- Horizon Line -->
               <line x1="20" y1="${horizonY}" x2="460" y2="${horizonY}" class="horizon-line" />
 
-              <!-- Cardinal Directions -->
-              <text x="40" y="${horizonY + 14}" class="cardinal-label">${localize('card.east', userLang)} (90°)</text>
-              <text x="240" y="${horizonY + 14}" class="cardinal-label">${localize('card.south', userLang)} (180°)</text>
-              <text x="440" y="${horizonY + 14}" class="cardinal-label">${localize('card.west', userLang)} (270°)</text>
+              <!-- Sliding Cardinal Directions -->
+              ${cardinalMarkersSvg}
 
               <!-- Milestone Indicators along Horizon -->
-              ${this._config.show_milestones && showSun ? `
+              ${showTrajectory && this._config.show_milestones && showSun ? `
                 <text x="40" y="${horizonY - 8}" class="milestone-text">🌅 ${formatTime(data.nextRising, this._hass)}</text>
                 ${isDay ? `<text x="240" y="22" class="milestone-text">☀️ ${formatTime(data.nextNoon, this._hass)}</text>` : ''}
                 <text x="440" y="${horizonY - 8}" class="milestone-text">🌇 ${formatTime(data.nextSetting, this._hass)}</text>
               ` : ''}
 
               <!-- Sun Celestial Object -->
-              ${showSun ? `
+              ${showSun && (isTrajectoryInView || data.isSunAboveHorizon) ? `
                 <g class="sun-element">
                   <circle cx="${sunX}" cy="${sunY}" r="14" fill="#ff9800" />
                   ${this._effectiveSunTexture ? `
@@ -2325,7 +2301,7 @@
               ` : ''}
 
               <!-- Moon Celestial Object in Sky (if in Moon or Combined mode) -->
-              ${showMoon && (!data.isSunAboveHorizon || this._viewMode === 'moon_only') ? `
+              ${showMoon && isTrajectoryInView && (!data.isSunAboveHorizon || this._viewMode === 'moon_only') ? `
                 <g transform="translate(${moonX - 16}, ${moonY - 16})">
                   ${renderMoonSvg(data.moon.phaseFraction, 16, this._effectiveMoonTexture, 'sky')}
                   <text x="16" y="${moonY >= 45 ? -6 : 38}" text-anchor="middle" fill="#e2e8f0" font-size="9.5" font-weight="600">
@@ -2333,46 +2309,9 @@
                   </text>
                 </g>
               ` : ''}
-            
 
               <!-- Interactive Constellations & Planets Overlay (Rendered ON TOP of Sun, Moon & Horizon) -->
-              ${(this._config.show_stars !== false && (sky.type !== 'day' || data.sunElevation <= 0)) ? `
-                <g class="sky-interactive-overlay">
-                  <!-- Constellation Hit Areas and Hover Labels -->
-                  ${[
-                    { name: 'ursa_major', title: 'constellations.ursa_major.title', label: 'constellations.ursa_major.label', pts: '125,38 232,32 232,56 168,76 128,74', x: 170, y: 34 },
-                    { name: 'ursa_minor', title: 'constellations.ursa_minor.title', label: 'constellations.ursa_minor.label', pts: '68,18 128,14 128,44 68,40', x: 95, y: 14 },
-                    { name: 'cassiopeia', title: 'constellations.cassiopeia.title', label: 'constellations.cassiopeia.label', pts: '355,50 432,50 432,76 355,76', x: 395, y: 46 },
-                    { name: 'orion', title: 'constellations.orion.title', label: 'constellations.orion.label', pts: '272,62 328,62 328,122 272,122', x: 300, y: 56 },
-                    { name: 'summer_triangle', title: 'constellations.summer_triangle.title', label: 'constellations.summer_triangle.label', pts: '240,12 332,12 332,48 240,48', x: 285, y: 12 },
-                    { name: 'taurus_pleiades', title: 'constellations.taurus_pleiades.title', label: 'constellations.taurus_pleiades.label', pts: '224,66 268,66 268,114 224,114', x: 244, y: 64 },
-                    { name: 'gemini', title: 'constellations.gemini.title', label: 'constellations.gemini.label', pts: '178,74 218,74 218,118 178,118', x: 195, y: 72 },
-                    { name: 'leo', title: 'constellations.leo.title', label: 'constellations.leo.label', pts: '45,72 122,72 122,106 45,106', x: 85, y: 70 },
-                    { name: 'canis_major', title: 'constellations.canis_major.title', label: 'constellations.canis_major.label', pts: '328,90 375,90 375,124 328,124', x: 350, y: 88 },
-                    { name: 'pegasus', title: 'constellations.pegasus.title', label: 'constellations.pegasus.label', pts: '418,50 460,50 460,110 418,110', x: 438, y: 46 },
-                    { name: 'crux', title: 'constellations.crux.title', label: 'constellations.crux.label', pts: '132,86 172,86 172,122 132,122', x: 152, y: 84 },
-                  ].map(c => `
-                    <g class="constellation-hit-group" data-name="${c.name}">
-                      <title>${localize(c.title, userLang)}</title>
-                      <polygon points="${c.pts}" class="const-hit-area" />
-                      <text class="const-hover-label" x="${c.x}" y="${c.y}">${localize(c.label, userLang)}</text>
-                    </g>
-                  `).join('')}
-
-                  <!-- Planet Hit Areas and Hover Labels -->
-                  ${[
-                    { name: 'venus', title: 'planets.venus.title', label: 'planets.venus.label', cx: 66, cy: 52, x: 66, y: 38 },
-                    { name: 'jupiter', title: 'planets.jupiter.title', label: 'planets.jupiter.label', cx: 332, cy: 48, x: 332, y: 34 },
-                    { name: 'mars', title: 'planets.mars.title', label: 'planets.mars.label', cx: 382, cy: 92, x: 382, y: 78 }
-                  ].map(p => `
-                    <g class="planet-hit-group" data-name="${p.name}">
-                      <title>${localize(p.title, userLang)}</title>
-                      <circle cx="${p.cx}" cy="${p.cy}" r="14" class="star-hit-area" />
-                      <text class="star-hover-label" x="${p.x}" y="${p.y}">${localize(p.label, userLang)}</text>
-                    </g>
-                  `).join('')}
-                </g>
-              ` : ''}
+              ${interactiveOverlaySvg}
             </svg>
           </div>
 
@@ -2492,6 +2431,29 @@
           if (!target) return;
           this._viewMode = target.getAttribute('data-view');
           this._hasUserSwitchedView = true;
+          this.render();
+        });
+      });
+
+      // Event listeners for heading switcher & pan buttons
+      const headingBtns = this.shadowRoot.querySelectorAll('.heading-btn');
+      headingBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const target = e.target.closest('.heading-btn');
+          if (!target) return;
+          this._heading = Number(target.getAttribute('data-heading'));
+          this.render();
+        });
+      });
+
+      const navBtns = this.shadowRoot.querySelectorAll('.heading-nav-btn');
+      navBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const target = e.target.closest('.heading-nav-btn');
+          if (!target) return;
+          const dir = Number(target.getAttribute('data-dir')) || 1;
+          const cur = (this._heading !== undefined) ? this._heading : defaultHeading;
+          this._heading = ((cur + dir * 45) % 360 + 360) % 360;
           this.render();
         });
       });
@@ -2626,6 +2588,22 @@
           </div>
 
           <div class="toggle-row">
+            <span class="toggle-label">${localize('editor.show_heading_switcher', userLang)}</span>
+            <input type="checkbox" id="show_heading_switcher" ${this._config.show_heading_switcher !== false ? 'checked' : ''} />
+          </div>
+
+          <div class="form-row">
+            <label>${localize('editor.default_heading', userLang)}</label>
+            <select id="default_heading">
+              <option value="" ${this._config.default_heading === undefined || this._config.default_heading === '' ? 'selected' : ''}>Auto (${t('Nach Breitengrad', 'By Latitude', 'Berdasarkan Lintang')})</option>
+              <option value="180" ${String(this._config.default_heading) === '180' ? 'selected' : ''}>180° ${localize('card.south', userLang)}</option>
+              <option value="0" ${String(this._config.default_heading) === '0' ? 'selected' : ''}>0° ${localize('card.north', userLang)}</option>
+              <option value="90" ${String(this._config.default_heading) === '90' ? 'selected' : ''}>90° ${localize('card.east', userLang)}</option>
+              <option value="270" ${String(this._config.default_heading) === '270' ? 'selected' : ''}>270° ${localize('card.west', userLang)}</option>
+            </select>
+          </div>
+
+          <div class="toggle-row">
             <span class="toggle-label">${localize('editor.show_milestones', userLang)}</span>
             <input type="checkbox" id="show_milestones" ${this._config.show_milestones !== false ? 'checked' : ''} />
           </div>
@@ -2676,6 +2654,8 @@
       const earthTexInput = this.shadowRoot.getElementById('earth_texture');
       const viewSelect = this.shadowRoot.getElementById('default_view');
       const switchToggle = this.shadowRoot.getElementById('show_view_switcher');
+      const headingSwitchToggle = this.shadowRoot.getElementById('show_heading_switcher');
+      const defaultHeadingSelect = this.shadowRoot.getElementById('default_heading');
       const milestonesToggle = this.shadowRoot.getElementById('show_milestones');
       const starsToggle = this.shadowRoot.getElementById('show_stars');
       const constToggle = this.shadowRoot.getElementById('show_constellations');
@@ -2695,6 +2675,8 @@
           earth_texture: earthTexInput.value.trim(),
           default_view: viewSelect.value,
           show_view_switcher: switchToggle.checked,
+          show_heading_switcher: headingSwitchToggle.checked,
+          default_heading: defaultHeadingSelect.value !== '' ? Number(defaultHeadingSelect.value) : undefined,
           show_milestones: milestonesToggle.checked,
           show_stars: starsToggle.checked,
           show_constellations: constToggle.checked,
@@ -2720,6 +2702,8 @@
       earthTexInput.addEventListener('input', triggerChange);
       viewSelect.addEventListener('change', triggerChange);
       switchToggle.addEventListener('change', triggerChange);
+      headingSwitchToggle.addEventListener('change', triggerChange);
+      defaultHeadingSelect.addEventListener('change', triggerChange);
       milestonesToggle.addEventListener('change', triggerChange);
       starsToggle.addEventListener('change', triggerChange);
       constToggle.addEventListener('change', triggerChange);
@@ -2750,7 +2734,7 @@
   });
 
   console.info(
-    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.3.6 ',
+    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.4.0 ',
     'color: white; background: #0c1222; font-weight: 700; border-radius: 3px 0 0 3px;',
     'color: white; background: #ff9800; font-weight: 700; border-radius: 0 3px 3px 0;'
   );

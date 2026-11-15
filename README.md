@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="icon.png" width="160" height="160" alt="Astronomical Sun & Moon Card Icon">
+</p>
+
 # ☀️ Astronomical Sun & Moon Card for Home Assistant
 
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=adromir&repository=ha-astronomical-sun-moon-card&category=plugin)
@@ -24,6 +28,19 @@ A modern, highly tactile Lovelace Custom Card for Home Assistant that visualizes
     - **Civil Twilight / Dusk** (-6° – 0°): Deep magenta, indigo, and evening dusk.
     - **Nautical Twilight** (-12° – -6°): Deep navy twilight.
     - **Astronomical Night** (< -12°): Cosmic midnight black with shimmering starfield!
+- **Real Local Night Sky & Constellations (v1.3.0)**:
+  - Dynamically calculates the **Local Sidereal Time (LST)** from your observer coordinates and projects the actual visible night sky.
+  - Features ~50 navigational stars (Ursa Major, Orion, Cassiopeia, Summer Triangle, etc.) with magnitude scaling and twinkling animations.
+  - Subtle dashed constellation outline lines connect key asterisms.
+- **Animated Meteor Showers & Shooting Stars (v1.3.0)**:
+  - Tracks 8 major annual meteor showers (Perseids, Geminids, Leonids, Quadrantids, etc.).
+  - Animated shooting star streaks streak across the night sky dome, increasing in frequency near shower peaks.
+- **Animated Aurora Borealis & Aurora Australis (v1.3.0)**:
+  - Hemisphere-aware: Renders Aurora Borealis (Northern Hemisphere) or Aurora Australis (Southern Hemisphere).
+  - Luminous, undulating emerald-green and magenta glowing wave curtains above the horizon.
+  - Auto-integrates with Home Assistant's `aurora` integration (`binary_sensor.aurora_visibility_*`) or testable anytime via demo mode.
+- **Compact Astronomical Events Status Ribbon (v1.3.0)**:
+  - Sleek ribbon directly below the celestial dome showing upcoming solstices, equinoxes, meteor shower peaks, and eclipses.
 - **Photorealistic SVG Lunar Phases**:
   - Accurate mathematical lunar terminator calculated from the synodic cycle.
   - Renders true-to-life crescent, quarter, gibbous, and full moon shapes with subtle lunar crater shading.
@@ -65,7 +82,7 @@ A modern, highly tactile Lovelace Custom Card for Home Assistant that visualizes
 2. Upload `astronomical-sun-moon-card.js` into your `<config>/www/` directory.
 3. In Home Assistant, go to **Settings** > **Dashboards** > **Three dots (top right)** > **Resources**.
 4. Add resource:
-   - URL: `/local/astronomical-sun-moon-card.js?v=1.2.1`
+   - URL: `/local/astronomical-sun-moon-card.js?v=1.3.0`
    - Type: `JavaScript Module`
 
 ---
@@ -86,7 +103,7 @@ For accurate local lunar data and synchronization with Home Assistant's official
 
 ### Built-in Celestial Textures (Alpha Transparency)
 
-Starting with **v1.2.0**, high-resolution photorealistic textures for the **Moon**, **Sun** (with solar corona flares), and **Earth horizon** are bundled natively with full alpha transparency.
+Starting with **v1.2.0** and updated in **v1.3.0**, high-resolution photorealistic textures for the **Moon**, **Sun** (with solar corona flares), and **Earth horizon** are bundled natively as self-contained Base64 Data URIs with full alpha transparency.
 
 > [!TIP]
 > **No extra moon phase images required**: Thanks to dynamic mathematical SVG terminator masking, every single lunar phase (including continuous fractional values) is calculated and shaded live in vector space directly onto the full-disc texture — complete with earthshine (unlit side at 20% opacity) and glowing crater highlights!
@@ -102,6 +119,10 @@ default_view: combined
 show_view_switcher: true
 show_milestones: true
 show_stars: true
+show_constellations: true
+show_constellation_lines: true
+show_astronomical_events: true
+show_aurora: true
 # Textures work out of the box! You can customize them or set to 'none' for pure vector:
 # moon_texture: /local/custom_moon.png
 # sun_texture: none
@@ -119,6 +140,12 @@ show_stars: true
 | `show_view_switcher` | boolean | `true` | Show interactive view toggle pills in the header |
 | `show_milestones` | boolean | `true` | Show Sunrise, Solar Noon, and Sunset times |
 | `show_stars` | boolean | `true` | Display shimmering starfield during night/twilight |
+| `show_constellations` | boolean | `true` | Project real local constellations based on observer LST |
+| `show_constellation_lines` | boolean | `true` | Show subtle dashed lines connecting constellation stars |
+| `show_astronomical_events` | boolean | `true` | Show compact ribbon with upcoming solstices, meteors & eclipses |
+| `show_aurora` | boolean | `true` | Display animated Aurora Borealis / Australis wave curtains when active |
+| `aurora_demo_mode` | boolean | `false` | Enable preview demo of animated aurora anytime |
+| `aurora_entity` | string | `auto` | Aurora visibility sensor (auto-discovers `binary_sensor.aurora_visibility_*`) |
 | `moon_texture` | string | `built-in` | Moon texture URL. Defaults to bundled transparent texture; set to `'none'` for geometric vector |
 | `sun_texture` | string | `built-in` | Sun texture URL. Defaults to bundled transparent solar flare texture; set to `'none'` for vector |
 | `earth_texture` | string | `built-in` | Earth horizon texture URL. Defaults to bundled transparent globe texture; set to `'none'` for vector |

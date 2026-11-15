@@ -13,8 +13,22 @@
 
 A modern, highly tactile Lovelace Custom Card for Home Assistant that visualizes real-time celestial mechanics: the sun's trajectory across the sky dome, solar elevation & azimuth, day/golden-hour/dusk/night atmospheric transitions, and mathematically precise lunar phases with crater illumination.
 
+---
+
+## 📸 Screenshots
+
 <p align="center">
-  <img src="Screenshot/card-screenshot.jpg" width="460" alt="Astronomical Sun & Moon Card Preview">
+  <img src="https://raw.githubusercontent.com/adromir/ha-astronomical-sun-moon-card/main/Screenshot/card-screenshot.jpg" width="460" alt="Astronomical Sun & Moon Card Day Preview">
+</p>
+<p align="center">
+  <em>Daylight View: Sun trajectory across the sky dome with elevation, azimuth, and golden-hour transitions.</em>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/adromir/ha-astronomical-sun-moon-card/main/Screenshot/card-screenshot-night.png" width="460" alt="Astronomical Sun & Moon Card Night Sky Preview">
+</p>
+<p align="center">
+  <em>Night Sky View (v1.3.3): Shimmering starfield, major constellations, beacon planets, and interactive multilingual mouseover tooltips.</em>
 </p>
 
 ---

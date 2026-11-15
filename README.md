@@ -65,7 +65,7 @@ A modern, highly tactile Lovelace Custom Card for Home Assistant that visualizes
 2. Upload `astronomical-sun-moon-card.js` into your `<config>/www/` directory.
 3. In Home Assistant, go to **Settings** > **Dashboards** > **Three dots (top right)** > **Resources**.
 4. Add resource:
-   - URL: `/local/astronomical-sun-moon-card.js?v=1.2.0`
+   - URL: `/local/astronomical-sun-moon-card.js?v=1.2.1`
    - Type: `JavaScript Module`
 
 ---

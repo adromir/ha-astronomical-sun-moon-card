@@ -13,6 +13,10 @@
 
 A modern, highly tactile Lovelace Custom Card for Home Assistant that visualizes real-time celestial mechanics: the sun's trajectory across the sky dome, solar elevation & azimuth, day/golden-hour/dusk/night atmospheric transitions, and mathematically precise lunar phases with crater illumination.
 
+<p align="center">
+  <img src="Screenshot/card-screenshot.jpg" width="460" alt="Astronomical Sun & Moon Card Preview">
+</p>
+
 ---
 
 ## ✨ Features
@@ -82,7 +86,7 @@ A modern, highly tactile Lovelace Custom Card for Home Assistant that visualizes
 2. Upload `astronomical-sun-moon-card.js` into your `<config>/www/` directory.
 3. In Home Assistant, go to **Settings** > **Dashboards** > **Three dots (top right)** > **Resources**.
 4. Add resource:
-   - URL: `/local/astronomical-sun-moon-card.js?v=1.3.0`
+   - URL: `/local/astronomical-sun-moon-card.js?v=1.3.1`
    - Type: `JavaScript Module`
 
 ---

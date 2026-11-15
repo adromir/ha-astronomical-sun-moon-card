@@ -4,7 +4,7 @@
  * Visualizes real-time celestial trajectories, elevation, azimuth, milestones, and lunar phases.
  * 
  * Author: Adromir (https://github.com/adromir)
- * Version: 1.3.5
+ * Version: 1.3.6
  * License: MIT
  */
 
@@ -1258,10 +1258,10 @@
       }
       sunX = Math.max(40, Math.min(440, sunX));
 
+      const isDay = (data.isSunAboveHorizon || data.sunElevation >= 0);
+
       // Strictly lock Sun Y onto the drawn trajectory path!
-      const sunY = (data.isSunAboveHorizon || data.sunElevation >= 0)
-        ? getSkyArcY(sunX)
-        : getNightArcY(sunX);
+      const sunY = isDay ? getSkyArcY(sunX) : getNightArcY(sunX);
 
       // Celestial trajectory arc paths:
       const skyArcD = `M 40 ${horizonY} Q 240 -20 440 ${horizonY}`;
@@ -1763,8 +1763,29 @@
       }
       moonX = Math.max(40, Math.min(440, moonX));
 
-      // Strictly lock Moon Y onto the drawn sky trajectory path
-      const moonY = getSkyArcY(moonX);
+      // Strictly lock Moon Y: swaps to upper sky arc at night (or moon_only), lower arc at day
+      const moonY = (this._viewMode === 'moon_only' || !isDay) ? getSkyArcY(moonX) : getNightArcY(moonX);
+
+      // Trajectory curves swap styling at Day / Night
+      let skyArcClass = 'dome-sky-arc';
+      let nightArcClass = 'dome-night-arc';
+
+      if (this._viewMode === 'sun_only') {
+        skyArcClass = 'dome-sky-arc dome-sun-arc';
+        nightArcClass = 'dome-night-arc dome-sun-night-arc';
+      } else if (this._viewMode === 'moon_only') {
+        skyArcClass = 'dome-sky-arc dome-moon-arc';
+        nightArcClass = 'dome-night-arc dome-moon-night-arc';
+      } else {
+        // Combined mode: swap curves at Day / Night
+        if (isDay) {
+          skyArcClass = 'dome-sky-arc dome-sun-arc';
+          nightArcClass = 'dome-night-arc dome-moon-night-arc';
+        } else {
+          skyArcClass = 'dome-sky-arc dome-moon-arc';
+          nightArcClass = 'dome-night-arc dome-sun-night-arc';
+        }
+      }
 
       const showSun = this._viewMode === 'combined' || this._viewMode === 'sun_only';
       const showMoon = this._viewMode === 'combined' || this._viewMode === 'moon_only';
@@ -2259,9 +2280,9 @@
               <!-- Starfield -->
               ${starFieldSvg}
 
-              <!-- Celestial Trajectory Arc (Single unified dome curve) -->
-              <path class="dome-sky-arc ${this._viewMode === 'moon_only' ? 'dome-moon-arc' : this._viewMode === 'sun_only' ? 'dome-sun-arc' : ''}" d="${skyArcD}" />
-              <path class="dome-night-arc ${this._viewMode === 'moon_only' ? 'dome-moon-night-arc' : this._viewMode === 'sun_only' ? 'dome-sun-night-arc' : ''}" d="${nightArcD}" />
+              <!-- Celestial Trajectory Arc (Day/Night swapped dome curve) -->
+              <path class="${skyArcClass}" d="${skyArcD}" />
+              <path class="${nightArcClass}" d="${nightArcD}" />
 
               <!-- Earth Horizon Globe (if texture configured) -->
               ${this._effectiveEarthTexture ? `
@@ -2284,7 +2305,7 @@
               <!-- Milestone Indicators along Horizon -->
               ${this._config.show_milestones && showSun ? `
                 <text x="40" y="${horizonY - 8}" class="milestone-text">🌅 ${formatTime(data.nextRising, this._hass)}</text>
-                <text x="240" y="22" class="milestone-text">☀️ ${formatTime(data.nextNoon, this._hass)}</text>
+                ${isDay ? `<text x="240" y="22" class="milestone-text">☀️ ${formatTime(data.nextNoon, this._hass)}</text>` : ''}
                 <text x="440" y="${horizonY - 8}" class="milestone-text">🌇 ${formatTime(data.nextSetting, this._hass)}</text>
               ` : ''}
 
@@ -2729,7 +2750,7 @@
   });
 
   console.info(
-    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.3.5 ',
+    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.3.6 ',
     'color: white; background: #0c1222; font-weight: 700; border-radius: 3px 0 0 3px;',
     'color: white; background: #ff9800; font-weight: 700; border-radius: 0 3px 3px 0;'
   );

@@ -4,7 +4,7 @@
  * Visualizes real-time celestial trajectories, elevation, azimuth, milestones, and lunar phases.
  * 
  * Author: Adromir (https://github.com/adromir)
- * Version: 1.4.3
+ * Version: 1.4.4
  * License: MIT
  */
 
@@ -42,6 +42,14 @@
             "east": "East",
             "south": "South",
             "west": "West",
+            "n_short": "N",
+            "ne_short": "NE",
+            "e_short": "E",
+            "se_short": "SE",
+            "s_short": "S",
+            "sw_short": "SW",
+            "w_short": "W",
+            "nw_short": "NW",
             "active": "active",
             "visibility": "Visibility",
             "today": "Today!",
@@ -213,6 +221,14 @@
             "east": "Ost",
             "south": "Süd",
             "west": "West",
+            "n_short": "N",
+            "ne_short": "NO",
+            "e_short": "O",
+            "se_short": "SO",
+            "s_short": "S",
+            "sw_short": "SW",
+            "w_short": "W",
+            "nw_short": "NW",
             "active": "aktiv",
             "visibility": "Sichtbarkeit",
             "today": "Heute!",
@@ -384,6 +400,14 @@
             "east": "Timur",
             "south": "Selatan",
             "west": "Barat",
+            "n_short": "U",
+            "ne_short": "TL",
+            "e_short": "T",
+            "se_short": "TG",
+            "s_short": "S",
+            "sw_short": "BD",
+            "w_short": "B",
+            "nw_short": "BL",
             "active": "aktif",
             "visibility": "Visibilitas",
             "today": "Hari ini!",
@@ -970,10 +994,10 @@
     }
   };
 
-  // 120+ Rich background filler stars rendered via GPU-accelerated CSS box-shadow
-  const STARFIELD_BOX_SHADOW_1 = "41.7cqw 5px #ffffff, 23.2cqw 32px #ffffff, 71.2cqw 5px #ffffff, 33.6cqw 74px #ffffff, 46.4cqw 74px #ffffff, 53.7cqw 47px #e1f5fe, 95.5cqw 37px #ffffff, 19.7cqw 88px #ffffff, 58.3cqw 34px #ffe082, 59.4cqw 24px #f5f5f5, 62.9cqw 100px #e1f5fe, 12.9cqw 98px #f5f5f5, 45.3cqw 60px #ffffff, 8.2cqw 32px #ffffff, 37.5cqw 55px #ffffff, 77.2cqw 69px #e1f5fe, 71.4cqw 13px #ffe082, 60.1cqw 36px #ffffff, 83.2cqw 75px #ffffff, 84.7cqw 71px #ffffff, 8.7cqw 66px #ffe082, 87.1cqw 105px #ffffff, 71.9cqw 22px #f5f5f5, 3.2cqw 69px #ffffff, 17.0cqw 81px #f5f5f5, 57.2cqw 101px #f5f5f5, 67.8cqw 69px #ffffff, 88.9cqw 28px #e1f5fe, 64.4cqw 22px #f5f5f5, 34.4cqw 93px #ffffff, 38.8cqw 78px #e1f5fe, 21.7cqw 19px #ffe082, 23.0cqw 64px #ffffff, 82.7cqw 47px #f5f5f5, 48.9cqw 13px #ffe082, 57.6cqw 5px #ffffff, 52.6cqw 66px #ffffff, 74.2cqw 32px #ffffff, 66.1cqw 49px #e1f5fe, 68.6cqw 57px #ffffff, 25.4cqw 100px #ffe082, 72.7cqw 13px #ffffff, 58.5cqw 46px #e1f5fe, 22.7cqw 36px #f5f5f5, 5.3cqw 26px #ffe082, 46.4cqw 59px #e1f5fe, 89.9cqw 74px #e1f5fe, 79.9cqw 11px #ffffff";
-  const STARFIELD_BOX_SHADOW_2 = "5.1cqw 67px #ffffff, 76.0cqw 73px #e0f2fe, 78.8cqw 87px #bbdefb, 52.7cqw 51px #ffffff, 36.8cqw 6px #fff9c4, 70.2cqw 94px #e0f2fe, 4.3cqw 57px #ffffff, 66.1cqw 37px #ffffff, 12.7cqw 74px #ffffff, 71.4cqw 12px #ffffff, 93.4cqw 90px #fff9c4, 23.7cqw 53px #fff9c4, 89.6cqw 39px #fff9c4, 48.3cqw 92px #fff9c4, 32.8cqw 54px #e0f2fe, 82.4cqw 65px #fff9c4, 48.2cqw 67px #fff9c4, 63.4cqw 102px #ffffff, 73.1cqw 13px #ffffff, 22.6cqw 40px #ffffff, 45.0cqw 25px #bbdefb, 85.5cqw 10px #bbdefb, 89.1cqw 35px #bbdefb, 95.2cqw 44px #fff9c4, 48.8cqw 78px #fff9c4, 83.2cqw 78px #ffffff, 49.4cqw 87px #bbdefb, 80.7cqw 45px #ffffff, 28.3cqw 95px #ffffff, 25.2cqw 78px #e0f2fe, 16.7cqw 35px #e0f2fe, 41.9cqw 10px #ffffff, 46.0cqw 41px #fff9c4, 68.2cqw 73px #ffffff, 53.6cqw 47px #ffffff, 41.3cqw 102px #ffffff";
-  const STARFIELD_BOX_SHADOW_3 = "2.9cqw 20px rgba(225,245,254,0.7), 11.2cqw 5px rgba(255,255,255,0.75), 87.4cqw 44px rgba(255,255,255,0.75), 76.3cqw 73px rgba(255,255,255,0.75), 18.6cqw 31px rgba(255,255,255,0.75), 53.3cqw 68px rgba(255,255,255,0.75), 25.1cqw 17px rgba(255,255,255,0.75), 73.0cqw 27px rgba(255,255,255,0.75), 41.7cqw 38px rgba(225,245,254,0.7), 70.0cqw 92px rgba(225,245,254,0.7), 2.8cqw 22px rgba(255,255,255,0.75), 77.0cqw 85px rgba(225,245,254,0.7), 39.3cqw 5px rgba(255,249,196,0.65), 28.6cqw 41px rgba(225,245,254,0.7), 85.7cqw 23px rgba(225,245,254,0.7), 55.5cqw 103px rgba(255,249,196,0.65), 76.8cqw 4px rgba(255,249,196,0.65), 92.4cqw 92px rgba(255,255,255,0.75), 45.2cqw 91px rgba(255,255,255,0.75), 74.0cqw 45px rgba(255,255,255,0.75), 23.6cqw 106px rgba(255,249,196,0.65), 32.9cqw 104px rgba(255,255,255,0.75), 44.6cqw 84px rgba(255,249,196,0.65), 1.7cqw 91px rgba(255,255,255,0.75), 43.0cqw 62px rgba(225,245,254,0.7), 13.3cqw 41px rgba(255,249,196,0.65), 51.3cqw 74px rgba(255,249,196,0.65), 2.1cqw 97px rgba(255,255,255,0.75), 4.3cqw 49px rgba(225,245,254,0.7), 98.9cqw 81px rgba(255,249,196,0.65), 32.6cqw 23px rgba(255,249,196,0.65), 42.3cqw 28px rgba(255,255,255,0.75), 70.9cqw 32px rgba(255,249,196,0.65), 61.1cqw 81px rgba(255,255,255,0.75), 53.8cqw 4px rgba(255,255,255,0.75), 89.9cqw 61px rgba(225,245,254,0.7), 14.1cqw 83px rgba(255,255,255,0.75), 63.3cqw 5px rgba(225,245,254,0.7), 82.3cqw 89px rgba(225,245,254,0.7), 14.0cqw 55px rgba(255,255,255,0.75), 95.2cqw 58px rgba(225,245,254,0.7), 72.7cqw 33px rgba(255,255,255,0.75), 85.4cqw 26px rgba(225,245,254,0.7), 76.0cqw 81px rgba(225,245,254,0.7), 85.5cqw 29px rgba(225,245,254,0.7)";
+  // 120+ Rich background filler stars rendered via GPU-accelerated CSS box-shadow (cqw Y spans full sky dome 0..24.5cqw)
+  const STARFIELD_BOX_SHADOW_1 = "4.2cqw 2.1cqw #ffffff, 11.8cqw 16.4cqw #ffffff, 19.3cqw 6.8cqw #e1f5fe, 27.4cqw 21.2cqw #ffffff, 34.9cqw 11.5cqw #ffe082, 42.1cqw 3.4cqw #ffffff, 49.6cqw 18.7cqw #e1f5fe, 57.3cqw 8.9cqw #ffffff, 64.8cqw 22.8cqw #f5f5f5, 72.1cqw 13.6cqw #ffe082, 79.5cqw 4.5cqw #ffffff, 86.9cqw 19.4cqw #e1f5fe, 94.2cqw 9.2cqw #ffffff, 7.6cqw 11.9cqw #ffe082, 15.4cqw 23.1cqw #ffffff, 23.1cqw 1.6cqw #f5f5f5, 30.8cqw 14.8cqw #ffffff, 38.5cqw 20.5cqw #e1f5fe, 46.2cqw 7.3cqw #ffffff, 53.9cqw 23.6cqw #ffe082, 61.4cqw 4.9cqw #ffffff, 68.7cqw 16.1cqw #f5f5f5, 76.2cqw 10.4cqw #ffffff, 83.4cqw 22.3cqw #ffe082, 91.1cqw 14.2cqw #ffffff, 97.6cqw 5.7cqw #e1f5fe, 2.5cqw 19.8cqw #ffffff, 13.7cqw 4.3cqw #e1f5fe, 25.9cqw 17.9cqw #ffffff, 36.4cqw 2.8cqw #f5f5f5, 44.8cqw 12.7cqw #ffffff, 55.1cqw 1.9cqw #e1f5fe, 63.2cqw 11.1cqw #ffe082, 74.6cqw 20.9cqw #ffffff, 81.8cqw 7.6cqw #f5f5f5, 89.4cqw 2.4cqw #ffffff, 95.8cqw 17.5cqw #ffe082, 17.9cqw 13.4cqw #ffffff, 29.2cqw 9.7cqw #e1f5fe, 40.3cqw 22.7cqw #ffffff, 51.7cqw 14.5cqw #f5f5f5, 66.5cqw 6.1cqw #ffffff, 77.9cqw 17.2cqw #e1f5fe, 85.1cqw 11.8cqw #ffffff, 92.7cqw 21.6cqw #f5f5f5, 6.1cqw 5.2cqw #ffffff, 21.5cqw 19.1cqw #ffe082, 47.9cqw 20.2cqw #ffffff";
+  const STARFIELD_BOX_SHADOW_2 = "5.8cqw 14.6cqw #ffffff, 14.2cqw 8.3cqw #e0f2fe, 22.6cqw 22.1cqw #bbdefb, 31.4cqw 5.4cqw #ffffff, 39.7cqw 16.8cqw #fff9c4, 48.1cqw 9.6cqw #e0f2fe, 56.5cqw 21.4cqw #ffffff, 64.9cqw 12.2cqw #fff9c4, 73.3cqw 3.8cqw #ffffff, 81.7cqw 18.5cqw #e0f2fe, 90.1cqw 7.1cqw #bbdefb, 96.4cqw 13.9cqw #ffffff, 9.4cqw 21.7cqw #fff9c4, 18.1cqw 3.1cqw #ffffff, 26.8cqw 12.9cqw #e0f2fe, 35.2cqw 23.4cqw #ffffff, 43.6cqw 6.4cqw #fff9c4, 52.0cqw 17.6cqw #bbdefb, 60.4cqw 2.2cqw #ffffff, 68.8cqw 19.9cqw #e0f2fe, 77.2cqw 8.7cqw #fff9c4, 85.6cqw 22.9cqw #ffffff, 93.8cqw 4.1cqw #bbdefb, 3.3cqw 9.9cqw #ffffff, 12.5cqw 18.2cqw #fff9c4, 24.4cqw 7.8cqw #ffffff, 33.9cqw 14.1cqw #e0f2fe, 45.5cqw 19.3cqw #ffffff, 58.9cqw 15.4cqw #fff9c4, 67.1cqw 6.9cqw #ffffff, 75.8cqw 23.8cqw #bbdefb, 84.3cqw 10.8cqw #ffffff, 91.9cqw 16.5cqw #fff9c4, 16.6cqw 10.2cqw #e0f2fe, 41.2cqw 1.8cqw #ffffff, 70.5cqw 14.9cqw #fff9c4";
+  const STARFIELD_BOX_SHADOW_3 = "1.9cqw 4.7cqw rgba(225,245,254,0.7), 8.4cqw 17.3cqw rgba(255,255,255,0.75), 14.9cqw 1.4cqw rgba(255,249,196,0.65), 21.1cqw 11.2cqw rgba(255,255,255,0.75), 27.9cqw 23.5cqw rgba(225,245,254,0.7), 34.1cqw 7.4cqw rgba(255,255,255,0.75), 40.8cqw 18.9cqw rgba(255,249,196,0.65), 47.3cqw 4.2cqw rgba(225,245,254,0.7), 53.6cqw 21.8cqw rgba(255,255,255,0.75), 60.1cqw 10.6cqw rgba(255,249,196,0.65), 66.7cqw 2.9cqw rgba(255,255,255,0.75), 73.1cqw 16.2cqw rgba(225,245,254,0.7), 79.8cqw 8.1cqw rgba(255,255,255,0.75), 86.2cqw 20.6cqw rgba(255,249,196,0.65), 92.5cqw 12.1cqw rgba(225,245,254,0.7), 98.1cqw 2.3cqw rgba(255,255,255,0.75), 4.8cqw 23.2cqw rgba(255,249,196,0.65), 11.3cqw 6.5cqw rgba(255,255,255,0.75), 17.6cqw 15.8cqw rgba(225,245,254,0.7), 24.1cqw 4.9cqw rgba(255,255,255,0.75), 30.5cqw 19.6cqw rgba(255,249,196,0.65), 37.2cqw 11.7cqw rgba(225,245,254,0.7), 43.9cqw 1.6cqw rgba(255,255,255,0.75), 50.4cqw 13.3cqw rgba(255,249,196,0.65), 57.1cqw 6.2cqw rgba(225,245,254,0.7), 63.8cqw 20.1cqw rgba(255,255,255,0.75), 70.2cqw 9.5cqw rgba(255,249,196,0.65), 76.9cqw 22.6cqw rgba(225,245,254,0.7), 83.1cqw 5.8cqw rgba(255,255,255,0.75), 89.7cqw 18.1cqw rgba(255,249,196,0.65), 95.3cqw 10.9cqw rgba(225,245,254,0.7), 3.7cqw 13.7cqw rgba(255,255,255,0.75), 16.2cqw 20.8cqw rgba(255,249,196,0.65), 28.8cqw 2.6cqw rgba(225,245,254,0.7), 42.4cqw 15.1cqw rgba(255,255,255,0.75), 55.8cqw 17.7cqw rgba(255,249,196,0.65), 68.4cqw 4.4cqw rgba(225,245,254,0.7), 81.2cqw 13.8cqw rgba(255,255,255,0.75), 93.6cqw 23.1cqw rgba(225,245,254,0.7), 6.9cqw 9.1cqw rgba(255,255,255,0.75), 32.3cqw 17.4cqw rgba(225,245,254,0.7), 49.1cqw 9.3cqw rgba(255,249,196,0.65), 62.5cqw 14.4cqw rgba(255,255,255,0.75), 75.4cqw 1.8cqw rgba(225,245,254,0.7), 87.9cqw 15.6cqw rgba(255,255,255,0.75)";
 
   // Dynamic Horizontal projection onto the card's 180° panorama celestial dome
   function projectToDome(alt, az, heading) {
@@ -1041,28 +1065,29 @@
     });
   }
 
-  // --- METEOR SHOWERS (Annual major showers) ---
+  // --- METEOR SHOWERS (Annual major showers with radiant declination) ---
   const METEOR_SHOWERS = [
-    { key: 'quadrantids', startM: 12, startD: 28, endM: 1, endD: 12, peakM: 1, peakD: 4, zhr: 110 },
-    { key: 'lyrids', startM: 4, startD: 14, endM: 4, endD: 30, peakM: 4, peakD: 22, zhr: 18 },
-    { key: 'eta_aquariids', startM: 4, startD: 19, endM: 5, endD: 28, peakM: 5, peakD: 6, zhr: 50 },
-    { key: 'perseids', startM: 7, startD: 17, endM: 8, endD: 24, peakM: 8, peakD: 12, zhr: 100 },
-    { key: 'orionids', startM: 10, startD: 2, endM: 11, endD: 7, peakM: 10, peakD: 21, zhr: 20 },
-    { key: 'leonids', startM: 11, startD: 6, endM: 11, endD: 30, peakM: 11, peakD: 17, zhr: 15 },
-    { key: 'geminids', startM: 12, startD: 4, endM: 12, endD: 20, peakM: 12, peakD: 14, zhr: 120 },
-    { key: 'ursids', startM: 12, startD: 17, endM: 12, endD: 26, peakM: 12, peakD: 22, zhr: 10 }
+    { key: 'quadrantids', startM: 12, startD: 28, endM: 1, endD: 12, peakM: 1, peakD: 4, zhr: 110, dec: 49 },
+    { key: 'lyrids', startM: 4, startD: 14, endM: 4, endD: 30, peakM: 4, peakD: 22, zhr: 18, dec: 34 },
+    { key: 'eta_aquariids', startM: 4, startD: 19, endM: 5, endD: 28, peakM: 5, peakD: 6, zhr: 50, dec: -1 },
+    { key: 'perseids', startM: 7, startD: 17, endM: 8, endD: 24, peakM: 8, peakD: 12, zhr: 100, dec: 58 },
+    { key: 'orionids', startM: 10, startD: 2, endM: 11, endD: 7, peakM: 10, peakD: 21, zhr: 20, dec: 16 },
+    { key: 'leonids', startM: 11, startD: 6, endM: 11, endD: 30, peakM: 11, peakD: 17, zhr: 15, dec: 22 },
+    { key: 'geminids', startM: 12, startD: 4, endM: 12, endD: 20, peakM: 12, peakD: 14, zhr: 120, dec: 33 },
+    { key: 'ursids', startM: 12, startD: 17, endM: 12, endD: 26, peakM: 12, peakD: 22, zhr: 10, dec: 76 }
   ];
 
-  // --- ECLIPSE CATALOG (2026 - 2032) ---
+  // --- ECLIPSE CATALOG (2026 - 2032, with geographic visibility bounds) ---
   const ECLIPSE_CATALOG = [
-    { date: '2026-08-12', typeKey: 'total_solar', regionKey: 'europe_greenland_spain' },
-    { date: '2026-08-28', typeKey: 'partial_lunar', regionKey: 'pacific_americas_europe' },
-    { date: '2027-02-06', typeKey: 'annular_solar', regionKey: 'south_america_antarctica' },
-    { date: '2027-08-02', typeKey: 'great_total_solar', regionKey: 'mediterranean_north_africa_egypt' },
-    { date: '2028-01-12', typeKey: 'partial_lunar', regionKey: 'globally_visible' },
-    { date: '2028-07-22', typeKey: 'total_solar', regionKey: 'australia_new_zealand' },
-    { date: '2028-12-31', typeKey: 'total_lunar_new_year', regionKey: 'europe_africa_asia' },
-    { date: '2029-06-26', typeKey: 'total_lunar', regionKey: 'americas_europe_africa' }
+    { date: '2026-08-12', typeKey: 'total_solar', regionKey: 'europe_greenland_spain', latMin: 25, latMax: 85, lonMin: -75, lonMax: 40 },
+    { date: '2026-08-28', typeKey: 'partial_lunar', regionKey: 'pacific_americas_europe', latMin: -80, latMax: 85, lonMin: -170, lonMax: 45 },
+    { date: '2027-02-06', typeKey: 'annular_solar', regionKey: 'south_america_antarctica', latMin: -85, latMax: 15, lonMin: -115, lonMax: 20 },
+    { date: '2027-02-20', typeKey: 'partial_lunar', regionKey: 'americas_europe_africa', latMin: -85, latMax: 85, lonMin: -130, lonMax: 100 },
+    { date: '2027-08-02', typeKey: 'great_total_solar', regionKey: 'mediterranean_north_africa_egypt', latMin: 0, latMax: 65, lonMin: -30, lonMax: 75 },
+    { date: '2028-01-12', typeKey: 'partial_lunar', regionKey: 'globally_visible', latMin: -75, latMax: 85, lonMin: -135, lonMax: 60 },
+    { date: '2028-07-22', typeKey: 'total_solar', regionKey: 'australia_new_zealand', latMin: -55, latMax: 5, lonMin: 100, lonMax: 180 },
+    { date: '2028-12-31', typeKey: 'total_lunar_new_year', regionKey: 'europe_africa_asia', latMin: -65, latMax: 85, lonMin: -25, lonMax: 180 },
+    { date: '2029-06-26', typeKey: 'total_lunar', regionKey: 'americas_europe_africa', latMin: -70, latMax: 75, lonMin: -120, lonMax: 40 }
   ];
 
   // Helper to compute Equinoxes and Solstices for a given year (Jean Meeus approximation)
@@ -1075,7 +1100,7 @@
     ];
   }
 
-  function getUpcomingAstronomicalEvents(now = new Date(), lang = 'en') {
+  function getUpcomingAstronomicalEvents(now = new Date(), lang = 'en', lat = 50.0, lon = 10.0) {
     const events = [];
     const currentYear = now.getFullYear();
     const locLocale = lang === 'de' ? 'de-DE' : (lang === 'id' ? 'id-ID' : 'en-US');
@@ -1100,8 +1125,11 @@
       }
     }
 
-    // 2. Meteor Showers
+    // 2. Meteor Showers (filtered by radiant visibility at observer latitude)
     for (const shower of METEOR_SHOWERS) {
+      if (shower.dec !== undefined && (90 - Math.abs(lat - shower.dec)) < 5) {
+        continue;
+      }
       let peakYear = currentYear;
       let peakDate = new Date(peakYear, shower.peakM - 1, shower.peakD);
       if (peakDate.getTime() < now.getTime() - 86400000) {
@@ -1140,8 +1168,14 @@
       }
     }
 
-    // 3. Eclipses
+    // 3. Eclipses (filtered by geographic visibility at observer location)
     for (const ecl of ECLIPSE_CATALOG) {
+      if (ecl.latMin !== undefined && (lat < ecl.latMin || lat > ecl.latMax)) {
+        continue;
+      }
+      if (ecl.lonMin !== undefined && (lon < ecl.lonMin || lon > ecl.lonMax)) {
+        continue;
+      }
       const eDate = new Date(ecl.date + 'T12:00:00Z');
       const diffMs = eDate.getTime() - now.getTime();
       const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
@@ -1324,8 +1358,27 @@
     }
 
     set hass(hass) {
+      const oldHass = this._hass;
       this._hass = hass;
-      this._requestRender();
+      if (!oldHass || !this._config) {
+        this._requestRender();
+        return;
+      }
+
+      const sunId = this._config.sun_entity || 'sun.sun';
+      const moonId = this._config.moon_entity || (hass.states['sensor.moon_phase'] ? 'sensor.moon_phase' : 'sensor.moon');
+      const auroraId = this._config.aurora_entity || this._cachedAuroraId;
+
+      const changed =
+        oldHass.language !== hass.language ||
+        oldHass.states[sunId] !== hass.states[sunId] ||
+        (moonId && oldHass.states[moonId] !== hass.states[moonId]) ||
+        (auroraId && oldHass.states[auroraId] !== hass.states[auroraId]) ||
+        (oldHass.config && hass.config && (oldHass.config.latitude !== hass.config.latitude || oldHass.config.longitude !== hass.config.longitude));
+
+      if (changed) {
+        this._requestRender();
+      }
     }
 
     connectedCallback() {
@@ -1334,6 +1387,60 @@
 
     disconnectedCallback() {
       this._stopTicker();
+      if (this._headingAnimFrame) {
+        cancelAnimationFrame(this._headingAnimFrame);
+        this._headingAnimFrame = null;
+      }
+    }
+
+    _animateHeadingTo(newTarget, defaultHeading) {
+      const normalizedTarget = ((newTarget % 360) + 360) % 360;
+      const startHeading = (this._heading !== undefined) ? this._heading : defaultHeading;
+      this._targetHeading = normalizedTarget;
+
+      // Shortest-path angular delta in [-180, 180]
+      const delta = ((normalizedTarget - startHeading + 540) % 360) - 180;
+      if (Math.abs(delta) < 0.1) {
+        this._heading = normalizedTarget;
+        this.render();
+        return;
+      }
+
+      if (this._headingAnimFrame) {
+        cancelAnimationFrame(this._headingAnimFrame);
+        this._headingAnimFrame = null;
+      }
+
+      // Immediately highlight target button for responsive feedback
+      const headingBtns = this.shadowRoot ? this.shadowRoot.querySelectorAll('.heading-btn') : [];
+      headingBtns.forEach(btn => {
+        btn.classList.toggle('active', Number(btn.getAttribute('data-heading')) === Math.round(normalizedTarget));
+      });
+
+      const duration = Math.min(700, Math.max(320, Math.abs(delta) * 4.5));
+      const startTime = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
+
+      const step = (nowTs) => {
+        const curTs = (typeof nowTs === 'number') ? nowTs : Date.now();
+        const t = Math.min(1, (curTs - startTime) / duration);
+        const eased = 1 - Math.pow(1 - t, 3); // cubic ease-out
+        this._heading = ((startHeading + delta * eased) % 360 + 360) % 360;
+        this.render(true);
+        if (t < 1) {
+          this._headingAnimFrame = requestAnimationFrame(step);
+        } else {
+          this._heading = normalizedTarget;
+          this._headingAnimFrame = null;
+          this.render(false);
+        }
+      };
+
+      if (typeof requestAnimationFrame === 'function') {
+        this._headingAnimFrame = requestAnimationFrame(step);
+      } else {
+        this._heading = normalizedTarget;
+        this.render(false);
+      }
     }
 
     _startTicker() {
@@ -1443,6 +1550,51 @@
       };
     }
 
+    _getAuroraData(lat) {
+      if (this._config.show_aurora === false) {
+        return { active: false, probability: 0, isNorthern: lat >= 0, azimuth: lat >= 0 ? 0 : 180 };
+      }
+
+      const isNorthern = lat >= 0;
+      const auroraAz = isNorthern ? 0 : 180;
+
+      if (this._config.aurora_demo_mode === true) {
+        return { active: true, probability: 65, isNorthern, azimuth: auroraAz, isDemo: true };
+      }
+
+      let auroraEntity = null;
+      if (this._config.aurora_entity && this._hass.states[this._config.aurora_entity]) {
+        auroraEntity = this._hass.states[this._config.aurora_entity];
+        this._cachedAuroraId = this._config.aurora_entity;
+      } else {
+        const autoKey = this._cachedAuroraId && this._hass.states[this._cachedAuroraId]
+          ? this._cachedAuroraId
+          : Object.keys(this._hass.states).find(k =>
+              (k.startsWith('binary_sensor.') || k.startsWith('sensor.')) && k.toLowerCase().includes('aurora')
+            );
+        if (autoKey) {
+          this._cachedAuroraId = autoKey;
+          auroraEntity = this._hass.states[autoKey];
+        }
+      }
+
+      if (!auroraEntity || auroraEntity.state === 'unknown' || auroraEntity.state === 'unavailable') {
+        return { active: false, probability: 0, isNorthern, azimuth: auroraAz };
+      }
+
+      if (auroraEntity.entity_id.startsWith('binary_sensor.')) {
+        const isOn = auroraEntity.state === 'on';
+        const prob = auroraEntity.attributes && auroraEntity.attributes.visibility !== undefined
+          ? parseFloat(auroraEntity.attributes.visibility) || (isOn ? 75 : 0)
+          : (isOn ? 75 : 0);
+        return { active: isOn, probability: Math.round(prob), isNorthern, azimuth: auroraAz };
+      }
+
+      const val = parseFloat(auroraEntity.state);
+      const prob = !isNaN(val) ? Math.max(0, Math.min(100, Math.round(val))) : 0;
+      return { active: prob >= 15, probability: prob, isNorthern, azimuth: auroraAz };
+    }
+
     // --- SKY ATMOSPHERE STYLING ---
     _getSkyAtmosphere(elevation) {
       if (elevation > 6) {
@@ -1493,19 +1645,31 @@
       }
     }
 
-    render() {
+    render(skyOnly = false) {
       const now = new Date();
       const data = this._getData();
       const sky = this._getSkyAtmosphere(data.sunElevation);
       const userLang = (this._hass && this._hass.language) ? this._hass.language.substring(0, 2).toLowerCase() : 'en';
-      const upcomingEvents = this._config.show_astronomical_events !== false ? getUpcomingAstronomicalEvents(now, userLang).slice(0, 5) : [];
 
       const lat = (this._hass && this._hass.config && this._hass.config.latitude !== undefined) ? this._hass.config.latitude : 50.0;
       const lon = (this._hass && this._hass.config && this._hass.config.longitude !== undefined) ? this._hass.config.longitude : 10.0;
+      const aurora = this._getAuroraData(lat);
+      const upcomingEvents = this._config.show_astronomical_events !== false ? getUpcomingAstronomicalEvents(now, userLang, lat, lon).slice(0, 5) : [];
+      if (aurora.active && this._config.show_astronomical_events !== false) {
+        upcomingEvents.unshift({
+          type: 'aurora',
+          icon: '🌌',
+          title: localize(aurora.isNorthern ? 'card.aurora_borealis' : 'card.aurora_australis', userLang),
+          badge: `${aurora.probability}%`,
+          isAurora: true
+        });
+      }
       const defaultHeading = (lat >= 0) ? 180 : 0;
       const heading = (this._heading !== undefined) ? this._heading : (this._config.default_heading !== undefined ? Number(this._config.default_heading) : defaultHeading);
       const lstDeg = calculateLocalSiderealTime(now, lon);
-      const isTrajectoryInView = Math.abs(((heading - defaultHeading + 540) % 360) - 180) <= 45;
+      const headingDelta = Math.abs(((heading - defaultHeading + 540) % 360) - 180);
+      const isTrajectoryInView = headingDelta <= 65;
+      const trajectoryOpacity = this._config.always_show_trajectory ? 1 : Math.max(0, Math.min(1, (65 - headingDelta) / 20));
 
       // Dimensions for the celestial SVG dome
       const svgW = 480;
@@ -1567,13 +1731,13 @@
       // Sliding cardinal markers along horizon line based on current viewing heading
       const cardinalDefs = [
         { az: 0, label: 'card.north', deg: '0°', isMajor: true },
-        { az: 45, label: 'NO', deg: '45°', isMajor: false },
+        { az: 45, label: 'card.ne_short', deg: '45°', isMajor: false },
         { az: 90, label: 'card.east', deg: '90°', isMajor: true },
-        { az: 135, label: 'SO', deg: '135°', isMajor: false },
+        { az: 135, label: 'card.se_short', deg: '135°', isMajor: false },
         { az: 180, label: 'card.south', deg: '180°', isMajor: true },
-        { az: 225, label: 'SW', deg: '225°', isMajor: false },
+        { az: 225, label: 'card.sw_short', deg: '225°', isMajor: false },
         { az: 270, label: 'card.west', deg: '270°', isMajor: true },
-        { az: 315, label: 'NW', deg: '315°', isMajor: false }
+        { az: 315, label: 'card.nw_short', deg: '315°', isMajor: false }
       ];
 
       let cardinalMarkersSvg = '';
@@ -1581,11 +1745,11 @@
         let diff = ((c.az - heading + 540) % 360) - 180;
         if (Math.abs(diff) <= 90) {
           const x = Math.round((240 + diff * (200 / 90)) * 10) / 10;
+          const name = localize(c.label, userLang);
           if (c.isMajor) {
-            const name = localize(c.label, userLang);
             cardinalMarkersSvg += `<text x="${x}" y="${horizonY + 14}" class="cardinal-label">${name} (${c.deg})</text>`;
           } else {
-            cardinalMarkersSvg += `<text x="${x}" y="${horizonY + 12}" class="cardinal-label cardinal-sub">${c.deg}</text>`;
+            cardinalMarkersSvg += `<text x="${x}" y="${horizonY + 12}" class="cardinal-label cardinal-sub">${name} (${c.deg})</text>`;
           }
         }
       });
@@ -1824,6 +1988,128 @@
       const showMoon = this._viewMode === 'combined' || this._viewMode === 'moon_only';
       const showTrajectory = isTrajectoryInView || this._config.always_show_trajectory;
 
+      // Direction-aware Aurora Borealis (North = 0°) / Australis (South = 180°) SVG curtains
+      let auroraSvg = '';
+      if (aurora.active && sky.type !== 'day') {
+        const auroraDiff = ((aurora.azimuth - heading + 540) % 360) - 180;
+        if (Math.abs(auroraDiff) <= 105) {
+          const cx = 240 + auroraDiff * (200 / 90);
+          const x0 = (cx - 170).toFixed(1);
+          const x1 = (cx - 85).toFixed(1);
+          const x2 = cx.toFixed(1);
+          const x4 = (cx + 170).toFixed(1);
+          const alphaScale = Math.max(0.35, Math.min(1, aurora.probability / 80));
+          auroraSvg = `
+            <g class="aurora-layer" clip-path="url(#skyDomeStarsClip)" opacity="${alphaScale.toFixed(2)}">
+              <defs>
+                <linearGradient id="auroraGrad1" x1="0%" y1="100%" x2="0%" y2="0%">
+                  <stop offset="0%" stop-color="#00e676" stop-opacity="0.65" />
+                  <stop offset="55%" stop-color="#00b0ff" stop-opacity="0.35" />
+                  <stop offset="100%" stop-color="#e040fb" stop-opacity="0" />
+                </linearGradient>
+                <linearGradient id="auroraGrad2" x1="0%" y1="100%" x2="0%" y2="0%">
+                  <stop offset="0%" stop-color="#00e676" stop-opacity="0.5" />
+                  <stop offset="60%" stop-color="#7c4dff" stop-opacity="0.28" />
+                  <stop offset="100%" stop-color="#e040fb" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <path class="aurora-curtain-1" d="M ${x0} ${horizonY} Q ${x1} 52 ${x2} 72 T ${x4} ${horizonY} Z" fill="url(#auroraGrad1)" />
+              <path class="aurora-curtain-2" d="M ${(cx - 135).toFixed(1)} ${horizonY} Q ${(cx - 45).toFixed(1)} 36 ${x2} 58 T ${(cx + 135).toFixed(1)} ${horizonY} Z" fill="url(#auroraGrad2)" />
+            </g>
+          `;
+        }
+      }
+
+      const skySvgInner = `
+              <defs>
+                <clipPath id="skyDomeStarsClip">
+                  <rect x="0" y="0" width="${svgW}" height="${horizonY}" />
+                </clipPath>
+                <radialGradient id="sunDiscGrad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ffffff" />
+                  <stop offset="40%" stop-color="${sky.sunGlow}" />
+                  <stop offset="100%" stop-color="#ff9800" />
+                </radialGradient>
+              </defs>
+
+              <!-- Starfield -->
+              ${starFieldSvg}
+
+              <!-- Direction-Aware Aurora Borealis / Australis -->
+              ${auroraSvg}
+
+              <!-- Celestial Trajectory Arc (Day/Night swapped dome curve with smooth angular fade) -->
+              ${showTrajectory ? `
+                <g opacity="${trajectoryOpacity.toFixed(2)}">
+                  <path class="${skyArcClass}" d="${skyArcD}" />
+                  <path class="${nightArcClass}" d="${nightArcD}" />
+                </g>
+              ` : ''}
+
+              <!-- Earth Horizon Globe (if texture configured) -->
+              ${this._effectiveEarthTexture ? `
+                <defs>
+                  <clipPath id="earthGlobeClip">
+                    <circle cx="240" cy="${horizonY + 140}" r="145" />
+                  </clipPath>
+                </defs>
+                <image href="${this._effectiveEarthTexture}" x="95" y="${horizonY - 5}" width="290" height="290" clip-path="url(#earthGlobeClip)" opacity="0.95" preserveAspectRatio="xMidYMid slice" />
+              ` : ''}
+
+              <!-- Horizon Line -->
+              <line x1="20" y1="${horizonY}" x2="460" y2="${horizonY}" class="horizon-line" />
+
+              <!-- Sliding Cardinal Directions -->
+              ${cardinalMarkersSvg}
+
+              <!-- Milestone Indicators along Horizon -->
+              ${showTrajectory && this._config.show_milestones && showSun ? `
+                <g opacity="${trajectoryOpacity.toFixed(2)}">
+                  <text x="40" y="${horizonY - 8}" class="milestone-text">🌅 ${formatTime(data.nextRising, this._hass)}</text>
+                  ${isDay ? `<text x="240" y="22" class="milestone-text">☀️ ${formatTime(data.nextNoon, this._hass)}</text>` : ''}
+                  <text x="440" y="${horizonY - 8}" class="milestone-text">🌇 ${formatTime(data.nextSetting, this._hass)}</text>
+                </g>
+              ` : ''}
+
+              <!-- Sun Celestial Object -->
+              ${showSun && (isTrajectoryInView || data.isSunAboveHorizon) ? `
+                <g class="sun-element" opacity="${(data.isSunAboveHorizon && !isTrajectoryInView) ? '1' : trajectoryOpacity.toFixed(2)}">
+                  <circle cx="${sunX}" cy="${sunY}" r="14" fill="#ff9800" />
+                  ${this._effectiveSunTexture ? `
+                    <image href="${this._effectiveSunTexture}" x="${sunX - 16}" y="${sunY - 16}" width="32" height="32" preserveAspectRatio="xMidYMid meet" />
+                  ` : `
+                    <circle cx="${sunX}" cy="${sunY}" r="14" fill="url(#sunDiscGrad)" />
+                  `}
+                  ${isDay ? `
+                    <text x="${sunX}" y="${sunY - 18}" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="700" style="paint-order: stroke fill; stroke: #080d1a; stroke-width: 3px; stroke-linejoin: round;">
+                      ${data.sunElevation.toFixed(1)}°
+                    </text>
+                  ` : ''}
+                </g>
+              ` : ''}
+
+              <!-- Moon Celestial Object in Sky (if in Moon or Combined mode, Day & Night) -->
+              ${showMoon && isTrajectoryInView ? `
+                <g transform="translate(${moonX - 16}, ${moonY - 16})" opacity="${trajectoryOpacity.toFixed(2)}">
+                  ${renderMoonSvg(data.moon.phaseFraction, 16, this._effectiveMoonTexture, 'sky')}
+                  <text x="16" y="${moonY >= 45 ? -6 : 38}" text-anchor="middle" fill="#e2e8f0" font-size="9.5" font-weight="600" style="paint-order: stroke fill; stroke: #080d1a; stroke-width: 3px; stroke-linejoin: round;">
+                    ${data.illumination}%
+                  </text>
+                </g>
+              ` : ''}
+
+              <!-- Interactive Constellations & Planets Overlay (Rendered ON TOP of Sun, Moon & Horizon) -->
+              ${interactiveOverlaySvg}
+      `;
+
+      if (skyOnly && this.shadowRoot) {
+        const svgEl = this.shadowRoot.querySelector('svg.sky-svg');
+        if (svgEl) {
+          svgEl.innerHTML = skySvgInner;
+          return;
+        }
+      }
+
       this.shadowRoot.innerHTML = `
         <style>
           :host {
@@ -1892,7 +2178,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 60%;
+            height: 70.6%;
             pointer-events: none;
             overflow: hidden;
             z-index: 1;
@@ -1905,14 +2191,14 @@
             border-radius: 50%;
           }
           .starfield::before {
-            width: 1.5px;
-            height: 1.5px;
+            width: 2.2px;
+            height: 2.2px;
             box-shadow: ${STARFIELD_BOX_SHADOW_1};
             animation: pulse1 3.2s infinite alternate ease-in-out;
           }
           .starfield::after {
-            width: 2.2px;
-            height: 2.2px;
+            width: 3px;
+            height: 3px;
             box-shadow: ${STARFIELD_BOX_SHADOW_2};
             animation: pulse2 2.4s infinite alternate-reverse ease-in-out;
           }
@@ -1927,8 +2213,8 @@
           .starfield-layer::before {
             content: "";
             position: absolute;
-            width: 1px;
-            height: 1px;
+            width: 1.5px;
+            height: 1.5px;
             border-radius: 50%;
             box-shadow: ${STARFIELD_BOX_SHADOW_3};
             animation: pulse3 4.2s infinite alternate ease-in-out;
@@ -2416,7 +2702,7 @@
           ${this._config.show_astronomical_events !== false && upcomingEvents.length > 0 ? `
             <div class="astronomical-ribbon">
               ${upcomingEvents.map(ev => `
-                <div class="ribbon-pill ${ev.isToday ? 'event-today-pill' : ''}">
+                <div class="ribbon-pill ${ev.isAurora ? 'aurora-pill' : (ev.isToday ? 'event-today-pill' : '')}">
                   <span class="ribbon-icon">${ev.icon}</span>
                   <span class="ribbon-title">${ev.title}</span>
                   <span class="ribbon-badge">${ev.badge}</span>
@@ -2432,87 +2718,20 @@
             ${this._config.show_heading_switcher !== false ? `
               <div class="sky-heading-overlay">
                 <button class="heading-nav-btn" data-dir="-1" title="Pan Left">‹</button>
-                <button class="heading-btn ${Math.round(heading) === 0 ? 'active' : ''}" data-heading="0">${localize('card.north', userLang)}</button>
-                <button class="heading-btn ${Math.round(heading) === 90 ? 'active' : ''}" data-heading="90">${localize('card.east', userLang)}</button>
-                <button class="heading-btn ${Math.round(heading) === 180 ? 'active' : ''}" data-heading="180">${localize('card.south', userLang)}</button>
-                <button class="heading-btn ${Math.round(heading) === 270 ? 'active' : ''}" data-heading="270">${localize('card.west', userLang)}</button>
+                <button class="heading-btn ${Math.round(heading) === 0 ? 'active' : ''}" data-heading="0">${localize('card.n_short', userLang)}</button>
+                <button class="heading-btn ${Math.round(heading) === 45 ? 'active' : ''}" data-heading="45">${localize('card.ne_short', userLang)}</button>
+                <button class="heading-btn ${Math.round(heading) === 90 ? 'active' : ''}" data-heading="90">${localize('card.e_short', userLang)}</button>
+                <button class="heading-btn ${Math.round(heading) === 135 ? 'active' : ''}" data-heading="135">${localize('card.se_short', userLang)}</button>
+                <button class="heading-btn ${Math.round(heading) === 180 ? 'active' : ''}" data-heading="180">${localize('card.s_short', userLang)}</button>
+                <button class="heading-btn ${Math.round(heading) === 225 ? 'active' : ''}" data-heading="225">${localize('card.sw_short', userLang)}</button>
+                <button class="heading-btn ${Math.round(heading) === 270 ? 'active' : ''}" data-heading="270">${localize('card.w_short', userLang)}</button>
+                <button class="heading-btn ${Math.round(heading) === 315 ? 'active' : ''}" data-heading="315">${localize('card.nw_short', userLang)}</button>
                 <button class="heading-nav-btn" data-dir="1" title="Pan Right">›</button>
               </div>
             ` : ''}
 
             <svg class="sky-svg" viewBox="0 0 ${svgW} ${svgH}">
-              <defs>
-                <clipPath id="skyDomeStarsClip">
-                  <rect x="0" y="0" width="${svgW}" height="${horizonY}" />
-                </clipPath>
-                <radialGradient id="sunDiscGrad" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#ffffff" />
-                  <stop offset="40%" stop-color="${sky.sunGlow}" />
-                  <stop offset="100%" stop-color="#ff9800" />
-                </radialGradient>
-              </defs>
-
-              <!-- Starfield -->
-              ${starFieldSvg}
-
-              <!-- Celestial Trajectory Arc (Day/Night swapped dome curve) -->
-              ${showTrajectory ? `
-                <path class="${skyArcClass}" d="${skyArcD}" />
-                <path class="${nightArcClass}" d="${nightArcD}" />
-              ` : ''}
-
-              <!-- Earth Horizon Globe (if texture configured) -->
-              ${this._effectiveEarthTexture ? `
-                <defs>
-                  <clipPath id="earthGlobeClip">
-                    <circle cx="240" cy="${horizonY + 140}" r="145" />
-                  </clipPath>
-                </defs>
-                <image href="${this._effectiveEarthTexture}" x="95" y="${horizonY - 5}" width="290" height="290" clip-path="url(#earthGlobeClip)" opacity="0.95" preserveAspectRatio="xMidYMid slice" />
-              ` : ''}
-
-              <!-- Horizon Line -->
-              <line x1="20" y1="${horizonY}" x2="460" y2="${horizonY}" class="horizon-line" />
-
-              <!-- Sliding Cardinal Directions -->
-              ${cardinalMarkersSvg}
-
-              <!-- Milestone Indicators along Horizon -->
-              ${showTrajectory && this._config.show_milestones && showSun ? `
-                <text x="40" y="${horizonY - 8}" class="milestone-text">🌅 ${formatTime(data.nextRising, this._hass)}</text>
-                ${isDay ? `<text x="240" y="22" class="milestone-text">☀️ ${formatTime(data.nextNoon, this._hass)}</text>` : ''}
-                <text x="440" y="${horizonY - 8}" class="milestone-text">🌇 ${formatTime(data.nextSetting, this._hass)}</text>
-              ` : ''}
-
-              <!-- Sun Celestial Object -->
-              ${showSun && (isTrajectoryInView || data.isSunAboveHorizon) ? `
-                <g class="sun-element">
-                  <circle cx="${sunX}" cy="${sunY}" r="14" fill="#ff9800" />
-                  ${this._effectiveSunTexture ? `
-                    <image href="${this._effectiveSunTexture}" x="${sunX - 16}" y="${sunY - 16}" width="32" height="32" preserveAspectRatio="xMidYMid meet" />
-                  ` : `
-                    <circle cx="${sunX}" cy="${sunY}" r="14" fill="url(#sunDiscGrad)" />
-                  `}
-                  ${isDay ? `
-                    <text x="${sunX}" y="${sunY - 18}" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="700" style="paint-order: stroke fill; stroke: #080d1a; stroke-width: 3px; stroke-linejoin: round;">
-                      ${data.sunElevation.toFixed(1)}°
-                    </text>
-                  ` : ''}
-                </g>
-              ` : ''}
-
-              <!-- Moon Celestial Object in Sky (if in Moon or Combined mode) -->
-              ${showMoon && isTrajectoryInView && (!data.isSunAboveHorizon || this._viewMode === 'moon_only') ? `
-                <g transform="translate(${moonX - 16}, ${moonY - 16})">
-                  ${renderMoonSvg(data.moon.phaseFraction, 16, this._effectiveMoonTexture, 'sky')}
-                  <text x="16" y="${moonY >= 45 ? -6 : 38}" text-anchor="middle" fill="#e2e8f0" font-size="9.5" font-weight="600">
-                    ${data.illumination}%
-                  </text>
-                </g>
-              ` : ''}
-
-              <!-- Interactive Constellations & Planets Overlay (Rendered ON TOP of Sun, Moon & Horizon) -->
-              ${interactiveOverlaySvg}
+              ${skySvgInner}
             </svg>
           </div>
 
@@ -2636,14 +2855,13 @@
         });
       });
 
-      // Event listeners for heading switcher & pan buttons
+      // Event listeners for heading switcher & pan buttons (with smooth head-turning animation)
       const headingBtns = this.shadowRoot.querySelectorAll('.heading-btn');
       headingBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
           const target = e.target.closest('.heading-btn');
           if (!target) return;
-          this._heading = Number(target.getAttribute('data-heading'));
-          this.render();
+          this._animateHeadingTo(Number(target.getAttribute('data-heading')), defaultHeading);
         });
       });
 
@@ -2653,9 +2871,8 @@
           const target = e.target.closest('.heading-nav-btn');
           if (!target) return;
           const dir = Number(target.getAttribute('data-dir')) || 1;
-          const cur = (this._heading !== undefined) ? this._heading : defaultHeading;
-          this._heading = ((cur + dir * 45) % 360 + 360) % 360;
-          this.render();
+          const cur = (this._targetHeading !== undefined) ? this._targetHeading : ((this._heading !== undefined) ? this._heading : defaultHeading);
+          this._animateHeadingTo(((cur + dir * 45) % 360 + 360) % 360, defaultHeading);
         });
       });
     }
@@ -2935,7 +3152,7 @@
   });
 
   console.info(
-    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.4.3 ',
+    '%c ASTRONOMICAL-SUN-MOON-CARD %c v1.4.4 ',
     'color: white; background: #0c1222; font-weight: 700; border-radius: 3px 0 0 3px;',
     'color: white; background: #ff9800; font-weight: 700; border-radius: 0 3px 3px 0;'
   );
